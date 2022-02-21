@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:37:14 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/20 20:00:18 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/20 18:37:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int	main()
-{
-	char *str;
-	//< << > >>
-	printf("%d\n", getpid());
-	while (1)
-	{
-		str = readline("minishell$ ");
-		if (str)
-		{
-			if (str[0] == 'a')
-			{
-				free(str);
-				while (1)
-				{
-					str = readline("");	
-				}
-			}
-			add_history(str);
-			free(str);			
-		}
-	}
-	return (0);
-}
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <string.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+#endif

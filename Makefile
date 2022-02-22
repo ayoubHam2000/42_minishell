@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/22 17:20:04 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/22 18:51:12 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,13 @@ COMMANDS_FILES = \
 FILES = \
 	$(UTIL_FILES) \
 	$(COMMANDS_FILES) \
+	src/signals.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -g
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

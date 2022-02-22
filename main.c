@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:37:14 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/20 20:00:18 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:40:05 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main()
 {
 	char *str;
-	//< << > >>
+
 	printf("%d\n", getpid());
 	while (1)
 	{
@@ -31,7 +31,8 @@ int	main()
 				}
 			}
 			add_history(str);
-			free(str);			
+			free(str);		
+				
 		}
 	}
 	return (0);

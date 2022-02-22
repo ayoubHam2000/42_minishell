@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/22 11:07:02 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/22 17:20:04 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ UTIL_FILES = \
 	utils/ft_strnstr.c \
 	utils/ft_strrchr.c \
 	utils/ft_substr.c \
+	utils/ft_error.c \
+	utils/ft_error_exit.c \
 
 COMMANDS_FILES = \
 
@@ -40,7 +42,7 @@ FILES = \
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline 
+FLAGS = -lreadline -g
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell
@@ -69,3 +71,5 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+#~/goinfre/brew/opt/readline/lib/libreadline.a .
+#~/goinfre/brew/opt/readline/lib/libhistory.a .

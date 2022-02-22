@@ -3,6 +3,10 @@
 		"includes/**"
 	],
 	"files.associations": {
-		"utils.h": "c"
+		"utils.h": "c",
+		"minishell.h": "c",
+		"util.h": "c",
+		"readline.h": "c",
+		"history.h": "c"
 	}
 }

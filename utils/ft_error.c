@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 10:14:45 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 11:29:13 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/22 11:49:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unistd.h"
+#include "utils.h"
 
-void	ft_putstr(const char *str)
+int	ft_error(const char *str)
 {
-	while (*str)
-		write(1, str++, 1);
+	ft_putstr_fd(2, str);
+	return (1);
 }

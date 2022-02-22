@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2021/11/16 14:50:08 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/22 10:57:39 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+// dstsize include a room for NULL termination
+// ft_strlcpy return the source length
 
-# include "utils.h"
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (*src != 0 && dstsize > 1)
+	{
+		*dst = *src;
+		src++;
+		dst++;
+		i++;
+		dstsize--;
+	}
+	while (*src++ != 0)
+		i++;
+	if (dstsize)
+		*dst = 0;
+	return (i);
+}

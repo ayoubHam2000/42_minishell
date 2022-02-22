@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/22 10:14:45 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/22 10:48:24 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "unistd.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# include "utils.h"
-
-#endif
+void	ft_put_str(const char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}

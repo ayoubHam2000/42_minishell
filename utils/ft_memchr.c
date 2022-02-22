@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2021/11/17 17:49:40 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/22 10:19:59 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	i;
 
-# include "utils.h"
-
-#endif
+	if (n == 0)
+		return (NULL);
+	i = c;
+	while (n > 1 && *((unsigned char *)s) != i)
+	{
+		s++;
+		n--;
+	}
+	if (n == 1 && *((unsigned char *)s) != i)
+		return (NULL);
+	return ((void *)s);
+}

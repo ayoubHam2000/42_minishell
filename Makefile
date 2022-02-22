@@ -6,21 +6,46 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/22 09:30:39 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/22 11:07:02 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+UTIL_FILES = \
+	utils/ft_atoi.c \
+	utils/ft_memchr.c \
+	utils/ft_memcmp.c \
+	utils/ft_memcpy.c \
+	utils/ft_memmove.c \
+	utils/ft_memset.c \
+	utils/ft_putstr.c \
+	utils/ft_putstr_fd.c \
+	utils/ft_split.c \
+	utils/ft_strchr.c \
+	utils/ft_strdup.c \
+	utils/ft_strjoin.c \
+	utils/ft_strlcpy.c \
+	utils/ft_strlen.c \
+	utils/ft_strncmp.c \
+	utils/ft_strnstr.c \
+	utils/ft_strrchr.c \
+	utils/ft_substr.c \
+
+COMMANDS_FILES = \
+
 FILES = \
+	$(UTIL_FILES) \
+	$(COMMANDS_FILES) \
 	main.c
 
+#ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
-CFLAGS = -I includes/
+CFLAGS = -g -I includes/
 FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell
 
-OBJ_DIR = OUT/
+OBJ_DIR = _OUT/
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
@@ -33,6 +58,14 @@ $(NAME) : $(OBJ)
 
 $(OBJ) : $(OBJ_DIR)%.o : %.c
 	mkdir -p $(dir $@)
-	gcc $(CFLAGS) -c $(@:OUT/%.o=%.c) $(DEPFLAGS) -o $@
+	gcc $(CFLAGS) -c $(@:_OUT/%.o=%.c) $(DEPFLAGS) -o $@
 
 -include $(deps)
+
+clean :
+	rm -rf $(OBJ_DIR)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all

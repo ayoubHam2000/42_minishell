@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2021/11/16 14:50:11 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/22 10:20:21 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+// strlen count the number of characters in a given string
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-# include "utils.h"
-
-#endif
+	i = 0;
+	while (str[i] != 0)
+		i++;
+	return (i);
+}

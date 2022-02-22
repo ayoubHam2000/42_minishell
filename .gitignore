@@ -1,11 +1,10 @@
-.vscode
 **/*.out
 **/*.exe
 **/*.txt
 **/*.DS_store
 **/*.a
 **/*.o
-OUT
-obj/
+_OUT/
 minishell
-test
+test/
+ayoub.c

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:20 by aben-ham         ###   ########.fr       */
+/*   Created: 2021/11/17 16:15:50 by marvin            #+#    #+#             */
+/*   Updated: 2022/02/22 10:20:14 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# include "utils.h"
-
-#endif
+/*
+The strchr() function returns a pointer to the first occurrence
+	of the character c in the string s.
+*/
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s != 0 && *s != (char)c)
+		s++;
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
+}

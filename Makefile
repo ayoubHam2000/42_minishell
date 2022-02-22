@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/22 11:07:02 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/22 18:51:12 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,18 +29,21 @@ UTIL_FILES = \
 	utils/ft_strnstr.c \
 	utils/ft_strrchr.c \
 	utils/ft_substr.c \
+	utils/ft_error.c \
+	utils/ft_error_exit.c \
 
 COMMANDS_FILES = \
 
 FILES = \
 	$(UTIL_FILES) \
 	$(COMMANDS_FILES) \
+	src/signals.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline 
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell
@@ -69,3 +72,5 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+#~/goinfre/brew/opt/readline/lib/libreadline.a .
+#~/goinfre/brew/opt/readline/lib/libhistory.a .

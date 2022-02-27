@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "queue.h"
 
 int		ft_atoi(const char *str);
 void	*ft_memchr(const void *s, int c, size_t n);

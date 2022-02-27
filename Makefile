@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/22 18:51:12 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/25 14:49:16 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,11 @@ UTIL_FILES = \
 	utils/ft_substr.c \
 	utils/ft_error.c \
 	utils/ft_error_exit.c \
+	utils/queue_c/q_clear.c \
+	utils/queue_c/q_clone.c \
+	utils/queue_c/q_dequeue.c \
+	utils/queue_c/q_enqueue.c \
+	utils/queue_c/q_init.c
 
 COMMANDS_FILES = \
 
@@ -38,6 +43,7 @@ FILES = \
 	$(UTIL_FILES) \
 	$(COMMANDS_FILES) \
 	src/signals.c \
+	parser.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'

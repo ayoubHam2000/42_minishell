@@ -36,8 +36,8 @@ int	init_sigaction(void)
 	sigaddset(&set, SIGINT);
 	s.sa_mask = set;
 	s.__sigaction_u.__sa_handler = sig_handller;
-	if (sigaction(SIGINT, &s, NULL) != 0)
-		return (0);
+	//if (sigaction(SIGINT, &s, NULL) != 0)
+	//	return (0);
 	if (signal(SIGQUIT, SIG_IGN) != 0)
 		return (0);
 	return (1);

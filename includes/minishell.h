@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/23 10:18:44 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:18:12 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@
 # include <fcntl.h>
 # include <string.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include <sys/wait.h>
 
 # include "utils.h"
 
 # define PROMT_STR "\e[0;32m➜ \e[0;37mminishell$ \e[0;33m✗ \e[0m"
 # define ERR_INTERNAL "Internal Error\n"
+# define ERR_MEM "Memory Error\n"
 
 typedef struct sigaction	t_sigaction;
 

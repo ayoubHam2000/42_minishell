@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/25 14:49:16 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/24 16:33:48 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ FILES = \
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
+#FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

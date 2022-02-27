@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 19:35:05 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:32:35 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static void	sig_handller(int sig)
 	if (sig == SIGINT)
 	{
 		ft_putstr(PROMT_STR"   \n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		//rl_on_new_line();
+		//rl_replace_line("", 0);
+		//rl_redisplay();
 	}
 }
 
 int	init_sigaction(void)
 {
-	int			i;
+	/*int			i;
 	sigset_t	set;
 	t_sigaction	s;
 
@@ -39,6 +39,6 @@ int	init_sigaction(void)
 	//if (sigaction(SIGINT, &s, NULL) != 0)
 	//	return (0);
 	if (signal(SIGQUIT, SIG_IGN) != 0)
-		return (0);
+		return (0);*/
 	return (1);
 }

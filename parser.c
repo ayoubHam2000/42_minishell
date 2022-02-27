@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 18:35:06 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:33:18 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,37 @@ char	*add_dollar_content(t_queue *queue, char *str, char **env)
 	p = ft_substr(str, 0, p - str);
 	if (!p)
 		return (NULL);
-	env_var = get_env_var(p, env);
+	env_var = get_env_var(p, env); //if not found in env it's value will be ""
 	free(p);
-	if (!env_var || !q_enqueue(queue, env_var))
+	if (!q_enqueue(queue, env_var))
 		return (NULL);
-	
+	return (str);
+}
+
+char	*merge_strings(t_queue	*queue)
+{
+	t_node	*node;
+	size_t	len;
+	char	*res;
+
+	len = 0;
+	node = queue->first;
+	while (node)
+	{
+		len += ft_strlen(node->p);
+		node = node->next;
+	}
+	res = malloc(len + 1);
+	if (!res)
+		ft_error(ERR_MEM);
+	len = 0;
+	node = queue->first;
+	while (node)
+	{
+		ft_strlcpy(res + len, node->p, ft_strlen(node->p));
+		len = ft_strlen(res);
+		node = node->next;
+	}
 	return (res);
 }
 
@@ -169,18 +195,22 @@ char	*expansion(char *str, char **env)
 	{
 		token = ft_substr(str, 0, dollar - str);
 		if (!token || !q_enqueue(queue, token) || !add_dollar_content(queue, dollar + 1, env))
-			return (NULL);
-		
+			ft_error(ERR_MEM);
+		str = n_rule(dollar + 1);
 		dollar = next_dollar(str);
 	}
-	
+	str = merge_strings(queue);
+	q_clear(queue, NULL);
+	free(queue);
+	return (str);
 }
 
 int	parse_command(char *str, char **env)
 {
-	int	res;
+	char	*res;
 
+	str = expansion(str, env);
 	res = e_rule(str);
-	printf("%d\n", res);
+	printf("%s\n", res);
 	return (0);
 }

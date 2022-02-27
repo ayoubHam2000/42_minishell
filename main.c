@@ -6,15 +6,16 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/25 15:26:52 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:36:18 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
 
-int	parse_command(char *str);
+int	parse_command(char *str, char **env);
 
+/*
 void	process_command(char *str, char **env)
 {
 	if (!ft_strncmp(str, "exit", ft_strlen("exit")))
@@ -22,15 +23,17 @@ void	process_command(char *str, char **env)
 	else
 		parse_command(str);
 }
+*/
 
 int	main(int ac, char **av, char **env)
 {
 	//char		*str;
 	//int			status;
 
-	char	*str = "ls -la 'sdf\"sdf'";
+	char	*str = "ls $hi 'echo $t' \" $ui \"";
 	//process_command(str, env);
-	process_command(av[1], env);
+	//process_command(av[1], env);
+	parse_command(str, env);
 	/*if (!init_sigaction())
 		ft_error_exit(ERR_INTERNAL);
 	while (1)

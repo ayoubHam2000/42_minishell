@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/28 13:17:51 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 00:09:23 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,35 @@ char	*w_rule(char *str)
 char	*t_rule(char *str)
 {
 	if (*str == '>' && *(str + 1) == '>')
-		return (str + 2);
+		str = str + 2;
 	else if (*str == '<' && *(str + 1) == '<')
-		return (str + 2);
+		str = str + 2;
 	else if (*str == '>' || *str == '<' || *str == '|')
-		return (str + 1);
-	return (w_rule(str));
+		str = str + 1;
+	else
+		return (w_rule(str));
+	if (*str == '>' || *str == '<' || *str == '|')
+		return (NULL);
+	return (str);
 }
 
 char	*c_rule(char *str)
 {
-	if (!(*str))
-		return (str);
-	if (*str == '|')
-		return (NULL);
-	if (*str == ' ' || *str == '\t')
-		return (c_rule(str));
-	str = t_rule(str);
-	return (c_rule(str));
+	while (1)
+	{
+		if (!(*str))
+			return (str);
+		if (*str == '|')
+			return (NULL);
+		if (*str == ' ' || *str == '\t')
+		{
+			str++;
+			continue ;
+		}
+		str = t_rule(str);
+		if (!str)
+			return (NULL);
+	}
 }
 
 char	*n_rule(char *str)
@@ -106,21 +117,21 @@ char	*e_rule(char *str)
 	char	*t;
 
 	t = n_rule(str);
-	if (*t == '=')
+	if (t && *t == '=')
 		return (c_rule(t + 1));
 	return (c_rule(str));
 }
-
-
-
-
 
 int	parse_command(char *str, char **env)
 {
 	char	*res;
 
-	str = expansion(str, env);
-	//res = e_rule(str);
-	printf("%s\n", str);
+	res = expansion(str, env);
+	str = e_rule(res);
+	free(res);
+	if (!str)
+		printf("Syntax Error\n");
+	else
+		printf("%s\n", str);
 	return (0);
 }

@@ -2,14 +2,14 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang build active file",
+            "label": "C/C++: gcc build active file",
             "command": "make",
             "args": [],
             "options": {
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
-              "$gcc"
+                "$gcc"
             ],
             "group": {
                 "kind": "build",

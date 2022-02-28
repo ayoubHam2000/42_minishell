@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 11:49:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:47:13 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 int	ft_error(const char *str)
 {
 	ft_putstr_fd(2, str);
-	return (1);
+	return (0);
 }

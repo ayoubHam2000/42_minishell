@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/28 13:15:11 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:15:51 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define PROMT_STR "\e[0;32m➜ \e[0;37mminishell$ \e[0;33m✗ \e[0m"
 # define ERR_INTERNAL "Internal Error\n"
 # define ERR_MEM "Memory Error\n"
+# define ERR_ENV_VAR "Memory Error\n"
 
 typedef struct sigaction	t_sigaction;
 

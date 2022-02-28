@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/28 13:18:00 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:21:41 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,29 @@ static char	*next_dollar(char *str)
 	{
 		if (*res == '\'')
 			flag = !flag;
-		if (*res == '$' && flag)
+		if (*res == '$' && flag && var_pattern(res + 1))
 			return (res);
 		res++;
 	}
 	return (NULL);
 }
 
-static char	*add_dollar_content(t_queue *queue, char *str, char **env)
+static int	add_dollar_content(t_queue *queue, char *str, char **env)
 {
 	char	*p;
 	char	*env_var;
 
 	p = var_pattern(str);
-	if (!p)
-		return (NULL);
 	p = ft_substr(str, 0, p - str);
 	if (!p)
-		return (NULL);
-	env_var = get_env_var(p, env); //if not found in env it's value will be ""
+		return (ft_error(ERR_MEM));
+	env_var = get_env_var(p, env);
 	free(p);
+	if (!env_var)
+		return (ft_error(ERR_ENV_VAR));
 	if (!q_enqueue(queue, env_var))
-		return (NULL);
-	return (str);
+		return (ft_error(ERR_MEM));
+	return (1);
 }
 
 static char	*merge_strings(t_queue	*queue)
@@ -79,7 +79,7 @@ static char	*merge_strings(t_queue	*queue)
 	}
 	res = malloc(len + 1);
 	if (!res)
-		ft_error(ERR_MEM);
+		return (ft_error(ERR_MEM));
 	len = 0;
 	node = queue->first;
 	while (node)
@@ -102,15 +102,19 @@ char	*expansion(char *str, char **env)
 	while (dollar)
 	{
 		token = ft_substr(str, 0, dollar - str);
-		if (!token || !q_enqueue(queue, token) || !add_dollar_content(queue, dollar + 1, env))
-			ft_error(ERR_MEM);
+		if (!token || !q_enqueue(queue, token))
+			return (ft_error(ERR_MEM));
+		if (!add_dollar_content(queue, dollar + 1, env))
+			return (NULL);
 		str = var_pattern(dollar + 1);
 		dollar = next_dollar(str);
 	}
 	token = ft_substr(str, 0, ft_strlen(str));
 	if (!token || !q_enqueue(queue, token))
-		ft_error(ERR_MEM);
+		return ((void *)ft_error(ERR_MEM));
 	str = merge_strings(queue);
+	if (!str)
+		return (NULL);
 	q_clear(queue, NULL);
 	free(queue);
 	return (str);

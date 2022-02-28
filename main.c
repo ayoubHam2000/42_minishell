@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/24 16:36:18 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:28:24 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ int	main(int ac, char **av, char **env)
 	//char		*str;
 	//int			status;
 
-	char	*str = "ls $hi 'echo $t' \" $ui \"";
+	char	*str = av[1];
 	//process_command(str, env);
 	//process_command(av[1], env);
+	printf("%s\n", str);
 	parse_command(str, env);
+	//system("leaks minishell");
 	/*if (!init_sigaction())
 		ft_error_exit(ERR_INTERNAL);
 	while (1)

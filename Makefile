@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/24 16:33:48 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/28 13:14:50 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ FILES = \
 	$(UTIL_FILES) \
 	$(COMMANDS_FILES) \
 	src/signals.c \
-	parser.c \
+	parser/parser.c \
+	parser/expansion.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'

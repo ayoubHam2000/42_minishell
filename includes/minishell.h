@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/24 16:18:12 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:15:11 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ typedef struct s_gvar
 
 void	rl_replace_line(const char *text, int i);
 int		init_sigaction(void);
+char	*expansion(char *str, char **env);
 
 #endif

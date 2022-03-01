@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 14:48:37 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:38:32 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ typedef struct s_gvar
 	int	flag;
 }	t_gvar;
 
+//token => [file, redirection , pipe, command]
+
+# define CMD_FILE 0
+# define CMD_PIPE 1
+# define CMD_COMD 2
+# define CMD_REDT 3
+
+typedef struct s_cmd
+{
+	char	*token;
+	int		type;
+	char	*args;	
+}	t_cmd;
+
 //sysntax
 char	*a_rule(char *str);
 char	*b_rule(char *str);
@@ -49,8 +63,14 @@ char	*c_rule(char *str);
 char	*n_rule(char *str);
 char	*check_sysntax(char *str);
 
+//parser
+char	*expansion(char *str);
+t_queue	*parse_command(char *str);
+t_queue	*get_structur(char *str);
+
+
+
 void	rl_replace_line(const char *text, int i);
 int		init_sigaction(void);
-char	*expansion(char *str, char **env);
 
 #endif

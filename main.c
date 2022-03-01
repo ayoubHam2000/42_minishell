@@ -6,14 +6,14 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 14:50:53 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:23:44 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
 
-int	parse_command(char *str, char **env);
+
 
 /*
 void	process_command(char *str, char **env)
@@ -25,21 +25,19 @@ void	process_command(char *str, char **env)
 }
 */
 
+
+
 int	main(int ac, char **av, char **env)
 {
-	//char		*str;
-	//int			status;
+	char		*str;
+	int			status;
+	t_queue		*cmds;
 
-	#define D
-	#ifdef D
-	char	*str = av[1];
-	#else
-	char	*str = "o=aasd   ls -l";
-	#endif
 	//process_command(str, env);
 	//process_command(av[1], env);
-	printf("%s\n", str);
-	parse_command(str, env);
+	//printf("%s\n", str);
+	str = "ls >a -la | grep 'books \"are great' \"it's like\" > p";
+	cmds = parse_command(str);
 	/*if (!init_sigaction())
 		ft_error_exit(ERR_INTERNAL);
 	while (1)

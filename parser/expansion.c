@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 14:57:28 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:22:18 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*next_dollar(char *str)
 
 //####
 
-static void	add_dollar_content(t_queue *queue, char *str, char **env)
+static void	add_dollar_content(t_queue *queue, char *str)
 {
 	char	*p;
 	char	*env_var;
@@ -88,7 +88,7 @@ static char	*merge_strings(t_queue	*queue)
 	return (res);
 }
 
-char	*expansion(char *str, char **env)
+char	*expansion(char *str)
 {
 	t_queue	*queue;
 	char	*token;
@@ -100,7 +100,7 @@ char	*expansion(char *str, char **env)
 	{
 		token = ft_substr(str, 0, dollar - str);
 		q_enqueue(queue, token);
-		add_dollar_content(queue, dollar + 1, env);
+		add_dollar_content(queue, dollar + 1);
 		str = var_pattern(dollar + 1);
 		dollar = next_dollar(str);
 	}

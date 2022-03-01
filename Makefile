@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/01 14:52:12 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/01 18:34:00 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ UTIL_FILES = \
 	utils/ft_putstr.c \
 	utils/ft_putstr_fd.c \
 	utils/ft_split.c \
+	utils/ft_fsplit.c \
 	utils/ft_strchr.c \
 	utils/ft_strdup.c \
 	utils/ft_strjoin.c \
@@ -35,7 +36,8 @@ UTIL_FILES = \
 	utils/queue_c/q_clone.c \
 	utils/queue_c/q_dequeue.c \
 	utils/queue_c/q_enqueue.c \
-	utils/queue_c/q_init.c
+	utils/queue_c/q_init.c \
+	utils/types/p_cmd.c
 
 COMMANDS_FILES = \
 
@@ -47,6 +49,7 @@ FILES = \
 	parser/expansion.c \
 	parser/sysntax_1.c \
 	parser/sysntax_2.c \
+	parser/structure.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'

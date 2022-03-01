@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 18:22:11 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/03/01 18:38:06 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/01 18:41:01 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
-t_queue	*parse_command(char *str)
+int	ft_strcmp(char *str1, char *str2)
 {
-	t_queue	*res;
-	char	*format_str;
+	size_t	len;
 
-	format_str = expansion(str);
-	if (!check_sysntax(format_str))
-		printf("Syntax Error\n");
-	else
-		printf("%s\n", format_str);
-	res = get_structur(format_str);
-	free(format_str);
-	return (res);
+	len = ft_strlen(str1);
+	if (len != ft_strlen(str2))
+		return (0);
+	return (!ft_strncmp(str1, str2, ft_strlen(str1)));
 }

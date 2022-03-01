@@ -6,16 +6,11 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 23:24:24 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:57:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_env_var(char *str, char **env)
-{
-	return (ft_strjoin(str, "_env_var"));
-}
 
 static char	*var_pattern(char *str)
 {
@@ -59,7 +54,11 @@ static void	add_dollar_content(t_queue *queue, char *str, char **env)
 
 	p = var_pattern(str);
 	p = ft_substr(str, 0, p - str);
-	env_var = get_env_var(p, env);
+	env_var = getenv(p);
+	if (!env_var)
+		env_var = ft_strdup("");
+	else
+		env_var = ft_strdup(env_var);
 	q_enqueue(queue, env_var);
 	free(p);
 }

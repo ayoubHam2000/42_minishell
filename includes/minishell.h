@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:35:23 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:48:37 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ typedef struct s_gvar
 {
 	int	flag;
 }	t_gvar;
+
+//sysntax
+char	*a_rule(char *str);
+char	*b_rule(char *str);
+char	*s_rule(char *str);
+char	*w_rule(char *str);
+char	*t_rule(char *str);
+char	*c_rule(char *str);
+char	*n_rule(char *str);
+char	*check_sysntax(char *str);
 
 void	rl_replace_line(const char *text, int i);
 int		init_sigaction(void);

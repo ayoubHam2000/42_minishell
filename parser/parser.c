@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:34:53 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/02 20:09:19 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell.h"
 
-int	ft_error(const char *str)
+t_queue	*parse_command(char *str)
 {
-	ft_putstr_fd(2, str);
-	return (0);
+	t_queue	*res;
+	char	**commands;
+	char	*format_str;
+
+	if (check_sysntax(str))
+	{
+		format_str = add_spaces(str);
+		format_str = expansion(str);
+		commands = ft_split(str, '|');
+		res = get_structur(format_str, commands);
+		free(format_str);
+	}
+	return (res);
 }

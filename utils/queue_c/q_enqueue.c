@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   q_enqueue.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:34:53 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/15 16:25:43 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/02 19:53:31 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "queue.h"
 
-int	ft_error(const char *str)
+int	q_enqueue(t_queue *queue, void *p)
 {
-	ft_putstr_fd(2, str);
-	return (0);
+	t_node	*new;
+
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (0);
+	new->p = p;
+	new->next = NULL;
+	if (!queue->first)
+	{
+		queue->first = new;
+		queue->last = new;
+	}
+	else
+	{
+		queue->last->next = new;
+		queue->last = new;
+	}
+	return (1);
 }

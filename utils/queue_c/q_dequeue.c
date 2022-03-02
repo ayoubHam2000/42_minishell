@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   q_dequeue.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:34:53 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/15 16:33:05 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/15 16:35:44 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "queue.h"
 
-int	ft_error(const char *str)
+void	*q_dequeue(t_queue *queue)
 {
-	ft_putstr_fd(2, str);
-	return (0);
+	t_node	*node;
+	void	*p;
+
+	node = queue->first;
+	if (!node)
+		return (NULL);
+	if (node == queue->last)
+		queue->last = NULL;
+	queue->first = node->next;
+	p = node->p;
+	free(node);
+	return (p);
 }

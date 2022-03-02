@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 11:33:07 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:55:25 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "queue.h"
 
 int		ft_atoi(const char *str);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -36,5 +37,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_error(const char *str);
 void	ft_error_exit(const char *str);
+char	**ft_fsplit(char const *s, int (*f)(char c));
+int		ft_strcmp(char *str1, char *str2);
 
 #endif

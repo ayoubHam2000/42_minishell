@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:34:53 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/03/01 18:32:17 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/02 13:59:00 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell.h"
 
-int	ft_error(const char *str)
+t_cmd	*p_cmd(t_node *node)
 {
-	ft_putstr_fd(2, str);
-	return (0);
+	return (node->p);
+}
+
+t_redt	*p_redt(t_node *node)
+{
+	return (node->p);
 }

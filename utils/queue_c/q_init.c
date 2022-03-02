@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   q_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 11:30:28 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/27 22:34:53 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/15 16:24:01 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/15 16:30:59 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "queue.h"
 
-int	ft_error(const char *str)
+void	*q_init(void)
 {
-	ft_putstr_fd(2, str);
-	return (0);
+	t_queue	*new_queue;
+
+	new_queue = malloc(sizeof(t_queue));
+	if (!new_queue)
+		return (NULL);
+	new_queue->first = NULL;
+	new_queue->last = NULL;
+	new_queue->len = 0;
+	return (new_queue);
 }

@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:47:56 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/01 18:51:42 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/02 08:07:03 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 char    *command_buff;
 
@@ -285,9 +286,11 @@ char            *verfy(char *str)
 {
     int         i;
     int         control;
+    int         x;
 
     i = 0;
     control = 0;
+    x = 0;
 
      if (str[i] == '=')
     {
@@ -301,6 +304,19 @@ char            *verfy(char *str)
         i++;
     }
     if (control != 0)
+    {
+        printf("export: `%s': not a valid identifier \n",str);
+        return (NULL);
+    }
+
+    i = 0;
+    while(str[i])
+    {
+        if(str[i]== '=')
+            x++;
+        i++;
+    } 
+    if(x == 0)
     {
         printf("export: `%s': not a valid identifier \n",str);
         return (NULL);
@@ -338,8 +354,6 @@ char    **export(char * cmd,char **envp)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 int             Rch(char    **envp ,char    *cmd)
 {
     int     i;
@@ -348,20 +362,13 @@ int             Rch(char    **envp ,char    *cmd)
 
     while(envp[i])
     {
-        if (!strncmp(envp[i],cmd,ft_strlen(cmd)))
+        if (!strncmp(envp[i],cmd,strlen(cmd)))
             return (1);
         i++;
     }    
     return (0);
 }
-
-
-
-
-
 //////////////////////////////
-
-
 char   ** unset(char *cmd,char   **envp)
 {
         int     i;
@@ -374,17 +381,16 @@ char   ** unset(char *cmd,char   **envp)
         
         split = ft_split(cmd,' ');
 
-        //if (Rch(envp,split[1]) == 1)
-            //return (envp);
         unse = malloc(sizeof(char *) * ft_arraylen(envp) - 1 ); 
         while(envp[i])
         {
-            if (!strncmp(envp[i],split[1],4))
+            if (!strncmp(envp[i],split[1],ft_strlen(split[1])))
                     i++;
             unse[j++] = envp[i++];
         }
         
         unse[j]= 0;
+        
     return (unse);    
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,8 +414,7 @@ int     main(int argc,char **argv,char **envp)
         command_buff =readline(" Hakkache  minishell  >  ");
         if (strlen(command_buff) > 0)
             add_history(command_buff);
-        if (!strcmp(command_buff,"exit"))
-                exit(0);
+            
         else if(!strncmp(command_buff,"cd",2))
                 cdtest(command_buff);
         else if(!strncmp(command_buff,"pwd",strlen(command_buff)))
@@ -417,11 +422,16 @@ int     main(int argc,char **argv,char **envp)
         else if (!strncmp(command_buff,"exit",4))
                 exitcmd(command_buff);
         else if (!strncmp(command_buff,"env",strlen(command_buff)))
-                env(envp);
+                env(join);
         else if(!strncmp(command_buff,"export",6))
                 join = export(command_buff,join);
         else if(!strncmp(command_buff,"unset",5))
                 join = unset(command_buff,join);
+        else if(!strncmp(command_buff,"mkdir",5))///// just for  test cd 
+        {
+            unse = ft_split(command_buff,' ');
+            mkdir(unse[1],S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        }
         else
             execute(path(envp,command_buff),envp);
     }

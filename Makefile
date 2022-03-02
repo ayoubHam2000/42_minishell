@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/01 18:34:00 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/02 13:56:49 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ UTIL_FILES = \
 	utils/queue_c/q_dequeue.c \
 	utils/queue_c/q_enqueue.c \
 	utils/queue_c/q_init.c \
-	utils/types/p_cmd.c
+	utils/types.c
 
 COMMANDS_FILES = \
 

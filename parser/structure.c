@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 18:53:18 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:27:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,79 @@ static int	fsplit_command(char c)
 		else
 			f = 0;
 	}
+	else if (!c)
+		f = 0;
 	if (!f && c == ' ')
 		return (1);
 	return (0);
 }
 
-t_cmd	*create_cmd(char *str, int type)
+int	is_redirection(char *str)
+{
+	if (str[0] == '>' && str[1] == '>')
+		return (RD_AP);
+	else if (str[0] == '<' && str[1] == '<')
+		return (RD_DOC);
+	else if (str[0] == '>')
+		return (RD_OUT);
+	else if (str[0] == '<')
+		return (RD_IN);
+	return (0);
+}
+
+t_cmd	*init_cmd(void)
 {
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_cmd *));
+	cmd = malloc(sizeof(t_cmd));
+	cmd->q_args = q_init();
+	cmd->q_redt = q_init();
+	cmd->command = NULL;
+	return (cmd);
 }
 
-void	add_to_cmd(t_queue *queue, char **commands)
+t_cmd	*get_command(char *str)
 {
-	if (ft_strcmp(*commands, "|"))
-		q_enqueue(queue, create_cmd(*commands));
+	char	**tokens;
+	t_cmd	*cmd;
+	t_redt	*redt;
+
+	tokens = ft_fsplit(str, fsplit_command);
+	cmd = init_cmd();
+	while (*tokens)
+	{
+		if (is_redirection(*tokens))
+		{
+			redt = malloc(sizeof(t_redt));
+			redt->r_type = is_redirection(*tokens);
+			redt->file = *(tokens + 1);
+			free(*tokens);
+			q_enqueue(cmd->q_redt, redt);
+			tokens++;
+		}
+		else if (!cmd->command)
+			cmd->command = *tokens;
+		else
+			q_enqueue(cmd->q_args, *tokens);
+		tokens++;
+	}	
+	return (cmd);
 }
 
 t_queue	*get_structur(char *str)
 {
-	t_queue	*res;
+	t_queue	*q_cmd;
 	char	**commands;
+	char	**tmp;
 
-	res = q_init();
-	commands = ft_fsplit(str, fsplit_command);
-	while (*commands)
+	q_cmd = q_init();
+	commands = ft_split(str, '|');
+	tmp = commands;
+	while (*tmp)
 	{
-		add_to_cmd(res, commands);
-		commands++;
+		q_enqueue(q_cmd, get_command(*tmp));
+		tmp++;
 	}
 	free(commands);
-	return (res);
+	return (q_cmd);
 }

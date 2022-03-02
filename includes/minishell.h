@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 18:38:32 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 14:32:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,27 @@ typedef struct s_gvar
 # define CMD_COMD 2
 # define CMD_REDT 3
 
+# define RD_IN 1
+# define RD_OUT 2
+# define RD_AP 3
+# define RD_DOC 4
+
+typedef struct	s_redt
+{
+	char	r_type;
+	char	*file;
+}	t_redt ;
+
 typedef struct s_cmd
 {
-	char	*token;
-	int		type;
-	char	*args;	
-}	t_cmd;
+	char	*command;
+	t_queue	*q_args;
+	t_queue	*q_redt;
+}	t_cmd ;
+
+//types
+t_cmd	*p_cmd(t_node *node);
+t_redt	*p_redt(t_node *node);
 
 //sysntax
 char	*a_rule(char *str);

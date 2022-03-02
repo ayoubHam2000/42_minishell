@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 18:41:24 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:55:25 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,5 @@ int		ft_error(const char *str);
 void	ft_error_exit(const char *str);
 char	**ft_fsplit(char const *s, int (*f)(char c));
 int		ft_strcmp(char *str1, char *str2);
-
-//types
-t_cmd	*p_cmd(t_node *node);
 
 #endif

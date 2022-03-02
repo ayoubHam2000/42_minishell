@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/02 16:27:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:21:44 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,17 @@ t_cmd	*get_command(char *str)
 	return (cmd);
 }
 
-t_queue	*get_structur(char *str)
+t_queue	*get_structur(char *str, char **commands)
 {
 	t_queue	*q_cmd;
-	char	**commands;
-	char	**tmp;
+	char	*tmp;
 
 	q_cmd = q_init();
-	commands = ft_split(str, '|');
-	tmp = commands;
-	while (*tmp)
+	while (*commands)
 	{
-		q_enqueue(q_cmd, get_command(*tmp));
-		tmp++;
+		q_enqueue(q_cmd, get_command(*commands));
+		free(*commands);
+		commands++;
 	}
-	free(commands);
 	return (q_cmd);
 }

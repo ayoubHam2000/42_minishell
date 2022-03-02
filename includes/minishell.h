@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/02 14:32:58 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:11:57 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ char	*check_sysntax(char *str);
 //parser
 char	*expansion(char *str);
 t_queue	*parse_command(char *str);
-t_queue	*get_structur(char *str);
-
+t_queue	*get_structur(char *str, char **commands);
+char	*add_spaces(char *str);
 
 
 void	rl_replace_line(const char *text, int i);

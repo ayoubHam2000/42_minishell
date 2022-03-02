@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/02 16:30:45 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:41:56 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	show(t_queue *q)
 	}
 }
 
+
+
+
+
 int	main(int ac, char **av, char **env)
 {
 	char		*str;
@@ -63,7 +67,7 @@ int	main(int ac, char **av, char **env)
 	//process_command(str, env);
 	//process_command(av[1], env);
 	//printf("%s\n", str);
-	str = "ls -la > a < b";
+	str = "ls -la >a | grep 'hi'";
 	cmds = parse_command(str);
 	show(cmds);
 	/*if (!init_sigaction())

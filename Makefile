@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/02 13:56:49 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/02 19:36:30 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ FILES = \
 	parser/sysntax_1.c \
 	parser/sysntax_2.c \
 	parser/structure.c \
+	parser/add_spaces.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'

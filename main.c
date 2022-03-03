@@ -6,14 +6,12 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/02 19:41:56 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:10:52 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
-
-
 
 /*
 void	process_command(char *str, char **env)
@@ -25,38 +23,43 @@ void	process_command(char *str, char **env)
 }
 */
 
-void	show(t_queue *q)
+void	show(t_queue *commands)
 {
-	t_node	*node;
-	t_node	*tmp;
+	t_command	*c;
+	char		**args;
+	t_redt		**redt;
 
-	node = q->first;
-	while (node)
+	while (1)
 	{
-		printf("Command : %s\n", (char *)(p_cmd(node)->command));
-		printf("Args : [");
-		tmp = p_cmd(node)->q_args->first;
-		while (tmp)
+		c = q_dequeue(commands);
+		if (!c)
+			return ;
+		args = c->args;
+		printf("%s\n", c->command);
+		printf("[");
+		while (*args)
 		{
-			printf("%s, ", (char *)(tmp->p));
-			tmp = tmp->next;
+			printf("%s, ", *args);
+			free(*args);
+			args++;
 		}
 		printf("]\n");
-		printf("Redt : [");
-		tmp = p_cmd(node)->q_redt->first;
-		while (tmp)
+		redt = c->redt;
+		printf("[");
+		while (*redt)
 		{
-			printf("(%d - %s), ", p_redt(tmp)->r_type, p_redt(tmp)->file);
-			tmp = tmp->next;
+			printf("(%s, %d), ", (*redt)->file, (*redt)->r_type);
+			free((*redt)->file);
+			free(*redt);
+			redt++;
 		}
+		free(c->args);
+		free(c->redt);
+		free(c->command);
+		free(c);
 		printf("]\n");
-		node = node->next;
 	}
 }
-
-
-
-
 
 int	main(int ac, char **av, char **env)
 {
@@ -67,9 +70,12 @@ int	main(int ac, char **av, char **env)
 	//process_command(str, env);
 	//process_command(av[1], env);
 	//printf("%s\n", str);
-	str = "ls -la >a | grep 'hi'";
+
+	str = "ls -la > a | grep 'sd' -v <c";
+	//str = av[1];
 	cmds = parse_command(str);
 	show(cmds);
+	//system("leaks minishell");
 	/*if (!init_sigaction())
 		ft_error_exit(ERR_INTERNAL);
 	while (1)
@@ -87,4 +93,3 @@ int	main(int ac, char **av, char **env)
 	}*/
 	return (0);
 }
-//0x00006030000003a0

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:52:54 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/02 20:03:29 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:19:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*add_spaces(char *str)
 	int		i;
 	int		c;
 
-	new = malloc(size_of_new_str(str) + 1);
+	new = ft_malloc(size_of_new_str(str) + 1);
 	i = 0;
 	while (*str)
 	{

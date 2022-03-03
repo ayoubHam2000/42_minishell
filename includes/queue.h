@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:53:12 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/15 16:55:46 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:23:03 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ struct s_queue
 	t_node	*last;
 	long	len;
 };
+
+void	*ft_malloc(size_t size);
 
 //NULL if malloc failed
 void	*q_init(void);

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:18:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 11:01:09 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:19:56 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strdup(const char *s1)
 	size_t	s1_len;
 
 	s1_len = ft_strlen((char *)s1);
-	s2 = malloc(s1_len + 1);
+	s2 = ft_malloc(s1_len + 1);
 	if (!s2)
 		return (NULL);
 	ft_strlcpy(s2, s1, s1_len + 1);

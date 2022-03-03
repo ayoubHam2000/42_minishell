@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:24:01 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/15 16:30:59 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:20:10 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*q_init(void)
 {
 	t_queue	*new_queue;
 
-	new_queue = malloc(sizeof(t_queue));
+	new_queue = ft_malloc(sizeof(t_queue));
 	if (!new_queue)
 		return (NULL);
 	new_queue->first = NULL;

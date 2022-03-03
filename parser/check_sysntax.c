@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   systax_1.c                                         :+:      :+:    :+:   */
+/*   check_sysntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:38:41 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/01 14:46:58 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:42:08 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 ϵ <=> \0
 k <=> S
 
-E -> (N=ψ*W)?C
-N -> [a-Z_][a-Z0-9_]*
 C -> [^|]ψ*Tψ*|C
 T -> <ψ*W | >ψ*W | >>ψ*W | <<ψ*W | W
 W -> 'A | "B | S
@@ -27,25 +25,7 @@ B -> .*?"
 S -> ([^['"ψ|><]].)*
 */
 
-char	*a_rule(char *str)
-{
-	while (*str && *str != '\'')
-		str++;
-	if (!(*str))
-		return (NULL);
-	return (str + 1);
-}
-
-char	*b_rule(char *str)
-{
-	while (*str && *str != '"')
-		str++;
-	if (!(*str))
-		return (NULL);
-	return (str + 1);
-}
-
-char	*s_rule(char *str)
+static char	*s_rule(char *str)
 {
 	while (*str)
 	{
@@ -57,22 +37,24 @@ char	*s_rule(char *str)
 	return (str);
 }
 
-char	*w_rule(char *str)
+static char	*w_rule(char *str)
 {
 	if (*str == '\'')
-		return (a_rule(str + 1));
+		return (ft_strchr(str + 1, '\'') + 1);
 	else if (*str == '"')
-		return (b_rule(str + 1));
+		return (ft_strchr(str + 1, '"') + 1);
 	return (s_rule(str));
 }
 
-char	*t_rule(char *str)
+static char	*t_rule(char *str)
 {
 	char	*t;
 
 	if (*str == '>' && *(str + 1) == '>')
 		str = str + 2;
 	else if (*str == '<' && *(str + 1) == '<')
+		str = str + 2;
+	else if (*str == '<' && *(str + 1) == '>')
 		str = str + 2;
 	else if (*str == '>' || *str == '<')
 		str = str + 1;
@@ -86,4 +68,30 @@ char	*t_rule(char *str)
 	else
 		return (NULL);
 	return (str);
+}
+
+char	*check_sysntax(char *str)
+{
+	while (1)
+	{
+		if (!(*str))
+			return (str);
+		if (*str == '|')
+			return (NULL);
+		while (*str == '\t' || *str == ' ')
+			str++;
+		str = t_rule(str);
+		if (!str)
+			return (NULL);
+		while (*str == '\t' || *str == ' ')
+			str++;
+		if (*str == '|')
+		{
+				str++;
+			while (*str == '\t' || *str == ' ')
+				str++;
+			if (!(*str))
+				return (NULL);
+		}
+	}
 }

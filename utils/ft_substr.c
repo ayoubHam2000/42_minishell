@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 10:16:22 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:50:19 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:20:14 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (ft_strlen(s) <= start || len == 0)
 	{
-		res = malloc(1);
+		res = ft_malloc(1);
 		if (!res)
 			return (NULL);
 		*res = 0;
@@ -44,7 +44,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else
 	{
 		substr_len = min(ft_strlen(s) - start, len);
-		res = malloc(substr_len + 1);
+		res = ft_malloc(substr_len + 1);
 		if (!res)
 			return (NULL);
 		ft_strlcpy(res, s + start, substr_len + 1);

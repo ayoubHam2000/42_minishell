@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:39:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/15 16:41:18 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:42:03 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	q_clear(t_queue *queue, void (*del_ptr)(void *p))
 	}
 	queue->first = NULL;
 	queue->last = NULL;
+	queue->len = 0;
 }

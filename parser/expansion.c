@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 18:25:08 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,11 @@ static char	*var_pattern(char *str)
 static char	*next_dollar(char *str)
 {
 	char	*res;
-	int		flag;
 
 	res = str;
-	flag = 1;
 	while (*res)
 	{
-		if (*res == '\'')
-			flag = !flag;
-		if (*res == '$' && flag && var_pattern(res + 1))
+		if (*res == '$' && var_pattern(res + 1))
 			return (res);
 		res++;
 	}
@@ -58,7 +54,7 @@ static void	add_dollar_content(t_queue *queue, char *str)
 	else
 		env_var = ft_strdup(env_var);
 	q_enqueue(queue, env_var);
-	free(p);
+	//free(p);
 }
 
 static char	*merge_strings(t_queue	*queue)
@@ -92,6 +88,8 @@ char	*expansion(char *str)
 	char	*token;
 	char	*dollar;
 	
+	if (str[0] == '\'')
+		return (ft_strdup(str));
 	queue = q_init();
 	dollar = next_dollar(str);
 	while (dollar)
@@ -106,6 +104,6 @@ char	*expansion(char *str)
 	q_enqueue(queue, token);
 	str = merge_strings(queue);
 	q_clear(queue, NULL);
-	free(queue);
+	//free(queue);
 	return (str);
 }

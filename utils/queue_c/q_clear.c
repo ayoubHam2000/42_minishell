@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:39:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 13:42:03 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	default_del_ptr(void *p)
 {
-	free(p);
+	//free(p);
 }
 
 void	q_clear(t_queue *queue, void (*del_ptr)(void *p))
@@ -32,7 +32,7 @@ void	q_clear(t_queue *queue, void (*del_ptr)(void *p))
 		target = node;
 		node = node->next;
 		del_ptr(target->p);
-		free(target);
+		//free(target);
 	}
 	queue->first = NULL;
 	queue->last = NULL;

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 18:21:56 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	add_redt(t_queue *queue, char **tokens)
 	redt->r_type = is_redirection(*tokens);
 	len = ft_strlen(*tokens);
 	i = 0;
-	if (len == 1 || (len == 2 && (*tokens[0] == '>' || *tokens[0] == '<') && (*tokens[1] == '<' || *tokens[1] == '>')))
+	if (len == 1 || ft_strcmp(*tokens, ">>") || 
+	ft_strcmp(*tokens, "<<") || ft_strcmp(*tokens, "<>"))
 		redt->file = ft_strdup(*(tokens + 1));
 	else
 	{
@@ -82,7 +83,8 @@ static t_cmd	*get_command(char **tokens)
 				free_cmd(cmd);
 				return (NULL);
 			}
-			if (ft_strlen(*tokens) <= 2)
+			if (ft_strlen(*tokens) == 1 || ft_strcmp(*tokens, ">>") || 
+	ft_strcmp(*tokens, "<<") || ft_strcmp(*tokens, "<>"))
 				tokens++;
 		}
 		else if (!cmd->command)
@@ -109,7 +111,7 @@ t_queue	*get_structure(char **commands)
 		{
 			free_arr_str(tokens);
 			q_clear(q_cmd, free_cmd);
-			free(q_cmd);
+			//free(q_cmd);
 			return (NULL);
 		}
 		free_arr_str(tokens);

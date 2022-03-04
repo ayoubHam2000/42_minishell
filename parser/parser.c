@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 18:03:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static t_queue	*get_commands(t_queue *s)
 			break ;
 		cmd = get_command(c->command, c->q_args, c->q_redt);
 		q_enqueue(res, cmd);
-		free(c->q_args);
-		free(c->q_redt);
-		free(c);
+		//free(c->q_args);
+		//free(c->q_redt);
+		//free(c);
 	}
-	free(s);
+	//free(s);
 	return (res);
 }
 

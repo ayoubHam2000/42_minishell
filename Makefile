@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/04 18:22:25 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/04 19:52:17 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ UTIL_FILES = \
 	utils/ft_error.c \
 	utils/ft_error_exit.c \
 	utils/ft_malloc.c \
+	utils/ft_strcmp.c \
 	utils/queue_c/q_clear.c \
 	utils/queue_c/q_clone.c \
 	utils/queue_c/q_dequeue.c \

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:41:43 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/15 16:55:35 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_queue	*q_empty_queue(t_queue *queue)
 		if (!q_enqueue(new_queue, NULL))
 		{
 			q_clear(new_queue, NULL);
-			free(new_queue);
+			//free(new_queue);
 			return (NULL);
 		}
 		node = node->next;

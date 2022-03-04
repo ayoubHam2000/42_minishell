@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:53:12 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:23:03 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*q_init(void);
 //0 if s_push malloc failed
 int		q_enqueue(t_queue *queue, void *p);
 
-//free the pointer after remove it from the queue.
+////free the pointer after remove it from the queue.
 void	*q_dequeue(t_queue *queue);
 
 /*

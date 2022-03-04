@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:44:22 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 17:50:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	free_arr_str(char **str)
 	tmp = str;
 	while (*tmp)
 	{
-		free(*tmp);
+		//free(*tmp);
 		tmp++;
 	}
-	free(*tmp);
-	free(str);
+	//free(*tmp);
+	//free(str);
 }
 
 void	p_free_redt(void *p)
 {
-	free(((t_redt *)p)->file);
-	free(p);
+	//free(((t_redt *)p)->file);
+	//free(p);
 }
 
 void	free_cmd(void *p)
@@ -38,10 +38,10 @@ void	free_cmd(void *p)
 
 	cmd = p;
 	if (cmd->command)
-		free(cmd->command);
+		//free(cmd->command);
 	q_clear(cmd->q_args, NULL);
 	q_clear(cmd->q_redt, p_free_redt);
-	free(cmd->q_args);
-	free(cmd->q_redt);
-	free(cmd);
+	//free(cmd->q_args);
+	//free(cmd->q_redt);
+	//free(cmd);
 }

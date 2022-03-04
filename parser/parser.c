@@ -6,11 +6,29 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:32:16 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:03:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	fsplit_command(char c)
+{
+	static int	f;
+
+	if ((c == '\'' || c == '"') && (f == 0 || c == f))
+	{
+		if (f == 0)
+			f = c;
+		else
+			f = 0;
+	}
+	else if (!c)
+		f = 0;
+	if (!f && c == '|')
+		return (1);
+	return (0);
+}
 
 static t_command	*get_command(char *c, t_queue *q_arg, t_queue *q_redt)
 {
@@ -64,18 +82,18 @@ t_queue	*parse_command(char *str)
 {
 	t_queue	*res;
 	char	**commands;
-	char	*format_str;
 
 	if (check_sysntax(str))
 	{
-		str = add_spaces(str);
-		format_str = expansion(str);
-		commands = ft_split(format_str, '|');
-		res = get_structur(commands);
+		commands = ft_fsplit(str, fsplit_command);
+		res = get_structure(commands);
+		if (!res)
+		{
+			free_arr_str(commands);
+			return (NULL);
+		}
 		res = get_commands(res);
-		free(str);
-		free(format_str);
-		free(commands);
+		free_arr_str(commands);
 	}
 	else
 	{

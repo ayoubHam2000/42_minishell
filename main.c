@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:10:52 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:22:10 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,30 @@ int	main(int ac, char **av, char **env)
 	//process_command(av[1], env);
 	//printf("%s\n", str);
 
-	str = "ls -la > a | grep 'sd' -v <c";
+	//str = "ls $TERM >$t0 | 'ls > |$r $r -la' \"hi >$hi \"";
+	//str = "$dgsh > $TERM << $USER \"hi $t\"";
 	//str = av[1];
-	cmds = parse_command(str);
-	show(cmds);
+	//cmds = parse_command(str);
+	//if (cmds)
+	//	show(cmds);
 	//system("leaks minishell");
-	/*if (!init_sigaction())
-		ft_error_exit(ERR_INTERNAL);
+	//if (!init_sigaction())
+	//	ft_error_exit(ERR_INTERNAL);
 	while (1)
 	{
 		str = readline(PROMT_STR);
 		if (str)
 		{
-			process_command(str, env);
-			waitpid(0, &status, WUNTRACED | WCONTINUED);
+			//process_command(str, env);
+			cmds = parse_command(str);
+			if (cmds)
+				show(cmds);
+			//waitpid(0, &status, WUNTRACED | WCONTINUED);
 			add_history(str);
 			free(str);
 		}
 		else
 			exit(0);
-	}*/
+	}
 	return (0);
 }

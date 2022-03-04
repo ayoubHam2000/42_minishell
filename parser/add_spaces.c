@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:52:54 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:19:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 08:36:23 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*re(char *str)
 		|| (*str == '<' && *(str + 1) == '>')
 		)
 		str = str + 2;
-	else if (*str == '>' || *str == '<')
+	else if (*str == '>' || *str == '<' || *str == '|')
 		str = str + 1;
 	return (str);
 }

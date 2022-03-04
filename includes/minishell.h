@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:24:39 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:13:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 # include <string.h>
 # include <stdio.h>
-//# include <readline/readline.h>
-//# include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/wait.h>
 
 # include "utils.h"
@@ -60,10 +60,18 @@ typedef struct s_command
 
 //parser
 char	*check_sysntax(char *str);
-char	*expansion(char *str);
 t_queue	*parse_command(char *str);
-t_queue	*get_structur(char **commands);
+t_queue	*get_structure(char **commands);
 char	*add_spaces(char *str);
+//expansion
+char	*expansion(char *str);
+int		expand_redt(t_redt *redt);
+void	expand_command(t_cmd *cmd, char *str);
+void	expand_arg(t_queue *q_args, char *str);
+//p_free
+void	free_arr_str(char **str);
+void	p_free_redt(void *p);
+void	free_cmd(void *p);
 
 //other
 void	rl_replace_line(const char *text, int i);

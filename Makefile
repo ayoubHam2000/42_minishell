@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/02 19:36:30 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/04 18:22:25 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,32 +32,37 @@ UTIL_FILES = \
 	utils/ft_substr.c \
 	utils/ft_error.c \
 	utils/ft_error_exit.c \
+	utils/ft_malloc.c \
 	utils/queue_c/q_clear.c \
 	utils/queue_c/q_clone.c \
 	utils/queue_c/q_dequeue.c \
 	utils/queue_c/q_enqueue.c \
-	utils/queue_c/q_init.c \
-	utils/types.c
+	utils/queue_c/q_init.c 
 
 COMMANDS_FILES = \
+
+PARSING_FILES = \
+	parser/parser.c \
+	parser/expansion.c \
+	parser/check_sysntax.c \
+	parser/get_structure.c \
+	parser/add_spaces.c \
+	parser/expand.c \
+	parser/p_free.c
+	
 
 FILES = \
 	$(UTIL_FILES) \
 	$(COMMANDS_FILES) \
+	$(PARSING_FILES) \
 	src/signals.c \
-	parser/parser.c \
-	parser/expansion.c \
-	parser/sysntax_1.c \
-	parser/sysntax_2.c \
-	parser/structure.c \
-	parser/add_spaces.c \
 	main.c
 
 #ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-#FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
-FLAGS = -fsanitize=address
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
+#FLAGS = -fsanitize=address
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

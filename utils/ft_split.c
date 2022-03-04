@@ -6,14 +6,14 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:02:46 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:50:06 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:19:54 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 /*
-* Allocates (with malloc(3)) and returns an array
+* Allocates (with ft_malloc(3)) and returns an array
 	of strings obtained by splitting ’s’ using the
 	character ’c’ as a delimiter. The array must be
 	ended by a NULL pointer.
@@ -81,7 +81,7 @@ static int	fill_table(char const *s, char c, char **tab)
 		if (*s == 0)
 			break ;
 		count = part_len(s, c);
-		*tab = malloc(part_len(s, c) + 1);
+		*tab = ft_malloc(part_len(s, c) + 1);
 		if (!(*tab))
 		{
 			free_table(tab - size_tab, size_tab);
@@ -104,7 +104,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count = nb_place(s, c);
-	tab = malloc(sizeof(char *) * (count + 1));
+	tab = ft_malloc(sizeof(char *) * (count + 1));
 	if (!tab || !fill_table(s, c, tab))
 		return (NULL);
 	return (tab);

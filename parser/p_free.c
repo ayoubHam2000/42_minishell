@@ -1,40 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   q_clear.c                                          :+:      :+:    :+:   */
+/*   p_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 16:39:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 13:42:03 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/03/04 17:44:22 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/04 17:50:49 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "minishell.h"
 
-static void	default_del_ptr(void *p)
+void	free_arr_str(char **str)
 {
+	char	**tmp;
+
+	tmp = str;
+	while (*tmp)
+	{
+		free(*tmp);
+		tmp++;
+	}
+	free(*tmp);
+	free(str);
+}
+
+void	p_free_redt(void *p)
+{
+	free(((t_redt *)p)->file);
 	free(p);
 }
 
-void	q_clear(t_queue *queue, void (*del_ptr)(void *p))
+void	free_cmd(void *p)
 {
-	t_node	*node;
-	t_node	*target;
+	t_cmd	*cmd;
 
-	if (!queue)
-		return ;
-	if (!del_ptr)
-		del_ptr = default_del_ptr;
-	node = queue->first;
-	while (node)
-	{
-		target = node;
-		node = node->next;
-		del_ptr(target->p);
-		free(target);
-	}
-	queue->first = NULL;
-	queue->last = NULL;
-	queue->len = 0;
+	cmd = p;
+	if (cmd->command)
+		free(cmd->command);
+	q_clear(cmd->q_args, NULL);
+	q_clear(cmd->q_redt, p_free_redt);
+	free(cmd->q_args);
+	free(cmd->q_redt);
+	free(cmd);
 }

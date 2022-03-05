@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 18:22:10 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:36:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	show(t_queue *commands)
 		while (*args)
 		{
 			printf("%s, ", *args);
-			free(*args);
 			args++;
 		}
 		printf("]\n");
@@ -49,14 +48,8 @@ void	show(t_queue *commands)
 		while (*redt)
 		{
 			printf("(%s, %d), ", (*redt)->file, (*redt)->r_type);
-			free((*redt)->file);
-			free(*redt);
 			redt++;
 		}
-		free(c->args);
-		free(c->redt);
-		free(c->command);
-		free(c);
 		printf("]\n");
 	}
 }
@@ -67,20 +60,6 @@ int	main(int ac, char **av, char **env)
 	int			status;
 	t_queue		*cmds;
 
-	//process_command(str, env);
-	//process_command(av[1], env);
-	//printf("%s\n", str);
-
-	//str = "ls $TERM >$t0 | 'ls > |$r $r -la' \"hi >$hi \"";
-	//str = "$dgsh > $TERM << $USER \"hi $t\"";
-	//str = av[1];
-	//cmds = parse_command(str);
-	//if (cmds)
-	//	show(cmds);
-	//system("leaks minishell");
-	//if (!init_sigaction())
-	//	ft_error_exit(ERR_INTERNAL);
-	while (1)
 	{
 		str = readline(PROMT_STR);
 		if (str)
@@ -92,6 +71,8 @@ int	main(int ac, char **av, char **env)
 			//waitpid(0, &status, WUNTRACED | WCONTINUED);
 			add_history(str);
 			free(str);
+			free_all();
+			//system("leaks minishell");
 		}
 		else
 			exit(0);

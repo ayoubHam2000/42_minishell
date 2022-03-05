@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:33:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 13:41:29 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:25:59 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	*q_dequeue(t_queue *queue)
 		queue->last = NULL;
 	queue->first = node->next;
 	p = node->p;
-	free(node);
 	queue->len--;
 	return (p);
 }

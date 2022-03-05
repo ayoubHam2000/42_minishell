@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 18:03:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:35:21 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ static t_queue	*get_commands(t_queue *s)
 			break ;
 		cmd = get_command(c->command, c->q_args, c->q_redt);
 		q_enqueue(res, cmd);
-		free(c->q_args);
-		free(c->q_redt);
-		free(c);
 	}
-	free(s);
 	return (res);
 }
 
@@ -83,21 +79,18 @@ t_queue	*parse_command(char *str)
 	t_queue	*res;
 	char	**commands;
 
+	res = NULL;
 	if (check_sysntax(str))
 	{
 		commands = ft_fsplit(str, fsplit_command);
 		res = get_structure(commands);
 		if (!res)
-		{
-			free_arr_str(commands);
 			return (NULL);
-		}
 		res = get_commands(res);
-		free_arr_str(commands);
 	}
 	else
 	{
-		ft_putstr("Not Valide Sysntax\n");
+		ft_error("Not Valide Sysntax\n");
 	}
 	return (res);
 }

@@ -9,6 +9,7 @@
 		"readline.h": "c",
 		"history.h": "c",
 		"errno.h": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"queue.h": "c"
 	}
 }

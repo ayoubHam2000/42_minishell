@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:38:41 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 11:42:08 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 12:59:22 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,18 @@ static char	*s_rule(char *str)
 
 static char	*w_rule(char *str)
 {
+	char	*p;
+
 	if (*str == '\'')
-		return (ft_strchr(str + 1, '\'') + 1);
+		p = ft_strchr(str + 1, '\'');
 	else if (*str == '"')
-		return (ft_strchr(str + 1, '"') + 1);
-	return (s_rule(str));
+		p = ft_strchr(str + 1, '"');
+	else
+		return (s_rule(str));
+	if (p)
+		return (p + 1);
+	else
+		return (NULL);
 }
 
 static char	*t_rule(char *str)
@@ -53,8 +60,6 @@ static char	*t_rule(char *str)
 	if (*str == '>' && *(str + 1) == '>')
 		str = str + 2;
 	else if (*str == '<' && *(str + 1) == '<')
-		str = str + 2;
-	else if (*str == '<' && *(str + 1) == '>')
 		str = str + 2;
 	else if (*str == '>' || *str == '<')
 		str = str + 1;

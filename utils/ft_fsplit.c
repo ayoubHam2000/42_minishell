@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:29:10 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:25:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static size_t	nb_place(char const *s, int (*f)(char c))
 	while (1)
 	{
 		if (!f(*s))
+		{
+			s++;
 			count++;
+		}
 		while (!f(*s) && *s != 0)
 			s++;
 		if (*s == 0)
@@ -29,6 +32,8 @@ static size_t	nb_place(char const *s, int (*f)(char c))
 			s++;
 		if (*s == 0)
 			break ;
+		else
+			s++;
 	}
 	return (count);
 }
@@ -53,10 +58,8 @@ static void	free_table(char **tab, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		//free(tab[i]);
 		i++;
 	}
-	//free(tab);
 }
 
 static int	fill_table(char const *s, int (*f)(char c), char **tab)

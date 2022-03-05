@@ -6,13 +6,20 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:45:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 20:31:56 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:21:38 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		expand_redt(t_redt *redt)
+char	*remove_quotes(char *str)
+{
+	if (str[0] == '\'' || str[0] == '"')
+		return (ft_substr(str, 1, ft_strlen(str) - 2));
+	return (str);
+}
+
+int	expand_redt(t_redt *redt)
 {
 	char	*p;
 
@@ -24,11 +31,10 @@ int		expand_redt(t_redt *redt)
 			ft_error("minishell: ");
 			ft_error(redt->file);
 			ft_error(": ambiguous redirect\n");
-			//free(p);
 			return (0);
 		}
-		//free(redt->file);
-		redt->file = p;	
+		p = remove_quotes(p);
+		redt->file = p;
 	}
 	return (1);
 }
@@ -39,33 +45,18 @@ void	expand_command(t_cmd *cmd, char *str)
 
 	res = expansion(str);
 	if (!res[0])
-	{
-		//free(res);
 		cmd->command = NULL;
-	}
 	else
-		cmd->command = res;
+		cmd->command = remove_quotes(res);
 }
 
 void	expand_arg(t_queue *q_args, char *str)
 {
 	char	*res;
-	char	*tmp;
 
 	res = expansion(str);
-	tmp = res;
-	while (*tmp && (*tmp == ' ' || *tmp == '\t'))
-		tmp++;
-	if ((*tmp))
-		//free(res);
-	//else
-	{
-		if (res[0] == '\'' || res[0] == '"')
-		{
-			tmp = res;
-			res = ft_substr(res, 1, ft_strlen(res) - 2);
-			//free(tmp);
-		}
-		q_enqueue(q_args, res);
-	}
+	while (*res && (*res == ' ' || *res == '\t'))
+		res++;
+	if ((*res))
+		q_enqueue(q_args, remove_quotes(res));
 }

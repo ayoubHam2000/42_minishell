@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:22:24 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static char	*var_pattern(char *str)
 {
-	if ((*str >= 'a' && *str <= 'z') || (*str >= 'A' && *str <= 'Z') || (*str == '_'))
+	if ((*str >= 'a' && *str <= 'z')
+		|| (*str >= 'A' && *str <= 'Z') || (*str == '_'))
 		str++;
 	else
 	{
@@ -22,7 +23,8 @@ static char	*var_pattern(char *str)
 			return (str + 1);
 		return (NULL);
 	}
-	while ((*str >= 'a' && *str <= 'z') || (*str >= 'A' && *str <= 'Z') || (*str == '_') || (*str >= '0' && *str <= '9'))
+	while ((*str >= 'a' && *str <= 'z') || (*str >= 'A' && *str <= 'Z')
+		|| (*str == '_') || (*str >= '0' && *str <= '9'))
 		str++;
 	return (str);
 }
@@ -54,7 +56,6 @@ static void	add_dollar_content(t_queue *queue, char *str)
 	else
 		env_var = ft_strdup(env_var);
 	q_enqueue(queue, env_var);
-	//free(p);
 }
 
 static char	*merge_strings(t_queue	*queue)
@@ -70,7 +71,7 @@ static char	*merge_strings(t_queue	*queue)
 		len += ft_strlen(node->p);
 		node = node->next;
 	}
-	res = malloc(len + 1);
+	res = ft_malloc(len + 1);
 	len = 0;
 	node = queue->first;
 	while (node)
@@ -87,7 +88,7 @@ char	*expansion(char *str)
 	t_queue	*queue;
 	char	*token;
 	char	*dollar;
-	
+
 	if (str[0] == '\'')
 		return (ft_strdup(str));
 	queue = q_init();
@@ -103,7 +104,5 @@ char	*expansion(char *str)
 	token = ft_substr(str, 0, ft_strlen(str));
 	q_enqueue(queue, token);
 	str = merge_strings(queue);
-	q_clear(queue, NULL);
-	//free(queue);
 	return (str);
 }

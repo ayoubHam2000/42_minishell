@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:02:46 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/04 20:31:22 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:25:40 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ static void	free_table(char **tab, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		//free(tab[i]);
 		i++;
 	}
-	//free(tab);
 }
 
 static int	fill_table(char const *s, char c, char **tab)

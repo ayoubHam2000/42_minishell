@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/04 19:52:17 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/05 14:14:03 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ UTIL_FILES = \
 	utils/ft_malloc.c \
 	utils/ft_strcmp.c \
 	utils/queue_c/q_clear.c \
-	utils/queue_c/q_clone.c \
 	utils/queue_c/q_dequeue.c \
 	utils/queue_c/q_enqueue.c \
 	utils/queue_c/q_init.c 
@@ -47,9 +46,7 @@ PARSING_FILES = \
 	parser/expansion.c \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
-	parser/add_spaces.c \
-	parser/expand.c \
-	parser/p_free.c
+	parser/expand.c 
 	
 
 FILES = \
@@ -59,10 +56,9 @@ FILES = \
 	src/signals.c \
 	main.c
 
-#ls -d [dir/*] | grep "" | sed 's/$/ \\/g'
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
 #FLAGS = -fsanitize=address
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
@@ -92,5 +88,3 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
-#~/goinfre/brew/opt/readline/lib/libreadline.a .
-#~/goinfre/brew/opt/readline/lib/libhistory.a .

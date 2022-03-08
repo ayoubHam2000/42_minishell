@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:47:56 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/03 05:14:48 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:44:29 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,15 +133,17 @@ char    *path(char   **envp,char *cmd)
     }
     path = envp[i] + 5;
     pathsplit = ft_split(path,':');
+    
     i = 0;
-
-    pathsplit = ft_split(path,':');
 
     while(pathsplit[i])
     {
         str = ft_strjoin(ft_strjoin(pathsplit[i++],"/"),cmd);
         if (access(str, X_OK |F_OK) == 0)
-            return (str);
+        {
+            printf("[[%s]]]",str);
+                        return (str);
+        }
     }
     return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:35:21 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:40:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,42 @@ static t_command	*get_command(char *c, t_queue *q_arg, t_queue *q_redt)
 	return (command);
 }
 
-static t_queue	*get_commands(t_queue *s)
+static t_command	**get_commands(t_queue *s)
 {
-	t_queue		*res;
+	t_command	**res;
 	t_cmd		*c;
 	t_command	*cmd;
+	int			i;
 
-	res = q_init();
+	i = 0;
+	res = ft_malloc(sizeof(t_command *) * (s->len + 1));
 	while (1)
 	{
 		c = q_dequeue(s);
 		if (!c)
 			break ;
 		cmd = get_command(c->command, c->q_args, c->q_redt);
-		q_enqueue(res, cmd);
+		res[i] = cmd;
+		i++;
 	}
+	res[i] = NULL;
 	return (res);
 }
 
-t_queue	*parse_command(char *str)
+t_command	**parse_command(char *str)
 {
-	t_queue	*res;
-	char	**commands;
+	t_queue		*q;
+	t_command	**res;
+	char		**commands;
 
 	res = NULL;
 	if (check_sysntax(str))
 	{
 		commands = ft_fsplit(str, fsplit_command);
-		res = get_structure(commands);
-		if (!res)
+		q = get_structure(commands);
+		if (!q)
 			return (NULL);
-		res = get_commands(res);
+		res = get_commands(q);
 	}
 	else
 	{

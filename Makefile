@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/05 14:14:03 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/09 12:41:58 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ UTIL_FILES = \
 	utils/queue_c/q_init.c 
 
 COMMANDS_FILES = \
+	commands/pipes/pipe.c
 
 PARSING_FILES = \
 	parser/parser.c \
@@ -58,8 +59,8 @@ FILES = \
 
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
-#FLAGS = -fsanitize=address
+#FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include  -fsanitize=address
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

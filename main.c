@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:36:36 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:25:34 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	process_command(char *str, char **env)
 }
 */
 
-void	show(t_queue *commands)
+void	show(t_command	**commands)
 {
 	t_command	*c;
 	char		**args;
@@ -31,7 +31,7 @@ void	show(t_queue *commands)
 
 	while (1)
 	{
-		c = q_dequeue(commands);
+		c = *commands;
 		if (!c)
 			return ;
 		args = c->args;
@@ -51,28 +51,53 @@ void	show(t_queue *commands)
 			redt++;
 		}
 		printf("]\n");
+		commands++;
 	}
+}
+
+int	get_len_cmmands(t_command **c)
+{
+	int	n;
+
+	n = 0;
+	while (c[n])
+		n++;
+	return (n);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	char		*str;
-	int			status;
-	t_queue		*cmds;
+	char			*str;
+	int				status;
+	t_command		**cmds;
+	int				n;
 
-	{
+	while(1){
 		str = readline(PROMT_STR);
+		//str = "ls";
 		if (str)
 		{
+			if (strlen(str) == 0)
+				continue ;
 			//process_command(str, env);
 			cmds = parse_command(str);
 			if (cmds)
+			{
 				show(cmds);
-			//waitpid(0, &status, WUNTRACED | WCONTINUED);
+				//waitpid(0, &status, WUNTRACED | WCONTINUED);
+				//free(str);
+				//free_all();
+				//system("leaks minishell");
+				n = get_len_cmmands(cmds);
+				int	i = fork();
+				if (i == 0)
+				{
+					fork_pipes(n, cmds, env);
+					exit(0);
+				}
+				waitpid(0, NULL, WUNTRACED | WCONTINUED);
+			}
 			add_history(str);
-			free(str);
-			free_all();
-			//system("leaks minishell");
 		}
 		else
 			exit(0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 10:03:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:41:48 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,4 @@ char   ** unset(char *cmd,char   **envp)
         
     return (unse);    
 }
+///// unset katmse7 variable blanha hewa ani kan7awel n9ezz dak varibale li ghanmse7o mnin kankon kandwzo fe dak use

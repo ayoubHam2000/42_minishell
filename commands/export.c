@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 10:03:13 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:40:25 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char        **to(char **envp)
     split[i] = 0;
     return (split);
 }
-void printarray(char **array)
+///// had function kat7tli dak chi li fe envp fe wa7d variable smito split bach nkhdmo 3lih fe unset we export
 
+void printarray(char **array)
 {
     int i;
 
@@ -40,6 +41,9 @@ void printarray(char **array)
     while(array[i])
         printf("%s\n",array[i++]);
 }
+
+/////// hadi affichage we safe
+
 
 char    **envexport(char **cmd,char *str)
 {
@@ -59,6 +63,7 @@ char    **envexport(char **cmd,char *str)
     free(cmd);
     return (split);
 }
+///////// had envexport akhye ayoub heya li kadkhel aye variable jedid export hk=lk (ex)
 
 char            *verfy(char *str)
 {
@@ -87,6 +92,9 @@ char            *verfy(char *str)
     return (str);
 }
 
+/////// hena kanchof wach dak expoort valid
+
+
 char    **export(char * cmd,char **envp)
 {
     char **split;
@@ -110,4 +118,5 @@ char    **export(char * cmd,char **envp)
         }
         return (envp);
     }
+    ////// hna kandir dak lkhedma kamla  dya ajouter be verification dyalha
 }

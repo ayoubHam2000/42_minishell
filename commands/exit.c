@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 10:03:05 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:35:27 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_digits(char *cmd)
 
 void	exit_cmd(char **cmd)
 {
-	if (ft_arraylen(cmd) > 2)
+	if (ft_arraylen(cmd) > 2)   //// exit kat9bl int fe arg 
 	{
 		printf("exit: too many arguments");
 		return ;

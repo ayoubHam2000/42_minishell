@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:22:09 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 10:03:02 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:36:04 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_arraylen(char **array)
 	}
 	return (i);
 }
-
+/// echo 3adya mafiha maytcher7 hhhhh
 void	echocmd(char **cmd)
 {
 	int	i;

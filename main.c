@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 15:29:21 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:47:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(int ac, char **av, char **env)
 			{
 				show(cmds);
 				execute(cmds, env);
-				while (waitpid(0, &status, WUNTRACED | WCONTINUED) != -1)
-					;
+				wait(NULL);
 				free_all();
 			}
 			add_history(str);

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 15:50:22 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:43:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	execute(t_command	**arrcmd, char **env)
 {
 	int	i;
 
-	i = fork();
-	if (i == -1)
-		return ;
-	else if (i == 0)
-	{
+	//i = fork();
+	//if (i == -1)
+	//	return ;
+	//else if (i == 0)
+	//{
 		built_in(arrcmd[0], env);
 		//fork_pipes(arr_cmd_len(arrcmd), arrcmd, env);
-		exit(0);
-	}
+	//	exit(0);
+	//}
 }

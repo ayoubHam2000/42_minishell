@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/10 15:51:07 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:52:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	**ft_unset(char *args, char **envp)
 		unse[j++] = envp[i++];
 	}
 	unse[j] = 0;
-	return (unse);
+	return (unse);  
 }

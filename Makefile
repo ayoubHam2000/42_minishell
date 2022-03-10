@@ -6,11 +6,12 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/09 12:41:58 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/10 18:31:48 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 UTIL_FILES = \
+	utils/ft_arrlen.c \
 	utils/ft_atoi.c \
 	utils/ft_memchr.c \
 	utils/ft_memcmp.c \
@@ -20,6 +21,7 @@ UTIL_FILES = \
 	utils/ft_putstr.c \
 	utils/ft_putstr_fd.c \
 	utils/ft_split.c \
+	utils/ft_isdigit.c \
 	utils/ft_fsplit.c \
 	utils/ft_strchr.c \
 	utils/ft_strdup.c \
@@ -39,8 +41,15 @@ UTIL_FILES = \
 	utils/queue_c/q_enqueue.c \
 	utils/queue_c/q_init.c 
 
-COMMANDS_FILES = \
-	commands/pipes/pipe.c
+EXECUTION_FILES = \
+	execution/builtin/cd.c \
+	execution/builtin/echo.c \
+	execution/builtin/exit.c \
+	execution/builtin/export.c \
+	execution/builtin/pwd.c \
+	execution/builtin/unset.c \
+	execution/pipe/pipe.c \
+	execution/execute.c
 
 PARSING_FILES = \
 	parser/parser.c \
@@ -48,13 +57,12 @@ PARSING_FILES = \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
 	parser/expand.c 
-	
 
 FILES = \
 	$(UTIL_FILES) \
-	$(COMMANDS_FILES) \
+	$(EXECUTION_FILES) \
 	$(PARSING_FILES) \
-	src/signals.c \
+	other.c \
 	main.c
 
 #-Wall -Wextra -Werror

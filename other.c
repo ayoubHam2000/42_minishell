@@ -1,42 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 18:47:28 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/03/10 14:40:09 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/10 14:40:27 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
-int	main(int ac, char **av, char **env)
+void	show(t_command	**commands)
 {
-	char			*str;
-	int				status;
-	t_command		**cmds;
+	t_command	*c;
+	char		**args;
+	t_redt		**redt;
 
-	while(1){
-		str = readline(PROMT_STR);
-		if (str)
+	while (1)
+	{
+		c = *commands;
+		if (!c)
+			return ;
+		args = c->args;
+		printf("%s\n", c->command);
+		printf("[");
+		while (*args)
 		{
-			if (strlen(str) == 0)
-				continue ;
-			cmds = parse_command(str);
-			if (cmds)
-			{
-				show(cmds);
-				execute(cmds, env);
-				wait(NULL);
-				free_all();
-			}
-			add_history(str);
+			printf("%s, ", *args);
+			args++;
 		}
-		else
-			exit(0);
+		printf("]\n");
+		redt = c->redt;
+		printf("[");
+		while (*redt)
+		{
+			printf("(%s, %d), ", (*redt)->file, (*redt)->r_type);
+			redt++;
+		}
+		printf("]\n");
+		commands++;
 	}
-	return (0);
 }

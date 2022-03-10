@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:53:12 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:10:03 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:42:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,9 @@ struct s_queue
 
 void	*ft_malloc(size_t size);
 
-//NULL if malloc failed
 void	*q_init(void);
-
-//0 if s_push malloc failed
 int		q_enqueue(t_queue *queue, void *p);
-
-////free the pointer after remove it from the queue.
 void	*q_dequeue(t_queue *queue);
-
 void	q_clear(t_queue *queue, void (*del_ptr)(void *p));
 
 #endif

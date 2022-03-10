@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:47:56 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 23:08:06 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:58:09 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/types.h>
+#include <dirent.h>
+#include <sys/stat.h>
 
 char    *command_buff;
 
@@ -18,8 +21,9 @@ char	**ft_split(char const *str, char c);
 
 size_t	ft_strlen(const char *s);
 
-char	*ft_substr(char const *s1, unsigned int start, size_t len);
+
 ///////////////////////////////////
+
 int	ft_arraylen(char **array)
 {
 	int	i;
@@ -79,6 +83,10 @@ void	exit_cmd(char **cmd)
 //////////////////////////////////
 
 
+
+
+
+/*
 char *ft_strjoin(char *str1, char *str2)
 {
     int     i;
@@ -102,7 +110,7 @@ char *ft_strjoin(char *str1, char *str2)
     new[j] = '\0';
     return (new);
 }
-
+*/
 
 //////// path
 char    *path(char   **envp,char *cmd)
@@ -113,25 +121,15 @@ char    *path(char   **envp,char *cmd)
     char    *str;
 
     i = 0;
-    while (envp[i])
-    {
-        if (!strncmp(envp[i], "PATH=", 5))
-            break ;
-        i++;
-    }
-    path = envp[i] + 5;
+    path = envp[6] + 5;
+
     pathsplit = ft_split(path,':');
-    
-    i = 0;
 
     while(pathsplit[i])
     {
         str = ft_strjoin(ft_strjoin(pathsplit[i++],"/"),cmd);
         if (access(str, X_OK |F_OK) == 0)
-        {
-            printf("[[%s]]]",str);
-                        return (str);
-        }
+            return (str);
     }
     return (NULL);
 }
@@ -144,7 +142,7 @@ void  pwd()
     printf("%s\n",cwd);
 }
 //////////////////pwd
-void    execute(char *path, char **envp)
+void    f_execute(char *path, char **envp)
 {
     pid_t   id;
 
@@ -196,7 +194,7 @@ void    cdtest(char *path)
     plit = ft_split(path,' ');
     if(!plit)
         return ;
-    cd(plit);
+    ft_cd(plit);
 }
 /////////////////////////////////
 void    exitcmd(char *path)
@@ -387,34 +385,9 @@ char   ** unset(char *cmd,char   **envp)
     return (unse);    
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void	echocmd(char **cmd)
-{
-	int	i;
-	int	control;
 
-	i = 2;
-	control = 0;
-	if (ft_arraylen(cmd) == 1)
-	{
-		printf("\n");
-		return ;
-	}
-	if (!strncmp(cmd[i], "-n", strlen(cmd[1])))
-	{
-		control = 1;
-		i++;
-	}
-	while (cmd[i])
-	{
-		if (!cmd[i + 1])
-			printf("%s", cmd[i++]);
-		else
-			printf("%s ", cmd[i++]);
-	}
-	if (!control)
-		printf("\n");
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 int     main(int argc,char **argv,char **envp)
 {
@@ -432,12 +405,13 @@ int     main(int argc,char **argv,char **envp)
         command_buff =readline(" Hakkache  minishell  >  ");
         if (strlen(command_buff) > 0)
             add_history(command_buff);
-        if(!strncmp(command_buff,"cd",2))
+            
+        else if(!strncmp(command_buff,"cd",2))
                 cdtest(command_buff);
         else if(!strncmp(command_buff,"pwd",strlen(command_buff)))
-                pwd();
+                ft_pwd();
         else if (!strncmp(command_buff,"exit",4))
-                exitcmd(command_buff);
+                ft_exit(command_buff);
         else if (!strncmp(command_buff,"env",strlen(command_buff)))
                 env(join);
         else if(!strncmp(command_buff,"export",6))
@@ -450,7 +424,6 @@ int     main(int argc,char **argv,char **envp)
             mkdir(unse[1],S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         }
         else
-            execute(path(envp,command_buff),envp);
+            f_execute(path(envp,command_buff),envp);
     }
 }
-

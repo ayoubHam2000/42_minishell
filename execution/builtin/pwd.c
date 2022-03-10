@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 10:15:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 13:50:34 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/24 23:10:45 by yhakkach          #+#    #+#             */
+/*   Updated: 2022/03/10 18:58:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unistd.h"
+#include "minishell.h"
 
-void	ft_putstr_fd(int fd, const char *str)
+void	ft_pwd(void)
 {
-	while (*str)
-		write(fd, str++, 1);
+	char	cwd[1024];
+
+	getcwd(cwd, sizeof(cwd));
+	ft_putstr(cwd);
 }
+////// hadi dyal lpaths wakha rakha khedama dyal path

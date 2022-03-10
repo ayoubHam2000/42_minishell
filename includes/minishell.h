@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/09 11:25:16 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 15:50:49 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,25 @@ char		*add_spaces(char *str);
 t_command	**parse_command(char *str);
 
 //expansion
-char	*expansion(char *str);
-int		expand_redt(t_redt *redt);
-void	expand_command(t_cmd *cmd, char *str);
-void	expand_arg(t_queue *q_args, char *str);
+char		*expansion(char *str);
+int			expand_redt(t_redt *redt);
+void		expand_command(t_cmd *cmd, char *str);
+void		expand_arg(t_queue *q_args, char *str);
 
-//execution
-int fork_pipes (int n, t_command **arrcmd ,char **envp);
+//execution: pipe and built in
+void		ft_cd(char **cmd);
+void		ft_echo(char **cmd);
+void		ft_exit(char **cmd);
+void		ft_pwd(void);
+char		**ft_export(char **args, char **envp);
+char		**ft_unset(char *cmd, char **envp);
+int 		fork_pipes (int n, t_command **arrcmd ,char **envp);
+void		execute(t_command	**arrcmd, char **env);
 
 //other
-void	rl_replace_line(const char *text, int i);
-int		init_sigaction(void);
+void		rl_replace_line(const char *text, int i);
+int			init_sigaction(void);
+
+void	show(t_command	**commands);
 
 #endif

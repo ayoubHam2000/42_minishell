@@ -6,19 +6,11 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 10:16:22 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/03 14:20:14 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:42:20 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-/*
-* Allocates (with malloc(3)) and returns a substring
-	from the string ’s’.
-	The substring begins at index ’start’ and is of
-	maximum size ’len’.
-* The new string. NULL if the allocation fails.
-*/
 
 static size_t	min(size_t a, size_t b)
 {

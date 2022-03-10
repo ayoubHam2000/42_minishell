@@ -3,75 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 23:35:27 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:58:39 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_arraylen(char **array)
+static int	ft_digits(char *arg)
 {
 	int	i;
 
 	i = 0;
-	if (!array)
-		return (0);
-	while (array[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
+	if (!arg)
 		return (1);
-	return (0);
-}
-
-
-int	ft_digits(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (!cmd)
-		return (1);
-	while (cmd[i] && cmd)
+	while (arg[i] && arg)
 	{
-		if (!ft_isdigit(cmd[i]))
+		if (!ft_isdigit(arg[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void	exit_cmd(char **cmd)
+void	ft_exit(char **args)
 {
-	if (ft_arraylen(cmd) > 2)   //// exit kat9bl int fe arg 
+	if (ft_arrlen(args) > 2)
 	{
 		printf("exit: too many arguments");
 		return ;
 	}
 	printf("exit\n");
-	if (!ft_digits(cmd[1]))
+	if (!ft_digits(args[1]))
 	{
-		printf("exit: %s: numeric argument required",cmd[1]);
+		printf("exit: %s: numeric argument required", args[1]);
 		exit(2);
 	}
-	if (!cmd[1])
+	if (!args[1])
 		exit(EXIT_SUCCESS);
 	else
-		exit(atoi(cmd[1]));
-}
-
-int			main(int argc ,char **argv)
-{
-		
-		exit_cmd(argv);
-
+		exit(atoi(args[1]));
 }

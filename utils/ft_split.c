@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:02:46 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:25:40 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:51:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,6 @@ static size_t	part_len(char const *s, char c)
 	return (count);
 }
 
-static void	free_table(char **tab, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-	{
-		i++;
-	}
-}
-
 static int	fill_table(char const *s, char c, char **tab)
 {
 	size_t	count;
@@ -81,10 +70,7 @@ static int	fill_table(char const *s, char c, char **tab)
 		count = part_len(s, c);
 		*tab = ft_malloc(part_len(s, c) + 1);
 		if (!(*tab))
-		{
-			free_table(tab - size_tab, size_tab);
 			return (0);
-		}
 		ft_strlcpy(*tab, s, count + 1);
 		s = s + count;
 		tab++;

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 23:10:45 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/05 01:57:34 by yhakkach         ###   ########.fr       */
+/*   Created: 2022/03/10 13:52:50 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/10 14:00:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void  pwd()
+#include "utils.h"
+
+int	ft_arrlen(char **arr)
 {
-    char    cwd[1024];
-    getcwd(cwd,sizeof(cwd));
-    printf("%s",cwd);
+	int	res;
+
+	res = 0;
+	while (arr[res])
+		res++;
+	return (res);
 }

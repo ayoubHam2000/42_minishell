@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/11 20:35:31 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/11 22:02:51 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	built_in(t_command *command, t_env *env_var)
 {
 	int	i;
 
-	i = 0;
-		printf("%s\n", env_var->env[i++]);
 	if (ft_strcmp(command->command, "cd"))
 		ft_cd(command->args);
 	else if (ft_strcmp(command->command, "pwd"))
@@ -41,7 +39,6 @@ void	built_in(t_command *command, t_env *env_var)
 	else if (ft_strcmp(command->command, "unset"))
 		env_var->env = ft_unset(command->args, env_var->env);
 }
-
 void	execute(t_command	**arrcmd, t_env *env_var)
 {
 	int	i;

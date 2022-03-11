@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/11 20:36:18 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/11 21:57:43 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s1, unsigned int start, size_t len);
 
 int is_valid_identifier(char *str);
+char	**ft_split(char const *s, char c);
 #endif

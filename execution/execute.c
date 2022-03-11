@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 18:43:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/11 20:35:31 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ static int		arr_cmd_len(t_command	**arrcmd)
 	return (i);
 }
 
-void	built_in(t_command *command, char **env)
+void	built_in(t_command *command, t_env *env_var)
 {
+	int	i;
+
+	i = 0;
+		printf("%s\n", env_var->env[i++]);
 	if (ft_strcmp(command->command, "cd"))
 		ft_cd(command->args);
 	else if (ft_strcmp(command->command, "pwd"))
@@ -33,12 +37,12 @@ void	built_in(t_command *command, char **env)
 	else if (ft_strcmp(command->command, "exit"))
 		ft_exit(command->args);
 	else if (ft_strcmp(command->command, "export"))
-		ft_export(command->args, env);
-	//else if (ft_strcmp(command->command, "unset"))
-	//	ft_export(command->args, env);
+		env_var->env = ft_export(command->args, env_var->env);
+	else if (ft_strcmp(command->command, "unset"))
+		env_var->env = ft_unset(command->args, env_var->env);
 }
 
-void	execute(t_command	**arrcmd, char **env)
+void	execute(t_command	**arrcmd, t_env *env_var)
 {
 	int	i;
 
@@ -47,7 +51,7 @@ void	execute(t_command	**arrcmd, char **env)
 	//	return ;
 	//else if (i == 0)
 	//{
-		built_in(arrcmd[0], env);
+		built_in(arrcmd[0], env_var);
 		//fork_pipes(arr_cmd_len(arrcmd), arrcmd, env);
 	//	exit(0);
 	//}

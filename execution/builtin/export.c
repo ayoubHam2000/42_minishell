@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/10 15:51:53 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/11 19:07:32 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ char	**envexport(char **cmd, char *str)
 	int		j;
 	char	**split;
 
+	if (!str)
+		return (cmd);
 	i = -1;
 	j = 0;
-	split = ft_malloc(sizeof(char *) * (ft_arrlen(cmd) + 2));
+	split = malloc(sizeof(char *) * (ft_arrlen(cmd) + 2));
 	while (cmd[++i])
 		split[i] = cmd[i];
 	split[i++] = str;
@@ -54,30 +56,60 @@ char	**envexport(char **cmd, char *str)
 	return (split);
 }
 
-char	*verfy(char *str)
+
+int is_valid_identifier(char *str)
 {
 	int	i;
-	int	control;
 
-	i = 0;
-	control = 0;
-	if (str[i] == '=')
+	i = 1;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
 	{
 		printf("export: `%s': not a valid identifier \n", str);
 		return (0);
 	}
 	while (str[i])
 	{
-		if (str[i] == ' ')
-			control++;
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+		{
+			printf("export: `%s': not a valid identifier \n", str);
+			return (0);
+		}
 		i++;
 	}
-	if (control != 0)
+	return (1);
+}
+
+int ft_strcherche(char *str, char c)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i])
 	{
-		printf("export: `%s': not a valid identifier \n", str);
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+char	*verfy(char *str)
+{
+	int	i;
+	char	**split;
+	
+
+	int index_equal = ft_strcherche(str,'=');
+	if (index_equal == -1)
+	{
+		is_valid_identifier(str);
 		return (0);
 	}
-	return (str);
+	char *var_name = ft_substr(str,0,index_equal);
+	if (is_valid_identifier(var_name))
+		return (str);
+	return (0);
 }
 
 char	**ft_export(char **args, char **envp)
@@ -94,9 +126,12 @@ char	**ft_export(char **args, char **envp)
 	{
 		while (*args)
 		{
-			envp = envexport(envp, verfy(*args));
+			//printf("%s\n",args);
+			split = envexport(envp, verfy(*args));
 			args++;
 		}
-		return (envp);
+		// i = 0;
+		// while ()
+		return (split);
 	}
 }

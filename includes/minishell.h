@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 15:50:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/11 20:36:18 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ typedef struct s_command
 	t_redt	**redt;
 }	t_command;
 
+
+typedef struct s_env
+{
+	char	**env;
+}	t_env;
 //parser
 char		*check_sysntax(char *str);
 t_queue		*get_structure(char **commands);
@@ -75,9 +80,9 @@ void		ft_echo(char **cmd);
 void		ft_exit(char **cmd);
 void		ft_pwd(void);
 char		**ft_export(char **args, char **envp);
-char		**ft_unset(char *cmd, char **envp);
+char		**ft_unset(char **args, char **envp);
 int 		fork_pipes (int n, t_command **arrcmd ,char **envp);
-void		execute(t_command	**arrcmd, char **env);
+void		execute(t_command	**arrcmd, t_env *env_var);
 
 //other
 void		rl_replace_line(const char *text, int i);
@@ -85,4 +90,12 @@ int			init_sigaction(void);
 
 void	show(t_command	**commands);
 
+
+
+int	ft_isalnum(int c);
+int	ft_isalpha(int c);
+char	**ft_split(char const *s, char c);
+char	*ft_substr(char const *s1, unsigned int start, size_t len);
+
+int is_valid_identifier(char *str);
 #endif

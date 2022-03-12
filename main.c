@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/11 18:42:06 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/12 21:57:09 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main(int ac, char **av, char **env)
 	t_command		**cmds;
 	t_env			env_var;
 
-	
 	env_var.env = too(env);
 	while(1){
 		str = readline(PROMT_STR);
@@ -65,9 +64,11 @@ int	main(int ac, char **av, char **env)
 			cmds = parse_command(str);
 			if (cmds)
 			{
-				show(cmds);
-				execute(cmds, &env_var);
-				wait(NULL);
+				//show(cmds);
+				open_files(cmds);
+				//execute(cmds, &env_var);
+				//wait(NULL);
+				close_files(cmds);
 				//free_all();
 			}
 			add_history(str);

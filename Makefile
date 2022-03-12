@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
+#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/11 19:09:41 by yhakkach         ###   ########.fr        #
+#    Updated: 2022/03/12 21:45:04 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ UTIL_FILES = \
 	utils/queue_c/q_clear.c \
 	utils/queue_c/q_dequeue.c \
 	utils/queue_c/q_enqueue.c \
-	utils/queue_c/q_init.c 
+	utils/queue_c/q_init.c \
+	utils/ft_itoa.c \
+	utils/file_error.c
 
 EXECUTION_FILES = \
 	execution/builtin/cd.c \
@@ -58,7 +60,10 @@ PARSING_FILES = \
 	parser/expansion.c \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
-	parser/expand.c 
+	parser/expand.c \
+	parser/io_files/close_files.c \
+	parser/io_files/open_files_utils.c \
+	parser/io_files/open_files.c
 
 FILES = \
 	$(UTIL_FILES) \

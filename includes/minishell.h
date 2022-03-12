@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/11 21:57:43 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/12 21:37:38 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_command
 	char	*command;
 	char	**args;
 	t_redt	**redt;
+	int		fd[2];
 }	t_command;
 
 
@@ -67,12 +68,20 @@ char		*check_sysntax(char *str);
 t_queue		*get_structure(char **commands);
 char		*add_spaces(char *str);
 t_command	**parse_command(char *str);
+void		open_files(t_command **cmds);
 
 //expansion
 char		*expansion(char *str);
 int			expand_redt(t_redt *redt);
 void		expand_command(t_cmd *cmd, char *str);
 void		expand_arg(t_queue *q_args, char *str);
+
+//open files
+int			get_last_doc_index(t_redt **redt);
+int			io_flag(int type);
+int			get_doc_file(char *delimiter);
+void		close_files(t_command **cmds);
+void		open_files(t_command **cmds);
 
 //execution: pipe and built in
 void		ft_cd(char **cmd);

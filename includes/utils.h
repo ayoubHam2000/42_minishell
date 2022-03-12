@@ -6,12 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 14:02:19 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/12 21:55:43 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
+
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -20,6 +21,8 @@
 # define ERR_MALLOC "ERR_MALLOC"
 
 int		ft_arrlen(char **arr);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -45,5 +48,7 @@ char	**ft_fsplit(char const *s, int (*f)(char c));
 int		ft_strcmp(char *str1, char *str2);
 void	*ft_malloc(size_t size);
 void	free_all(void);
+char	*ft_itoa(int n);
+int		file_error(char *file_name);
 
 #endif

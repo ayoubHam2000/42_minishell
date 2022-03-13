@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:47:56 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/10 18:58:09 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:46:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,6 @@ char	**ft_split(char const *str, char c);
 
 size_t	ft_strlen(const char *s);
 
-
-///////////////////////////////////
-
-int	ft_arraylen(char **array)
-{
-	int	i;
-
-	i = 0;
-	if (!array)
-		return (0);
-	while (array[i])
-	{
-		i++;
-	}
-	return (i);
-}
 
 int	ft_isdigit(int c)
 {

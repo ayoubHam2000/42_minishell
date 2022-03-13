@@ -6,13 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:52:50 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 14:00:04 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:42:57 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_arrlen(char **arr)
+int	ft_arrlen(void **arr)
 {
 	int	res;
 

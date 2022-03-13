@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/09 12:40:36 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 15:34:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static t_command	*get_command(char *c, t_queue *q_arg, t_queue *q_redt)
 
 	command = ft_malloc(sizeof(t_command));
 	command->command = c;
+	command->fd[0] = -1;
+	command->fd[1] = -1;
 	command->args = ft_malloc(sizeof(char *) * (q_arg->len + 1));
 	command->redt = ft_malloc(sizeof(t_redt *) * (q_redt->len + 1));
 	i = -1;
@@ -87,7 +89,7 @@ t_command	**parse_command(char *str)
 	res = NULL;
 	if (check_sysntax(str))
 	{
-		commands = ft_fsplit(str, fsplit_command);
+		commands = msk_split(str, fsplit_command);
 		q = get_structure(commands);
 		if (!q)
 			return (NULL);

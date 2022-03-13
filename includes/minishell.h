@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/12 21:37:38 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:31:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,14 @@ void		open_files(t_command **cmds);
 void		ft_cd(char **cmd);
 void		ft_echo(char **cmd);
 void		ft_exit(char **cmd);
-void		ft_pwd(void);
+char		*ft_pwd(void);
 char		**ft_export(char **args, char **envp);
 char		**ft_unset(char **args, char **envp);
-int 		fork_pipes (int n, t_command **arrcmd ,char **envp);
+
 void		execute(t_command	**arrcmd, t_env *env_var);
+void		exec_built_in(t_command *command, t_env *env_var);
+int			fork_pipes(int n, t_command **arrcmd, t_env *env);
+char		*get_cmd_path(char *command, t_env *env);
 
 //other
 void		rl_replace_line(const char *text, int i);

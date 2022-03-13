@@ -6,17 +6,19 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:10:45 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/10 18:58:58 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:42:40 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(void)
+char	*ft_pwd(void)
 {
-	char	cwd[1024];
+	const int	size = 1024;
+	char		*cwd;
 
-	getcwd(cwd, sizeof(cwd));
-	ft_putstr(cwd);
+	cwd = ft_malloc(size);
+	getcwd(cwd, size);
+	printf("%s\n", cwd);
+	return (cwd);
 }
-////// hadi dyal lpaths wakha rakha khedama dyal path

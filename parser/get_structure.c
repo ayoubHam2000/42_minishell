@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:22:46 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 15:34:16 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_queue	*get_structure(char **commands)
 	q_cmd = q_init();
 	while (*commands)
 	{
-		tokens = ft_fsplit(*commands, fsplit_command);
+		tokens = msk_split(*commands, fsplit_command);
 		cmd = get_command(tokens);
 		if (!cmd)
 			return (NULL);

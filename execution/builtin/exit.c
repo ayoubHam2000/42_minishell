@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/10 18:58:39 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:21:02 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_digits(char *arg)
 
 void	ft_exit(char **args)
 {
-	if (ft_arrlen(args) > 2)
+	if (ft_arrlen((void **)args) > 2)
 	{
 		printf("exit: too many arguments");
 		return ;

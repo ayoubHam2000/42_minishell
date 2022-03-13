@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:27:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/12 21:55:01 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:20:03 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ void	open_files(t_command **cmds)
 	{
 		if (!open_io_file_for_cmd(cmds[r], cmds[r]->redt))
 			cmds[r]->command = NULL;
+		if (cmds[r]->fd[0] == -1)
+			cmds[r]->fd[0] = 0;
+		if (cmds[r]->fd[1] == -1)
+			cmds[r]->fd[1] = 1;
 		r++;
 	}
 }

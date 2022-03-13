@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/13 14:24:40 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/13 18:32:34 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ PARSING_FILES = \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
 	parser/expand.c \
+	parser/redirection_type.c \
 	parser/io_files/close_files.c \
 	parser/io_files/open_files_utils.c \
 	parser/io_files/open_files.c

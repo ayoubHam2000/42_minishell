@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 15:58:13 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:34:37 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ char	**too(char **envp)
 	return (split);
 }
 
+static int	split_test(char c)
+{
+	static int	f;
+
+	if ((c == '\'' || c == '"') && (f == 0 || c == f))
+	{
+		if (f == 0)
+			f = c;
+		else
+			f = 0;
+	}
+	else if (!c)
+		f = 0;
+	if (!f && (c == ' '))
+		return (1);
+	else if (!f && (c == '>' || c == '<'))
+		return (2);
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char			*str;
@@ -42,6 +62,7 @@ int	main(int ac, char **av, char **env)
 	while(1)
 	{
 		str = readline(PROMT_STR);
+		//str = "ls |ukyu grep";
 		if (str)
 		{
 			if (strlen(str) == 0)

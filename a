@@ -1,0 +1,13 @@
+Makefile
+_OUT
+a
+commands
+execution
+includes
+main.c
+minishell
+other.c
+parser
+src
+test
+utils

@@ -6,28 +6,35 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 15:34:28 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:25:43 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	fsplit_command(char c)
+static t_queue	*get_commands_tokens(char **commands)
 {
-	static int	f;
+	size_t	i;
+	t_queue *q;
+	char	**tokens;
 
-	if ((c == '\'' || c == '"') && (f == 0 || c == f))
+	q = q_init();
+	i = 0;
+	while (commands[i])
 	{
-		if (f == 0)
-			f = c;
+		if (commands[i][0] == '|')
+		{
+			i++;
+			continue ;
+		}
+		tokens = msk_split(commands[i], msk_tokens);
+		if (check_command_syntax(tokens))
+			q_enqueue(q, tokens);
 		else
-			f = 0;
+			return (NULL);
+		i++;
 	}
-	else if (!c)
-		f = 0;
-	if (!f && c == '|')
-		return (1);
-	return (0);
+	return (q);
 }
 
 static t_command	*get_command(char *c, t_queue *q_arg, t_queue *q_redt)
@@ -82,22 +89,21 @@ static t_command	**get_commands(t_queue *s)
 
 t_command	**parse_command(char *str)
 {
-	t_queue		*q;
-	t_command	**res;
-	char		**commands;
+	char	**commands;
+	t_queue	*q;
 
-	res = NULL;
-	if (check_sysntax(str))
+	commands = msk_split(str, msk_pipe);
+	if (check_pipe_syntax(commands))
 	{
-		commands = msk_split(str, fsplit_command);
-		q = get_structure(commands);
-		if (!q)
-			return (NULL);
-		res = get_commands(q);
+		q = get_commands_tokens(commands);
+		if (q)
+		{
+			q = get_structure(q);
+			if (!q)
+				return (NULL);
+			return (get_commands(q));
+		}
 	}
-	else
-	{
-		ft_error("Not Valide Sysntax\n");
-	}
-	return (res);
+	ft_error(ERR_SYNATX_ERROR);
+	return (NULL);
 }

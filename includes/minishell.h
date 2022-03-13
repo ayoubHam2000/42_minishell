@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 10:31:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:31:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 # define PROMT_STR "\e[0;32m➜ \e[0;37mminishell$ \e[0;33m✗ \e[0m"
 # define ERR_INTERNAL "Internal Error\n"
 # define ERR_ENV_VAR "Memory Error\n"
+# define ERR_SYNATX_ERROR "Synatx Error\n"
 
 typedef struct sigaction	t_sigaction;
 
+# define RD_ERR -1
 # define RD_IN 1
 # define RD_OUT 2
 # define RD_AP 3
@@ -63,25 +65,36 @@ typedef struct s_env
 {
 	char	**env;
 }	t_env;
+
 //parser
-char		*check_sysntax(char *str);
-t_queue		*get_structure(char **commands);
-char		*add_spaces(char *str);
+t_queue		*get_structure(t_queue *cmds);
 t_command	**parse_command(char *str);
-void		open_files(t_command **cmds);
 
-//expansion
-char		*expansion(char *str);
-int			expand_redt(t_redt *redt);
-void		expand_command(t_cmd *cmd, char *str);
-void		expand_arg(t_queue *q_args, char *str);
+//parser->synatx
+int			msk_pipe(char c);
+int 		msk_tokens(char c);
+int			check_pipe_syntax(char **commands);
+int			check_command_syntax(char **tokens);
 
-//open files
+//parser->open files
 int			get_last_doc_index(t_redt **redt);
 int			io_flag(int type);
 int			get_doc_file(char *delimiter);
 void		close_files(t_command **cmds);
 void		open_files(t_command **cmds);
+
+//parser->expansion
+char		*expansion(char *str);
+int			expand_redt(t_redt *redt);
+void		expand_command(t_cmd *cmd, char *str);
+void		expand_arg(t_queue *q_args, char *str);
+
+//parsing->utils
+int			redirection_type(char *token);
+
+//=======
+//=======
+//=======
 
 //execution: pipe and built in
 void		ft_cd(char **cmd);
@@ -101,8 +114,6 @@ void		rl_replace_line(const char *text, int i);
 int			init_sigaction(void);
 
 void	show(t_command	**commands);
-
-
 
 int	ft_isalnum(int c);
 int	ft_isalpha(int c);

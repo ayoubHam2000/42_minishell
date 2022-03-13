@@ -6,68 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 15:34:16 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:33:45 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	fsplit_command(char c)
-{
-	static int	f;
-
-	if ((c == '\'' || c == '"') && (f == 0 || c == f))
-	{
-		if (f == 0)
-			f = c;
-		else
-			f = 0;
-	}
-	else if (!c)
-		f = 0;
-	if (!f && c == ' ')
-		return (1);
-	return (0);
-}
-
-static int	is_redirection(char *str)
-{
-	size_t	len;
-
-	len = ft_strlen(str);
-	if (len >= 2 && str[0] == '>' && str[1] == '>')
-		return (RD_AP);
-	else if (len >= 2 && str[0] == '<' && str[1] == '<')
-		return (RD_DOC);
-	else if (len >= 1 && str[0] == '>')
-		return (RD_OUT);
-	else if (len >= 1 && str[0] == '<')
-		return (RD_IN);
-	return (0);
-}
-
-static void	add_redt(t_queue *queue, char **tokens)
-{
-	t_redt	*redt;
-	size_t	len;
-	size_t	i;
-
-	redt = ft_malloc(sizeof(t_redt));
-	redt->r_type = is_redirection(*tokens);
-	len = ft_strlen(*tokens);
-	i = 0;
-	if (len == 1 || ft_strcmp(*tokens, ">>") || ft_strcmp(*tokens, "<<"))
-		redt->file = ft_strdup(*(tokens + 1));
-	else
-	{
-		while ((*tokens)[i] == '>' || (*tokens)[i] == '<')
-			i++;
-		redt->file = ft_substr(*tokens, i, len - i);
-	}
-	q_enqueue(queue, redt);
-}
-
-static t_cmd	*get_command(char **tokens)
+static t_cmd	*new_cmd(void)
 {
 	t_cmd	*cmd;
 
@@ -75,16 +20,26 @@ static t_cmd	*get_command(char **tokens)
 	cmd->q_args = q_init();
 	cmd->q_redt = q_init();
 	cmd->command = NULL;
+	return (cmd);
+}
+
+static t_cmd	*get_command(char **tokens)
+{
+	t_cmd	*cmd;
+	t_redt	*redt;
+
+	cmd = new_cmd();
 	while (*tokens)
 	{
-		if (is_redirection(*tokens))
+		if (redirection_type(*tokens))
 		{
-			add_redt(cmd->q_redt, tokens);
-			if (!expand_redt(cmd->q_redt->first->p))
+			redt = ft_malloc(sizeof(t_redt));
+			redt->r_type = redirection_type(*tokens);
+			redt->file = *(tokens + 1);
+			if (!expand_redt(redt))
 				return (NULL);
-			if (ft_strlen(*tokens) == 1
-				|| ft_strcmp(*tokens, ">>") || ft_strcmp(*tokens, "<<"))
-				tokens++;
+			q_enqueue(cmd->q_redt, redt);
+			tokens++;
 		}
 		else if (!cmd->command)
 			expand_command(cmd, *tokens);
@@ -95,21 +50,23 @@ static t_cmd	*get_command(char **tokens)
 	return (cmd);
 }
 
-t_queue	*get_structure(char **commands)
+t_queue	*get_structure(t_queue *cmds)
 {
-	t_queue	*q_cmd;
-	char	**tokens;
+	t_queue	*res;
+	t_node	*node;
 	t_cmd	*cmd;
+	char	**tokens;
 
-	q_cmd = q_init();
-	while (*commands)
+	node = cmds->first;
+	res = q_init();
+	while (node)
 	{
-		tokens = msk_split(*commands, fsplit_command);
+		tokens = node->p;
 		cmd = get_command(tokens);
 		if (!cmd)
 			return (NULL);
-		q_enqueue(q_cmd, cmd);
-		commands++;
+		q_enqueue(res, cmd);
+		node = node->next;
 	}
-	return (q_cmd);
+	return (res);
 }

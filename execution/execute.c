@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 16:01:59 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 16:33:46 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int	fork_pipes(int n, t_command **arrcmd, t_env *env)
 
 	i = 0;
 	in = 0;
-	while (i < n - 1)
+	/*while (i < n - 1)
 	{
 		fd = arrcmd[i]->fd;
 		printf("%d, %d\n", fd[0], fd[1]);
@@ -170,7 +170,9 @@ int	fork_pipes(int n, t_command **arrcmd, t_env *env)
 		i++;
 	}
 	if (in != 0)
-		dup2(in, 0);
+		dup2(in, 0);*/
+	fd = arrcmd[i]->fd;
+	dup2(1, fd[1]);
 	exec_cmd(arrcmd[i], env);
 	return (0);
 }

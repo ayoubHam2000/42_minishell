@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/11 19:07:32 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:32:25 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**to(char **envp)
 
 	i = -1;
 	j = 0;
-	n = ft_arrlen(envp);
+	n = ft_arrlen((void **)envp);
 	split = ft_malloc(sizeof(char *) * (n + 1));
 	while (envp[++i])
 		split[i] = envp[i];
@@ -48,7 +48,7 @@ char	**envexport(char **cmd, char *str)
 		return (cmd);
 	i = -1;
 	j = 0;
-	split = malloc(sizeof(char *) * (ft_arrlen(cmd) + 2));
+	split = malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
 	while (cmd[++i])
 		split[i] = cmd[i];
 	split[i++] = str;
@@ -96,10 +96,6 @@ int ft_strcherche(char *str, char c)
 }
 char	*verfy(char *str)
 {
-	int	i;
-	char	**split;
-	
-
 	int index_equal = ft_strcherche(str,'=');
 	if (index_equal == -1)
 	{
@@ -115,7 +111,6 @@ char	*verfy(char *str)
 char	**ft_export(char **args, char **envp)
 {
 	char	**split;
-	int		i;
 
 	if (!(*args))
 	{
@@ -126,12 +121,9 @@ char	**ft_export(char **args, char **envp)
 	{
 		while (*args)
 		{
-			//printf("%s\n",args);
 			split = envexport(envp, verfy(*args));
 			args++;
 		}
-		// i = 0;
-		// while ()
 		return (split);
 	}
 }

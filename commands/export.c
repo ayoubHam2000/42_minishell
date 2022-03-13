@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/09 23:40:25 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:45:55 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char        **to(char **envp)
     i = -1;
     j = 0;
 
-    n = ft_arraylen(envp);
+    n = ft_arrlen((void **)envp);
     split = malloc(sizeof(char *) * (n  + 1));
     if (!split)
         return (NULL);
@@ -53,7 +53,7 @@ char    **envexport(char **cmd,char *str)
     i = -1;
     j = 0;
     
-    split = malloc(sizeof(char *) * (ft_arraylen(cmd) + 2));
+    split = malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
     if (!split)
         return cmd;
     while(cmd[++i])
@@ -111,9 +111,9 @@ char    **export(char * cmd,char **envp)
         split = ft_split(cmd,' ');
         if(!split)
             return (envp);
-        if(ft_arraylen(split) > 1)
+        if(ft_arrlen((void **)split) > 1)
         {
-            while (i < ft_arraylen(split))
+            while (i < ft_arrlen((void **)split))
                 envp = envexport(envp,verfy(split[i++]));
         }
         return (envp);

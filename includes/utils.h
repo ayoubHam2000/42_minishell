@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/12 21:55:43 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:25:05 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define ERR_MALLOC "ERR_MALLOC"
 
-int		ft_arrlen(char **arr);
+int		ft_arrlen(void **arr);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
@@ -44,7 +44,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_error(const char *str);
 void	ft_error_exit(const char *str);
-char	**ft_fsplit(char const *s, int (*f)(char c));
+char	**msk_split(char const *s, int (*f)(char c));
 int		ft_strcmp(char *str1, char *str2);
 void	*ft_malloc(size_t size);
 void	free_all(void);

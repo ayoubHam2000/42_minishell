@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/12 21:45:04 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/13 14:24:40 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UTIL_FILES = \
 	utils/ft_putstr_fd.c \
 	utils/ft_split.c \
 	utils/ft_isdigit.c \
-	utils/ft_fsplit.c \
+	utils/msk_split.c \
 	utils/ft_strchr.c \
 	utils/ft_strdup.c \
 	utils/ft_strjoin.c \

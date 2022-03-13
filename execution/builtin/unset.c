@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/11 21:26:02 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:27:54 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_unset(char **args, char **envp)
 	if (is_valid_identifier1(args[0]) == 0 && is_here(args[0],envp) == -1)
 		return (envp);
 
-	unse = ft_malloc(sizeof(char *) * (ft_arrlen(envp)));
+	unse = ft_malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
 	if (!unse)
 		return (0);
 	while (envp[i])

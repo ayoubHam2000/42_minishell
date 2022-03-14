@@ -3,13 +3,6 @@
 		"includes/**"
 	],
 	"files.associations": {
-		"utils.h": "c",
-		"minishell.h": "c",
-		"util.h": "c",
-		"readline.h": "c",
-		"history.h": "c",
-		"errno.h": "c",
-		"type_traits": "c",
-		"queue.h": "c"
+		"readline.h": "c"
 	}
 }

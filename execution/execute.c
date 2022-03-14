@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/14 02:48:53 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/14 22:37:11 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	exec_cmd(t_command *cmd, t_env *env)
 	}
 	else
 	{
-		path = env_cmd_path(cmd->command, env->env);
+		path = get_cmd_path(cmd->command, env);
 		if (!path)
 			return ;
 		args = add_arg_0(cmd->args, path);

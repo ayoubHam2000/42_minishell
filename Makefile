@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/13 18:32:34 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/14 22:18:38 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ FILES = \
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
 #FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include  -fsanitize=address
+FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell
@@ -90,7 +90,7 @@ deps = $(OBJ:.o=.d)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	gcc $(FLAGS) $(OBJ) -o $(NAME)
+	gcc  $(OBJ) $(FLAGS) -o $(NAME)
 
 $(OBJ) : $(OBJ_DIR)%.o : %.c
 	mkdir -p $(dir $@)

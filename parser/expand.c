@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:45:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/05 14:21:38 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:41:31 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	expand_redt(t_redt *redt)
 			return (0);
 		}
 		p = remove_quotes(p);
-		redt->file = p;
+		redt->file =p ;
 	}
 	return (1);
 }

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 16:33:46 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/14 02:48:53 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+# include <errno.h>
 
 static char	**add_arg_0(char **args, char *arg0)
 {
@@ -115,7 +116,7 @@ void	exec_cmd(t_command *cmd, t_env *env)
 	else if (is_builtin(cmd->command))
 	{
 		exec_built_in(cmd, env);
-		exit(0);
+		exit(13);
 	}
 	else
 	{
@@ -139,63 +140,138 @@ static int	spawn_proc(int in, int out, t_command *cmd, t_env *env)
 		if (in != 0)
 		{
 			dup2(in, 0);
-			close(in);
+			// close(in);
 		}
 		if (out != 1)
 		{
 			dup2(out, 1);
-			close(out);
+			// close(out);
 		}
 		exec_cmd(cmd, env);
 	}
+	// close(out);
+	// close(in);
+	
 	return (pid);
 }
 
-int	fork_pipes(int n, t_command **arrcmd, t_env *env)
+// int    fork_pipes(int n, t_command **arrcmd, t_env *env)
+// {
+//     int        i;
+//     int        in;
+//     int        *fd;
+
+//     i = 0;
+//     in = 0;
+//     while (i < n - 1)
+//     {
+//         fd = arrcmd[i]->fd;
+//         printf("%d, %d\n", fd[0], fd[1]);
+//         pipe(fd);
+//         spawn_proc(in, fd[1], arrcmd[i], env);
+//         close(fd[1]);
+//         in = fd[0];
+//         i++;
+//     }
+//     fd = arrcmd[i]->fd;
+//     dup2(fd[1], 1);
+//     exec_cmd(arrcmd[i], env);
+//     return (0);
+// }
+
+int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 {
-	int		i;
-	int		in;
-	int		*fd;
+    int        i;
+    int        in;
+    int        *fd;
 
-	i = 0;
-	in = 0;
-	/*while (i < n - 1)
+	int			redin;
+	int			redout;
+
+    i = 0;	
+
+    int filein = arrcmd[0]->fd[0];
+	int fileout = arrcmd[0]->fd[1];
+	dprintf(2,"%d %d\n", redin, redout);
+	int 	prevIn;
+    while (i < n - 1)
+    {
+        int fd[2];
+
+		 filein = arrcmd[i]->fd[0];
+		 fileout = arrcmd[i]->fd[1];
+        pipe(fd);
+		 if (fileout != 1)
+		 {
+	 		redout = fileout;
+		 	close(fd[1]);
+			 fd[1] = redout;
+		 }
+		 // we  have file
+		if (filein != 0)
+			 redin =  filein;
+        spawn_proc(redin, fd[1], arrcmd[i], env);
+        close(fd[1]);		 	
+        redin = fd[0];
+        i++;
+    }
+
+	filein = arrcmd[i]->fd[0];
+	fileout = arrcmd[i]->fd[1];
+	dprintf(2, "[%d]\n", filein);
+	if(filein != 0)
 	{
-		fd = arrcmd[i]->fd;
-		printf("%d, %d\n", fd[0], fd[1]);
-		pipe(fd);
-		spawn_proc(in, fd[1], arrcmd[i], env);
-		close(fd[1]);
-		in = fd[0];
-		i++;
+		redin = filein;
 	}
-	if (in != 0)
-		dup2(in, 0);*/
-	fd = arrcmd[i]->fd;
-	dup2(1, fd[1]);
-	exec_cmd(arrcmd[i], env);
-	return (0);
-}
 
-//////
+	int pid = fork();
+	if (pid == 0)
+	{	
+		if (redin != 0)
+		{
+			dup2(redin, 0);
+		}
+		if (fileout != 1)
+		{
+			dup2(fileout, 1);
+		}
+    	exec_cmd(arrcmd[i], env);
+		exit(10);
+	}
+  
+    return (0);
+}
+//
 
 void	execute(t_command	**arrcmd, t_env *env_var)
 {
 	int	i;
-
+	int status ;
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
 		exec_built_in(arrcmd[0], env_var);
 	}
 	else
 	{
-		i = fork();
-		if (i == -1)
-			return ;
-		else if (i == 0)
-		{
+		// i = fork();
+		// if (i == -1)
+		// 	return ;
+		// else if (i == 0)
+		// {
 			fork_pipes(ft_arrlen((void **)arrcmd), arrcmd, env_var);
-			exit(0);
-		}
+			// wait(NULL);
+			// dprintf(2,"i am here\n");
+			errno = 0;
+			int ret =waitpid(-1, &status, 0);
+			while (ret != 0 && ret != -1 )
+			{
+				/* code */
+				ret = waitpid(-1, &status, 0);
+			}
+						// dprintf(2,"findhed i am here\n");
+
+			
+			// exit(0);
+		// }
 	}
 }

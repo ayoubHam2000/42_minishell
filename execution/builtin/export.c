@@ -6,36 +6,52 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/15 21:59:51 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:52:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**to(char **envp)
-{
-	char	**split;
-	int		i;
-	int		j;
-	int		n;
 
-	i = -1;
-	j = 0;
-	n = ft_arrlen((void **)envp);
-	split = ft_malloc(sizeof(char *) * (n + 1));
-	while (envp[++i])
-		split[i] = envp[i];
-	split[i] = 0;
-	return (split);
+int	ft_arrlenop(char **arr)
+{
+	int	res;
+
+	res = 0;
+	while (arr[res])
+		res++;
+	return (res);
 }
 
-void	printarray(char **array)
+void	printarray(char **array,int k)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	if (k == 0)
+	{
+		while (array[i])
 		printf("%s\n", array[i++]);
+	}
+	else
+	{
+		while (array[i])
+		printf("declare -x %s\n", array[i++]);
+	}
+	
+}
+
+char	*copy_arg(char *s1)
+{
+	char	*s2;
+	size_t	s1_len;
+
+	s1_len = ft_strlen((char *)s1);
+	s2 = malloc(s1_len + 1);
+	if (!s2)
+		ft_error_exit(ERR_MALLOC);
+	ft_strlcpy(s2, s1, s1_len + 1);
+	return (s2);
 }
 
 char	**envexport(char **cmd, char *str)
@@ -48,11 +64,14 @@ char	**envexport(char **cmd, char *str)
 		return (cmd);
 	i = -1;
 	j = 0;
-	split = ft_malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
+	split = malloc(sizeof(char *) * (ft_arrlenop(cmd) + 2));
+	if (!split)
+		ft_error_exit(ERR_MALLOC);
 	while (cmd[++i])
 		split[i] = cmd[i];
-	split[i++] = str;
+	split[i++] = copy_arg(str);
 	split[i] = 0;
+	free(cmd);
 	return (split);
 }
 
@@ -108,22 +127,25 @@ char	*verfy(char *str)
 	return (0);
 }
 
-char	**ft_export(char **args, char **envp)
+int	ft_export(char **args)
 {
-	char	**split;
+	int		i;
+	char	**env;
 
+	i = 0;
+	env = env_var(NULL);
 	if (!(*args))
 	{
-		printarray(envp);
-		return (envp);
+		printarray(env, 8);
 	}
 	else
 	{
-		while (*args)
+		while (args[i])
 		{
-			split = envexport(envp, verfy(*args));
-			args++;
+			env = envexport(env, verfy(args[i]));
+			i++;
 		}
-		return (split);
+		env_var(env);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/15 22:05:46 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:54:43 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@
 # define ERR_ENV_VAR "Memory Error\n"
 # define ERR_SYNATX_ERROR "Synatx Error\n"
 
-typedef struct sigaction	t_sigaction;
-
 # define RD_ERR -1
 # define RD_IN 1
 # define RD_OUT 2
 # define RD_AP 3
 # define RD_DOC 4
 # define RD_DOC_READ 5
+
+int	g_sig;
 
 typedef struct s_redt
 {
@@ -90,6 +90,9 @@ char		*expansion(char *str);
 int			expand_redt(t_redt *redt);
 void		expand_command(t_cmd *cmd, char *str);
 void		expand_arg(t_queue *q_args, char *str);
+char		*ft_getenv(char *var);
+char		**env_var(char **new_env);
+char		**get_copy_env(char **env);
 
 //parsing->utils
 int			redirection_type(char *token);
@@ -99,17 +102,20 @@ int			redirection_type(char *token);
 //=======
 
 //execution: pipe and built in
-void		ft_cd(char **cmd);
-void		ft_echo(char **cmd);
+char		*get_path(void);
+int			ft_cd(char **cmd);
+int			ft_echo(char **cmd);
 void		ft_exit(char **cmd);
-char		*ft_pwd(void);
-char		**ft_export(char **args, char **envp);
-char		**ft_unset(char **args, char **envp);
+int			ft_pwd(void);
+int			ft_export(char **args);
+int			ft_unset(char **args);
 
-void		execute(t_command	**arrcmd, t_env *env_var);
-void		exec_built_in(t_command *command, t_env *env_var);
-int			fork_pipes(int n, t_command **arrcmd, t_env *env);
-char		*get_cmd_path(char *command, t_env *env);
+int			execute(t_command	**arrcmd);
+int			exec_built_in(t_command *command);
+int			fork_pipes(int n, t_command **arrcmd);
+char		*get_cmd_path(char *command);
+int			ft_env(void);
+
 
 //other
 void		rl_replace_line(const char *text, int i);
@@ -124,4 +130,6 @@ char	*ft_substr(char const *s1, unsigned int start, size_t len);
 
 int is_valid_identifier(char *str);
 char	**ft_split(char const *s, char c);
+void 	printarray(char **array, int k);
+
 #endif

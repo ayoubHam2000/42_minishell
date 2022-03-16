@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/15 22:40:40 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/16 01:34:07 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ EXECUTION_FILES = \
 	execution/builtin/export.c \
 	execution/builtin/pwd.c \
 	execution/builtin/unset.c \
+	execution/builtin/ft_env.c \
 	execution/pipe/pipe.c \
 	execution/execute.c
 
@@ -61,6 +62,7 @@ PARSING_FILES = \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
 	parser/expand.c \
+	parser/ft_getenv.c \
 	parser/redirection_type.c \
 	parser/io_files/close_files.c \
 	parser/io_files/open_files_utils.c \

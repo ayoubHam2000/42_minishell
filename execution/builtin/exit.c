@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/13 10:21:02 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:52:25 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ static int	ft_digits(char *arg)
 
 void	ft_exit(char **args)
 {
-	if (ft_arrlen((void **)args) > 2)
+	if (ft_arrlen((void **)args) > 1)
 	{
 		printf("exit: too many arguments");
 		return ;
 	}
 	printf("exit\n");
-	if (!ft_digits(args[1]))
+	if (!ft_digits(args[0]))
 	{
-		printf("exit: %s: numeric argument required", args[1]);
+		printf("exit: %s: numeric argument required", args[0]);
 		exit(2);
 	}
-	if (!args[1])
+	if (!args[0])
 		exit(EXIT_SUCCESS);
 	else
-		exit(atoi(args[1]));
+		exit(atoi(args[0]));
 }

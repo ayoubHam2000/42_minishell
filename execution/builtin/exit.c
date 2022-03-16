@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 03:52:25 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:04:51 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_digits(char *arg)
 {
-	int	i;
+	long long	i;
 
 	i = 0;
 	if (!arg)

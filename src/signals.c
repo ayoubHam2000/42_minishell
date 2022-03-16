@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/14 05:18:32 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:50:59 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,25 @@
 
 static void	sig_handller(int sig)
 {
+	g_sig = sig;
 	if (sig == SIGINT)
 	{
-		ft_putstr(PROMT_STR"   \n");
-		//rl_on_new_line();
-		//rl_replace_line("", 0);
-		//rl_redisplay();
+		ft_putstr("\b\b  \n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (sig == SIGQUIT)
+	{
+		printf("\b\b  \b\b");
 	}
 }
 
 int	init_sigaction(void)
 {
-	size_t		i;
-	sigset_t	set;
-	t_sigaction	s;
-
-	i = -1;
-	while (++i < sizeof(t_sigaction))
-		*((char *)(&s) + i) = 0;
-	sigemptyset(&set);
-	sigaddset(&set, SIGINT);
-	s.sa_mask = set;
-	s.__sigaction_u.__sa_handler = sig_handller;
-	//if (sigaction(SIGINT, &s, NULL) != 0)
-	//	return (0);
-	if (signal(SIGQUIT, SIG_IGN) != 0)
+	if (signal(SIGINT, sig_handller) != 0)
+		return (0);
+	if (signal(SIGQUIT, sig_handller) != 0)
 		return (0);
 	return (1);
 }

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:38:52 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 02:20:03 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:54:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void    ft_env(char * cmd,char **envp)
+int    ft_env(void)
 {
-        printarray(envp,0);
+        printarray(env_var(NULL), 0);
+        return (0);
 }

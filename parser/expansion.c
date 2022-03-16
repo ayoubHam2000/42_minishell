@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:49:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 03:00:38 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 02:06:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static void	add_dollar_content(t_queue *queue, char *str)
 
 	p = var_pattern(str);
 	p = ft_substr(str, 0, p - str);
-	// hena khesk tserd env bach ra7na khdamin safe
-	env_var = getenv(p);
+	env_var = ft_getenv(p);
 	if (!env_var)
 		env_var = ft_strdup("");
 	else

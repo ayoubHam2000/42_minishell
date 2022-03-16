@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:14:58 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/15 15:09:47 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:45:20 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(char **args)
+int	ft_cd(char **args)
 {
 	char	*path;
 	int		i;
@@ -30,5 +30,6 @@ void	ft_cd(char **args)
 	}
 	else if (chdir(path) < 0)
 		printf("cd: chdir error: %s\n", path);
+	return (0);
 }
 

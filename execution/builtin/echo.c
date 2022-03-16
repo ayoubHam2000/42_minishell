@@ -6,13 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:22:09 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/13 10:20:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:51:35 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(char **cmd)
+int	ft_echo(char **cmd)
 {
 	int	i;
 	int	control;
@@ -23,7 +23,7 @@ void	ft_echo(char **cmd)
 	if (ft_arrlen((void **)cmd) == 0)
 	{
 		printf("\n");
-		return ;
+		return 0;
 	}
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
 	{
@@ -39,4 +39,5 @@ void	ft_echo(char **cmd)
 	}
 	if (!control)
 		printf("\n");
+	return (0);
 }

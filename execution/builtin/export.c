@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/15 23:34:15 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:52:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,6 @@ int	ft_arrlenop(char **arr)
 	while (arr[res])
 		res++;
 	return (res);
-}
-
-
-char	**to(char **envp)
-{
-	char	**split;
-	int		i;
-	int		j;
-	int		n;
-
-	i = -1;
-	j = 0;
-	n = ft_arrlen((void **)envp);
-	split = ft_malloc(sizeof(char *) * (n + 1));
-	while (envp[++i])
-		split[i] = envp[i];
-	split[i] = 0;
-	return (split);
 }
 
 void	printarray(char **array,int k)
@@ -59,6 +41,19 @@ void	printarray(char **array,int k)
 	
 }
 
+char	*copy_arg(char *s1)
+{
+	char	*s2;
+	size_t	s1_len;
+
+	s1_len = ft_strlen((char *)s1);
+	s2 = malloc(s1_len + 1);
+	if (!s2)
+		ft_error_exit(ERR_MALLOC);
+	ft_strlcpy(s2, s1, s1_len + 1);
+	return (s2);
+}
+
 char	**envexport(char **cmd, char *str)
 {
 	int		i;
@@ -70,9 +65,11 @@ char	**envexport(char **cmd, char *str)
 	i = -1;
 	j = 0;
 	split = malloc(sizeof(char *) * (ft_arrlenop(cmd) + 2));
+	if (!split)
+		ft_error_exit(ERR_MALLOC);
 	while (cmd[++i])
 		split[i] = cmd[i];
-	split[i++] = str;
+	split[i++] = copy_arg(str);
 	split[i] = 0;
 	free(cmd);
 	return (split);
@@ -130,23 +127,25 @@ char	*verfy(char *str)
 	return (0);
 }
 
-char	**ft_export(char **args, char **envp)
+int	ft_export(char **args)
 {
 	int		i;
-	
+	char	**env;
+
 	i = 0;
+	env = env_var(NULL);
 	if (!(*args))
 	{
-		printarray(envp,8);
-		return (envp);
+		printarray(env, 8);
 	}
 	else
 	{
 		while (args[i])
 		{
-			envp = envexport(envp, verfy(args[i]));
+			env = envexport(env, verfy(args[i]));
 			i++;
 		}
-		return (envp);
+		env_var(env);
 	}
+	return (0);
 }

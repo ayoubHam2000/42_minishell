@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 02:50:54 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 03:53:27 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,21 @@ int		is_here(char	*str,char	**envp)
 
 
 
-char	**ft_unset(char **args, char **envp)
+int	ft_unset(char **args)
 {
 	int		i;
 	int		j;
 	char	**unse;
 	int 	ii;
+	char	**envp;
 
 	ii = 0;
 	i = 0;
 	j = 0; 
-	
-	
-
-	unse = ft_malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
+	envp = env_var(NULL);
+	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
 	if (!unse)
-		return (0);
+		ft_error_exit(ERR_MALLOC);
 	while (args[ii])
 	{
 		while (envp[i])
@@ -83,6 +82,7 @@ char	**ft_unset(char **args, char **envp)
 		}
 		ii++;
 	}
-	unse[j] = 0;
-	return (unse);
+	unse[j] = NULL;
+	env_var(unse);
+	return (0);
 }

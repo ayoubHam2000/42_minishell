@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/15 21:44:15 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:05:31 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ static int	is_builtin(char *str)
 	return (0);
 }
 
-static char	*env_cmd_path(char *cmd, char **envp)
+static char	*env_cmd_path(char *cmd)
 {
 	char	*path;
 	char	**pathsplit;
 	int		i;
 	char	*str;
+	char	**envp;
 
 	i = 0;
+	envp = env_var(NULL);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
@@ -81,38 +83,42 @@ static char	*env_cmd_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-char	*get_cmd_path(char *command, t_env *env)
+char	*get_cmd_path(char *command)
 {
 	if (*command == '/')
 		return (command);
 	else if (ft_strchr(command, '/'))
 	{
 		command = ft_strjoin("/", command);
-		return (ft_strjoin(ft_pwd(), command));
+		return (ft_strjoin(get_path(), command));
 	}
 	else
-		return (env_cmd_path(command, env->env));
+		return (env_cmd_path(command));
 }
 
-void	exec_built_in(t_command *command, t_env *env)
+int	exec_built_in(t_command *command)
 {
+	int	i;
+
+	i = 0;
 	if (ft_strcmp(command->command, "cd"))
-		ft_cd(command->args);
+		i = ft_cd(command->args);
 	else if (ft_strcmp(command->command, "pwd"))
-		ft_pwd();
+		i = ft_pwd();
 	else if (ft_strcmp(command->command, "echo"))
-		ft_echo(command->args);
+		i = ft_echo(command->args);
 	else if (ft_strcmp(command->command, "exit"))
 		ft_exit(command->args);
 	else if (ft_strcmp(command->command, "export"))
-		env->env = ft_export(command->args, env->env);
+		i = ft_export(command->args);
 	else if (ft_strcmp(command->command, "unset"))
-		env->env = ft_unset(command->args, env->env);
+		i = ft_unset(command->args);
 	else if (ft_strcmp(command->command, "env"))
- 		 ft_env(command->args[0], env->env);
+ 		i = ft_env();
+	return (0);
  }
 
-void	exec_cmd(t_command *cmd, t_env *env)
+void	exec_cmd(t_command *cmd)
 {
 	char	*path;
 	char	**args;
@@ -121,22 +127,22 @@ void	exec_cmd(t_command *cmd, t_env *env)
 		return ;
 	else if (is_builtin(cmd->command))
 	{
-		exec_built_in(cmd, env);
+		exec_built_in(cmd);
 		exit(13);
 	}
 	else
 	{
-		path = get_cmd_path(cmd->command,env);
+		path = get_cmd_path(cmd->command);
 		if (!path)
 			return ;
 		args = add_arg_0(cmd->args, path);
-		execve(args[0], args, env->env);
+		execve(args[0], args, env_var(NULL));
 	}
 }
 
 ///////
 
-static int	spawn_proc(int in, int out, t_command *cmd, t_env *env)
+static int	spawn_proc(int in, int out, t_command *cmd)
 {
 	pid_t	pid;
 
@@ -153,7 +159,7 @@ static int	spawn_proc(int in, int out, t_command *cmd, t_env *env)
 			dup2(out, 1);
 			// close(out);
 		}
-		exec_cmd(cmd, env);
+		exec_cmd(cmd);
 	}
 	// close(out);
 	// close(in);
@@ -161,7 +167,7 @@ static int	spawn_proc(int in, int out, t_command *cmd, t_env *env)
 	return (pid);
 }
 
-int    fork_pipes(int n, t_command **arrcmd, t_env *env)
+int    fork_pipes(int n, t_command **arrcmd)
 {
     int        i;
     int        in;
@@ -191,7 +197,7 @@ int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 		 // we  have file
 		if (filein != 0)
 			 redin =  filein;
-        spawn_proc(redin, fd[1], arrcmd[i], env);
+        spawn_proc(redin, fd[1], arrcmd[i]);
         close(fd[1]);		 	
         redin = fd[0];
         i++;
@@ -215,31 +221,31 @@ int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 		{
 			dup2(fileout, 1);
 		}
-    	exec_cmd(arrcmd[i], env);
+		exec_cmd(arrcmd[i]);
 		exit(0);
 	}
-  
-    return (0);
+	return (0);
 }
-//
 
-void	execute(t_command	**arrcmd, t_env *env_var)
+int	execute(t_command	**arrcmd)
 {
 	int	i;
 	int status ;
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
-		exec_built_in(arrcmd[0], env_var);
+		return (exec_built_in(arrcmd[0]));
 	}
 	else
 	{
-			fork_pipes(ft_arrlen((void **)arrcmd), arrcmd, env_var);
-			int ret =waitpid(-1, &status, 0);
-			while (ret != 0 && ret != -1 )
-			{
-				ret = waitpid(-1, &status, 0);
-			}
-			///printf("%d",WEXITSTATUS(status));
-
+		fork_pipes(ft_arrlen((void **)arrcmd), arrcmd);
+		int ret = waitpid(-1, &status, 0);
+		while (ret != 0 && ret != -1 )
+		{
+			ret = waitpid(-1, &status, 0);
+		}
+		ret = WEXITSTATUS(status);
+		if (g_sig != 0)
+			ret += 127 + g_sig;
+		return (ret);
 	}
 }

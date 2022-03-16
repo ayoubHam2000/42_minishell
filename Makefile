@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
+#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/15 15:41:25 by yhakkach         ###   ########.fr        #
+#    Updated: 2022/03/16 01:34:07 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ PARSING_FILES = \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
 	parser/expand.c \
+	parser/ft_getenv.c \
 	parser/redirection_type.c \
 	parser/io_files/close_files.c \
 	parser/io_files/open_files_utils.c \
@@ -71,13 +72,14 @@ FILES = \
 	$(UTIL_FILES) \
 	$(EXECUTION_FILES) \
 	$(PARSING_FILES) \
+	src/signals.c \
 	other.c \
 	main.c
 
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
 #FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include  -fsanitize=address
+FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell
@@ -91,7 +93,7 @@ deps = $(OBJ:.o=.d)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	gcc $(FLAGS) $(OBJ) -o $(NAME)
+	gcc  $(OBJ) $(FLAGS) -o $(NAME)
 
 $(OBJ) : $(OBJ_DIR)%.o : %.c
 	mkdir -p $(dir $@)

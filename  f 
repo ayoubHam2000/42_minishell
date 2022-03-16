@@ -1,8 +1,11 @@
+ f 
 Makefile
 _OUT
 a
 commands
 execution
+f
+f 
 includes
 main.c
 minishell

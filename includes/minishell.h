@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 23:58:20 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:34:42 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void		execute(t_command	**arrcmd, t_env *env_var);
 void		exec_built_in(t_command *command, t_env *env_var);
 int			fork_pipes(int n, t_command **arrcmd, t_env *env);
 char		*get_cmd_path(char *command, t_env *env);
+void		ft_env(char * cmd,char **envp);
+
 
 //other
 void		rl_replace_line(const char *text, int i);
@@ -122,4 +124,6 @@ char	*ft_substr(char const *s1, unsigned int start, size_t len);
 
 int is_valid_identifier(char *str);
 char	**ft_split(char const *s, char c);
+void 	printarray(char **array, int k);
+
 #endif

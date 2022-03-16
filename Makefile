@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
+#    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/16 01:34:07 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/16 15:08:26 by yhakkach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,8 @@ FILES = \
 
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-#FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
-FLAGS = -lreadline 
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
+#FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

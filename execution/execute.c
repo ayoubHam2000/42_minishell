@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/15 00:34:33 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:44:15 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**add_arg_0(char **args, char *arg0)
 
 static int	is_builtin(char *str)
 {
-	const char	*built_in[] = {"cd", "pwd", "echo", "exit", "export", "unset", NULL};
+	const char	*built_in[] = {"cd", "pwd", "echo", "exit", "export", "unset","env", NULL};
 	int			i;
 
 	i = 0;
@@ -60,7 +60,7 @@ static char	*env_cmd_path(char *cmd, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (!strncmp(envp[i], "PATH=", 5))
+		if (!ft_strncmp(envp[i], "PATH=", 5))
 			break ;
 		i++;
 	}
@@ -108,7 +108,9 @@ void	exec_built_in(t_command *command, t_env *env)
 		env->env = ft_export(command->args, env->env);
 	else if (ft_strcmp(command->command, "unset"))
 		env->env = ft_unset(command->args, env->env);
-}
+	else if (ft_strcmp(command->command, "env"))
+ 		 ft_env(command->args[0], env->env);
+ }
 
 void	exec_cmd(t_command *cmd, t_env *env)
 {
@@ -214,7 +216,7 @@ int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 			dup2(fileout, 1);
 		}
     	exec_cmd(arrcmd[i], env);
-		exit(10);
+		exit(0);
 	}
   
     return (0);
@@ -235,10 +237,9 @@ void	execute(t_command	**arrcmd, t_env *env_var)
 			int ret =waitpid(-1, &status, 0);
 			while (ret != 0 && ret != -1 )
 			{
-				/* code */
 				ret = waitpid(-1, &status, 0);
 			}
-			printf("%d",WEXITSTATUS(status));
+			///printf("%d",WEXITSTATUS(status));
 
 	}
 }

@@ -3,6 +3,8 @@ _OUT
 a
 commands
 execution
+f
+f 
 includes
 main.c
 minishell

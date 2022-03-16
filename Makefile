@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
+#    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/13 18:32:34 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/15 15:41:25 by yhakkach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ EXECUTION_FILES = \
 	execution/builtin/export.c \
 	execution/builtin/pwd.c \
 	execution/builtin/unset.c \
+	execution/builtin/ft_env.c \
 	execution/pipe/pipe.c \
 	execution/execute.c
 

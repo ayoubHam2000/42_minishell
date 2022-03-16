@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/13 08:45:55 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:59:09 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ char        **to(char **envp)
     j = 0;
 
     n = ft_arrlen((void **)envp);
-    split = malloc(sizeof(char *) * (n  + 1));
-    if (!split)
-        return (NULL);
+    split = ft_malloc(sizeof(char *) * (n  + 1));
     while(envp[++i])
         split[i] = envp[i];
     split[i] = 0;
@@ -53,7 +51,7 @@ char    **envexport(char **cmd,char *str)
     i = -1;
     j = 0;
     
-    split = malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
+    split = ft_malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
     if (!split)
         return cmd;
     while(cmd[++i])

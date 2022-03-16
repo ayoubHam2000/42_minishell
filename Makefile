@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/14 22:18:38 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/15 22:40:40 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ FILES = \
 	$(UTIL_FILES) \
 	$(EXECUTION_FILES) \
 	$(PARSING_FILES) \
+	src/signals.c \
 	other.c \
 	main.c
 

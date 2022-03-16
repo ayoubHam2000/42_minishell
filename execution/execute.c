@@ -6,12 +6,14 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/14 22:37:11 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:24:43 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 # include <errno.h>
+
+
 
 static char	**add_arg_0(char **args, char *arg0)
 {
@@ -72,8 +74,10 @@ static char	*env_cmd_path(char *cmd, char **envp)
 		str = ft_strjoin(pathsplit[i++], "/");
 		str = ft_strjoin(str, cmd);
 		if (access(str, X_OK | F_OK) == 0)
-			return (str);
+			return (str);			
 	}
+		printf(" %s: command not found \n",cmd);
+			exit(127);
 	return (NULL);
 }
 
@@ -155,30 +159,6 @@ static int	spawn_proc(int in, int out, t_command *cmd, t_env *env)
 	return (pid);
 }
 
-// int    fork_pipes(int n, t_command **arrcmd, t_env *env)
-// {
-//     int        i;
-//     int        in;
-//     int        *fd;
-
-//     i = 0;
-//     in = 0;
-//     while (i < n - 1)
-//     {
-//         fd = arrcmd[i]->fd;
-//         printf("%d, %d\n", fd[0], fd[1]);
-//         pipe(fd);
-//         spawn_proc(in, fd[1], arrcmd[i], env);
-//         close(fd[1]);
-//         in = fd[0];
-//         i++;
-//     }
-//     fd = arrcmd[i]->fd;
-//     dup2(fd[1], 1);
-//     exec_cmd(arrcmd[i], env);
-//     return (0);
-// }
-
 int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 {
     int        i;
@@ -192,8 +172,7 @@ int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 
     int filein = arrcmd[0]->fd[0];
 	int fileout = arrcmd[0]->fd[1];
-	dprintf(2,"%d %d\n", redin, redout);
-	int 	prevIn;
+	
     while (i < n - 1)
     {
         int fd[2];
@@ -218,7 +197,6 @@ int    fork_pipes(int n, t_command **arrcmd, t_env *env)
 
 	filein = arrcmd[i]->fd[0];
 	fileout = arrcmd[i]->fd[1];
-	dprintf(2, "[%d]\n", filein);
 	if(filein != 0)
 	{
 		redin = filein;
@@ -253,25 +231,14 @@ void	execute(t_command	**arrcmd, t_env *env_var)
 	}
 	else
 	{
-		// i = fork();
-		// if (i == -1)
-		// 	return ;
-		// else if (i == 0)
-		// {
 			fork_pipes(ft_arrlen((void **)arrcmd), arrcmd, env_var);
-			// wait(NULL);
-			// dprintf(2,"i am here\n");
-			errno = 0;
 			int ret =waitpid(-1, &status, 0);
 			while (ret != 0 && ret != -1 )
 			{
 				/* code */
 				ret = waitpid(-1, &status, 0);
 			}
-						// dprintf(2,"findhed i am here\n");
+			//printf("%d",WEXITSTATUS(status));
 
-			
-			// exit(0);
-		// }
 	}
 }

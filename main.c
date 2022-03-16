@@ -6,12 +6,11 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/14 22:31:57 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:48:14 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
 char	**too(char **envp)
 {
@@ -23,9 +22,7 @@ char	**too(char **envp)
 	i = -1;
 	j = 0;
 	n = ft_arrlen((void **)envp);
-	split = malloc(sizeof(char *) * (n  + 1));
-	if (!split)
-		return (NULL);
+	split = ft_malloc(sizeof(char *) * (n  + 1));
 	while(envp[++i])
 		split[i] = envp[i];
 	split[i] = 0;
@@ -52,6 +49,8 @@ static int	split_test(char c)
 	return (0);
 }
 
+char	*ft_readline(int s);
+
 int	main(int ac, char **av, char **env)
 {
 	char			*str;
@@ -59,11 +58,10 @@ int	main(int ac, char **av, char **env)
 	t_env			env_var;
 
 	env_var.env = too(env);
+	init_sigaction();
 	while(1)
 	{
-		//char *tmp = ft_strjoin("\e[0;32m➜ \e[0;37m", ft_pwd());
 		str = readline(PROMT_STR);
-		//str = "ls |ukyu grep";
 		if (str)
 		{
 			if (strlen(str) == 0)
@@ -71,17 +69,18 @@ int	main(int ac, char **av, char **env)
 			cmds = parse_command(str);
 			if (cmds)
 			{
-				//show(cmds);
+				ft_readline(1);
 				open_files(cmds);
+				show(cmds);
 				execute(cmds, &env_var);
-				// wait(NULL);
 				close_files(cmds);
-				//free_all();
+				free_all();
+				ft_readline(0);
 			}
 			add_history(str);
 		}
 		else
-			exit(88);
+			exit(0);
 	}
 	return (0);
 }

@@ -3,6 +3,8 @@
 		"includes/**"
 	],
 	"files.associations": {
-		"readline.h": "c"
+		"readline.h": "c",
+		"utils.h": "c",
+		"minishell.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:40:09 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/10 14:40:27 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:12:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	show(t_command	**commands)
 			printf("(%s, %d), ", (*redt)->file, (*redt)->r_type);
 			redt++;
 		}
-		printf("]\n");
+		printf("]=>(%d, %d)\n", c->fd[0], c->fd[1]);
 		commands++;
 	}
 }

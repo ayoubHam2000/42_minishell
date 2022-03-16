@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/13 10:32:25 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:59:51 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**envexport(char **cmd, char *str)
 		return (cmd);
 	i = -1;
 	j = 0;
-	split = malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
+	split = ft_malloc(sizeof(char *) * (ft_arrlen((void **)cmd) + 2));
 	while (cmd[++i])
 		split[i] = cmd[i];
 	split[i++] = str;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 23:58:20 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/15 22:05:46 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 # include "utils.h"
 
@@ -38,6 +39,7 @@ typedef struct sigaction	t_sigaction;
 # define RD_OUT 2
 # define RD_AP 3
 # define RD_DOC 4
+# define RD_DOC_READ 5
 
 typedef struct s_redt
 {

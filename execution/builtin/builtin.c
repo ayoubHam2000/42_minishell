@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:47:56 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/13 08:46:04 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/15 22:04:32 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ char *ft_strjoin(char *str1, char *str2)
 
     if(!str1 && !str2)
         return(0);
-    new = malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+    //ft_malloc will will prevent leaks by saving the address in a linked list
+    //so we can free it (main.c -> freeall()) if ft_malloc failed the programme exit
+    //never use ft_malloc in a fork because the child has his own memory
+    new = ft_malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
     if(!new)
         return (0);
 
@@ -219,7 +222,7 @@ char        **to(char **envp)
     j = 0;
 
     n = ft_arraylen(envp);
-    split = malloc(sizeof(char *) * (n  + 1));
+    split = ft_malloc(sizeof(char *) * (n  + 1));
     if (!split)
         return (NULL);
     while(envp[++i])
@@ -245,7 +248,7 @@ char    **envexport(char **cmd,char *str)
     i = -1;
     j = 0;
     
-    split = malloc(sizeof(char *) * (ft_arraylen(cmd) + 2));
+    split = ft_malloc(sizeof(char *) * (ft_arraylen(cmd) + 2));
     if (!split)
         return cmd;
     while(cmd[++i])
@@ -356,7 +359,7 @@ char   ** unset(char *cmd,char   **envp)
         
         split = ft_split(cmd,' ');
 
-        unse = malloc(sizeof(char *) * ft_arraylen(envp) - 1 ); 
+        unse = ft_malloc(sizeof(char *) * ft_arraylen(envp) - 1 ); 
         while(envp[i])
         {
             if (!strncmp(envp[i],split[1],ft_strlen(split[1])))

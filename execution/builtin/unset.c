@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 03:53:27 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/17 22:09:47 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,23 @@ int	ft_unset(char **args)
 	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
 	if (!unse)
 		ft_error_exit(ERR_MALLOC);
-	while (args[ii])
+	while (envp[i])
 	{
-		while (envp[i])
+		j = 0;
+		while (args[j])
 		{
-			if (strncmp(envp[i], args[ii], ft_strlen(args[ii])))
-				unse[j++] = envp[i];
-			else
-			{
-				i++;
+			if (!strncmp(envp[i], args[j], ft_strlen(args[j])))
 				break ;
-			}
-			i++;
+			j++;
 		}
-		ii++;
+		if (j == ft_arrlen((void **)args))
+		{
+			unse[ii] = envp[i];
+			ii++;
+		}
+		i++;
 	}
-	unse[j] = NULL;
+	unse[ii] = NULL;
 	env_var(unse);
 	return (0);
 }

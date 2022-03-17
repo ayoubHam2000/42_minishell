@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 14:05:31 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:51:40 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ int	execute(t_command	**arrcmd)
 		}
 		ret = WEXITSTATUS(status);
 		if (g_sig != 0)
-			ret += 127 + g_sig;
+			ret = 128 + g_sig;
 		return (ret);
 	}
 }

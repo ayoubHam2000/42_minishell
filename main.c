@@ -31,6 +31,7 @@ void	process_str(char *str)
 	add_history(str);
 }
 
+//test
 int	main(int ac, char **av, char **env)
 {
 	char	*str;

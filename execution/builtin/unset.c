@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 20:00:26 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/17 22:09:47 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,23 @@ int	ft_unset(char **args)
 	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
 	if (!unse)
 		ft_error_exit(ERR_MALLOC);
-	unse[0] = NULL;
-	while (args[ii])
+	while (envp[i])
 	{
-		if (is_valid_identifier1(args[ii]))
+		j = 0;
+		while (args[j])
 		{
-			while (envp[i])
-			{
-				if (!strncmp(envp[i], args[ii], ft_strlen(args[ii])))
-					i++;
-				unse[j++] = envp[i++];
-			}
+			if (!strncmp(envp[i], args[j], ft_strlen(args[j])))
+				break ;
+			j++;
 		}
-		ii++;
+		if (j == ft_arrlen((void **)args))
+		{
+			unse[ii] = envp[i];
+			ii++;
+		}
+		i++;
 	}
-	unse[j] = NULL;
-	if (unse[0] == NULL)
-		unse = envp;
+	unse[ii] = NULL;
 	env_var(unse);
 	return (0);
 }

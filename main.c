@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/17 02:54:53 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:47:07 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int ac, char **av, char **env)
 	init_sigaction();
 	while(1)
 	{
-		g_sig = 0;
 		str = readline(PROMT_STR);
+		g_sig = 0;
 		if (str)
 		{
 			process_str(str);

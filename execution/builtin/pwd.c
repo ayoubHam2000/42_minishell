@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:10:45 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 03:47:41 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/18 03:01:09 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	ft_pwd(void)
 	res = get_path();
 	if (!res)
 		return (1);
+	printf("%s\n",res);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 20:04:51 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/18 02:57:35 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void	ft_exit(char **args)
 	}
 	printf("exit\n");
 	if (!ft_digits(args[0]))
+	{
+		printf("exit: %s: numeric argument required", args[0]);
+		exit(2);
+	}
+	if ((long long)ft_atoi(args[0]) > 9223372036854775807)
+	{
+		printf("exit: %s: numeric argument required", args[0]);
+		exit(2);
+	}
+	if ((long long)ft_atoi(args[0]) < (-9223372036854775807 - 1))
 	{
 		printf("exit: %s: numeric argument required", args[0]);
 		exit(2);

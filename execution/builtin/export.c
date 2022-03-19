@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/16 03:52:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:30:06 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	printarray(char **array,int k)
 	if (k == 0)
 	{
 		while (array[i])
-		printf("%s\n", array[i++]);
+			printf("%s\n", array[i++]);
 	}
 	else
 	{
 		while (array[i])
-		printf("declare -x %s\n", array[i++]);
+			printf("declare -x %s\n", array[i++]);
 	}
 	
 }
@@ -127,6 +127,46 @@ char	*verfy(char *str)
 	return (0);
 }
 
+
+int			is_equal(char *str)
+{
+	int i;
+	
+	i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+
+
+int		is_here(char *str, char **envp)
+{
+
+	int		i;
+	char 	*s;
+
+	s = ft_substr(str,0,is_equal(str));
+	i = 0;
+	printf("{{{{%s}}}}}",s);
+	while (envp[i])
+	{
+		if (!ft_strncmp(envp[i],s,ft_strlen(s)))
+		{
+			return(i);
+		}
+		i++;
+	}
+	return (-1);
+}
+
+
+
 int	ft_export(char **args)
 {
 	int		i;
@@ -142,7 +182,14 @@ int	ft_export(char **args)
 	{
 		while (args[i])
 		{
-			env = envexport(env, verfy(args[i]));
+			int idx_env = is_here(args[i],env);
+			if (idx_env != -1)
+			{
+				printf("\nidx = %d\n",idx_env);
+				env[idx_env] = copy_arg(args[i]);
+			}
+			else
+				env = envexport(env, verfy(args[i]));
 			i++;
 		}
 		env_var(env);

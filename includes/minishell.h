@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 13:54:43 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:00:14 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct s_command
 {
 	char	*command;
 	char	**args;
-	t_redt	**redt;
-	int		fd[2];
+	t_redt	**redt; // pipe
+	int		fd[2];// pipe
 }	t_command;
 
 

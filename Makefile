@@ -6,7 +6,7 @@
 #    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/16 18:42:10 by yhakkach         ###   ########.fr        #
+#    Updated: 2022/03/19 17:19:19 by yhakkach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ FILES = \
 
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include 
+FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include  -fsanitize=address
 #FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 

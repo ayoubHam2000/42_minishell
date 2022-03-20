@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/19 17:30:06 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:10:05 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int is_valid_identifier(char *str)
 	}
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
+		if ((!ft_isalnum(str[i]) && str[i]!='\'' && str[i]!='\'') && str[i] != '_')
 		{
 			printf("export: `%s': not a valid identifier \n", str);
 			return (0);
@@ -153,7 +153,6 @@ int		is_here(char *str, char **envp)
 
 	s = ft_substr(str,0,is_equal(str));
 	i = 0;
-	printf("{{{{%s}}}}}",s);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i],s,ft_strlen(s)))
@@ -185,7 +184,6 @@ int	ft_export(char **args)
 			int idx_env = is_here(args[i],env);
 			if (idx_env != -1)
 			{
-				printf("\nidx = %d\n",idx_env);
 				env[idx_env] = copy_arg(args[i]);
 			}
 			else

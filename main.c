@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 15:47:07 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:29:46 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	process_str(char *str)
 		open_files(cmds);
 		//show(cmds);
 		int i = execute(cmds);
-		printf("exit status : %d\n", i);
+		//printf("exit status : %d\n", i);
 		close_files(cmds);
 		free_all();
 	}

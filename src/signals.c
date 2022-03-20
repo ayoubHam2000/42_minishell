@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 14:50:59 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/20 21:03:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static void	sig_handller(int sig)
 	}
 	else if (sig == SIGQUIT)
 	{
-		printf("\b\b  \b\b");
+		//rl_on_new_line();
+		//rl_replace_line("", 0);
+		//printf("\b\b  \b\b\n");
 	}
 }
 

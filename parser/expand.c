@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:45:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 18:41:31 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/20 23:31:43 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,28 @@
 
 char	*remove_quotes(char *str)
 {
-	if (str[0] == '\'' || str[0] == '"')
-		return (ft_substr(str, 1, ft_strlen(str) - 2));
-	return (str);
+	char	*res;
+	int		i;
+	int		f;
+
+	res = str;
+	i = 0;
+	f = 0;
+	while (*str)
+	{
+		if ((*str == '\'' || *str == '"') && !f)
+			f = *str;
+		else if ((*str == '\'' && f == '\'') || (*str == '"' && f == '"'))
+			f = 0;
+		else
+		{
+			res[i] = *str;
+			i++;
+		}
+		str++;
+	}
+	res[i] = 0;
+	return (res);
 }
 
 int	expand_redt(t_redt *redt)

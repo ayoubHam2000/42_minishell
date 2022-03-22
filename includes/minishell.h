@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/19 17:00:14 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:05:12 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <termios.h>
 
 # include "utils.h"
 
@@ -120,6 +121,7 @@ int			ft_env(void);
 //other
 void		rl_replace_line(const char *text, int i);
 int			init_sigaction(void);
+int			du_working(int affect);
 
 void	show(t_command	**commands);
 

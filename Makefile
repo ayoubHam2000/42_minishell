@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/20 21:02:20 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/22 21:32:23 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ EXECUTION_FILES = \
 	execution/builtin/unset.c \
 	execution/builtin/ft_env.c \
 	execution/pipe/pipe.c \
+	execution/set_exit_status.c \
 	execution/execute.c
 
 PARSING_FILES = \

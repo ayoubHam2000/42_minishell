@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:05:05 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:25:19 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	process_str(char *str)
 	{
 		open_files(cmds);
 		//show(cmds);
-		int i = execute(cmds);
-		printf("exit status : %d\n", i);
+		execute(cmds);
 		close_files(cmds);
 		free_all();
 	}
@@ -58,7 +57,6 @@ int	main(int ac, char **av, char **env)
 	while(1)
 	{
 		str = readline(PROMT_STR);
-		g_sig = 0;
 		if (str)
 		{
 			du_working(1);

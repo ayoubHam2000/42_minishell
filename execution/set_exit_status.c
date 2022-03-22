@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:34:58 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/03/22 21:12:59 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/03/22 21:41:46 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	du_working(int affect)
+void	set_exit_status(int new_status, int new_sig)
 {
-	static int	i;
-	
-	if (affect)
-		i = !i;
-	return (i);
-}
+	static int	signal;
 
-static void	sig_handller(int sig)
-{
-	set_exit_status(0, sig);
-	if (sig == SIGINT)
+	if (new_sig)
 	{
-		if (!du_working(0))
-		{
-			ft_putstr("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
+		signal = new_sig;
+		return ;
 	}
-}
-
-int	init_sigaction(void)
-{
-	if (signal(SIGINT, sig_handller) != 0)
-		return (0);
-	if (signal(SIGQUIT, sig_handller) != 0)
-		return (0);
-	return (1);
+	if (signal)
+		printf("exit status :%d %d\n", 128 + signal, new_status);
+	else
+		printf("exit status : %d\n", new_status);
+	signal = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/18 03:00:42 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:43:48 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,14 +238,13 @@ int	execute(t_command	**arrcmd)
 	else
 	{
 		fork_pipes(ft_arrlen((void **)arrcmd), arrcmd);
-		int ret = waitpid(-1, &status, 0);
+		int ret = waitpid(-1, &status, WNOHANG);
 		while (ret != 0 && ret != -1 )
 		{
-			ret = waitpid(-1, &status, 0);
+			ret = waitpid(-1, &status, WNOHANG);
 		}
 		ret = WEXITSTATUS(status);
-		if (g_sig != 0)
-			ret = 128 + g_sig;
+		set_exit_status(ret, 0);
 		return (ret);
 	}
 }

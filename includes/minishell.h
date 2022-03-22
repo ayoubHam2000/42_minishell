@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:05:12 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:30:29 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@
 # define RD_AP 3
 # define RD_DOC 4
 # define RD_DOC_READ 5
-
-int	g_sig;
 
 typedef struct s_redt
 {
@@ -116,7 +114,7 @@ int			exec_built_in(t_command *command);
 int			fork_pipes(int n, t_command **arrcmd);
 char		*get_cmd_path(char *command);
 int			ft_env(void);
-
+void		set_exit_status(int new_status, int new_sig);
 
 //other
 void		rl_replace_line(const char *text, int i);

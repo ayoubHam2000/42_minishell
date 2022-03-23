@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 21:12:59 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/23 21:07:46 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:28:59 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	get_exit_status(int new_status)
 {
 	static int	status;
-	
+
 	if (new_status >= 0)
 		status = new_status;
 	return (status);

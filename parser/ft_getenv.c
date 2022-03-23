@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 01:22:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/16 03:06:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:51:04 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_getenv(char *var)
 	tmp = env_var(NULL);
 	if (!tmp || !var)
 		return (NULL);
+	if (var[0] == '?' && var[1] == 0)
+		return (ft_itoa(get_exit_status(-1)));
 	while (*tmp)
 	{
 		if (!ft_strncmp(var, *tmp, ft_strlen(var)))

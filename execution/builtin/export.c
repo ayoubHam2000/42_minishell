@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/20 18:10:05 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:01:29 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int is_valid_identifier(char *str)
 	}
 	while (str[i])
 	{
-		if ((!ft_isalnum(str[i]) && str[i]!='\'' && str[i]!='\'') && str[i] != '_')
+		if (!ft_isalnum(str[i])&& str[i] != '_')
 		{
 			printf("export: `%s': not a valid identifier \n", str);
 			return (0);

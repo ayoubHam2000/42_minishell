@@ -3,18 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 21:12:59 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:41:46 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:07:46 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	get_exit_status(int new_status)
+{
+	static int	status;
+	
+	if (new_status >= 0)
+		status = new_status;
+	return (status);
+}
+
 void	set_exit_status(int new_status, int new_sig)
 {
 	static int	signal;
+	char		**status;
 
 	if (new_sig)
 	{
@@ -22,8 +32,8 @@ void	set_exit_status(int new_status, int new_sig)
 		return ;
 	}
 	if (signal)
-		printf("exit status :%d %d\n", 128 + signal, new_status);
+		get_exit_status(128 + signal);
 	else
-		printf("exit status : %d\n", new_status);
+		get_exit_status(new_status);
 	signal = 0;
 }

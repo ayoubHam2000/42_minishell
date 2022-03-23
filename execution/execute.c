@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:43:48 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:59:57 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,27 +224,33 @@ int    fork_pipes(int n, t_command **arrcmd)
 		exec_cmd(arrcmd[i]);
 		exit(0);
 	}
-	return (0);
+	return (pid);
 }
 
 int	execute(t_command	**arrcmd)
 {
 	int	i;
-	int status ;
+	int status;
+	int	last_pid;
+	int	ret;
+
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
 		return (exec_built_in(arrcmd[0]));
 	}
 	else
 	{
-		fork_pipes(ft_arrlen((void **)arrcmd), arrcmd);
-		int ret = waitpid(-1, &status, WNOHANG);
-		while (ret != 0 && ret != -1 )
+		last_pid = fork_pipes(ft_arrlen((void **)arrcmd), arrcmd);
+		ret = waitpid(-1, &status, 0);
+		while (ret != 0 && ret != -1)
 		{
-			ret = waitpid(-1, &status, WNOHANG);
+			if (ret == last_pid)
+			{
+				ret = WEXITSTATUS(status);
+				set_exit_status(ret, 0);
+			}
+			ret = waitpid(-1, &status, 0);
 		}
-		ret = WEXITSTATUS(status);
-		set_exit_status(ret, 0);
 		return (ret);
 	}
 }

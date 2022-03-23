@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:30:29 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:33:21 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int			fork_pipes(int n, t_command **arrcmd);
 char		*get_cmd_path(char *command);
 int			ft_env(void);
 void		set_exit_status(int new_status, int new_sig);
+int			get_exit_status(int new_status);
 
 //other
 void		rl_replace_line(const char *text, int i);

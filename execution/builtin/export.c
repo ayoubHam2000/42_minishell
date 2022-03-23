@@ -6,7 +6,7 @@
 /*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/23 21:01:29 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:30:14 by yhakkach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,17 @@ int ft_strcherche(char *str, char c)
 	}
 	return (-1);
 }
+
 char	*verfy(char *str)
 {
+	int index_equal;
 	int index_equal = ft_strcherche(str,'=');
 	if (index_equal == -1)
 	{
 		is_valid_identifier(str);
 		return (0);
 	}
-	char *var_name = ft_substr(str,0,index_equal);
+	char *var_name = ft_substr(str, 0, index_equal);
 	if (is_valid_identifier(var_name))
 		return (str);
 	return (0);

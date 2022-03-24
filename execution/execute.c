@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/23 20:59:57 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:07:02 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,9 @@ int	execute(t_command	**arrcmd)
 
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
-		return (exec_built_in(arrcmd[0]));
+		ret = exec_built_in(arrcmd[0]);
+		set_exit_status(ret);
+		return (ret);
 	}
 	else
 	{
@@ -245,10 +247,7 @@ int	execute(t_command	**arrcmd)
 		while (ret != 0 && ret != -1)
 		{
 			if (ret == last_pid)
-			{
-				ret = WEXITSTATUS(status);
-				set_exit_status(ret, 0);
-			}
+				set_exit_status(status);
 			ret = waitpid(-1, &status, 0);
 		}
 		return (ret);

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/22 21:34:58 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:09:45 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	du_working(int affect)
 {
 	static int	i;
-	
+
 	if (affect)
 		i = !i;
 	return (i);
@@ -23,7 +23,6 @@ int	du_working(int affect)
 
 static void	sig_handller(int sig)
 {
-	set_exit_status(0, sig);
 	if (sig == SIGINT)
 	{
 		if (!du_working(0))

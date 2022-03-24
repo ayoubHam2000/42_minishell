@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:22:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 18:25:43 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:09:05 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_queue	*get_commands_tokens(char **commands)
 {
 	size_t	i;
-	t_queue *q;
+	t_queue	*q;
 	char	**tokens;
 
 	q = q_init();

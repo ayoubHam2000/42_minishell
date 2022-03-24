@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+         #
+#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/23 20:15:25 by yhakkach         ###   ########.fr        #
+#    Updated: 2022/03/24 11:12:34 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ PARSING_FILES = \
 	parser/check_sysntax.c \
 	parser/get_structure.c \
 	parser/expand.c \
+	parser/signals.c \
 	parser/ft_getenv.c \
 	parser/redirection_type.c \
 	parser/io_files/close_files.c \
@@ -73,13 +74,12 @@ FILES = \
 	$(UTIL_FILES) \
 	$(EXECUTION_FILES) \
 	$(PARSING_FILES) \
-	src/signals.c \
 	other.c \
 	main.c
 
 #-Wall -Wextra -Werror
 CFLAGS = -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib  -I ~/brew/opt/readline/include  -fsanitize=address
+FLAGS = -lreadline -L readline/lib  -I readline/include  -fsanitize=address
 # -fsanitize=address
 #FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)

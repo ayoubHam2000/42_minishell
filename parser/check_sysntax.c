@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:24:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 18:26:21 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:08:15 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	msk_pipe(char c)
 	return (0);
 }
 
-int msk_tokens(char c)
+int	msk_tokens(char c)
 {
 	static int	f;
 

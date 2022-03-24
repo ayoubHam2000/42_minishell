@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 16:02:55 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:53:50 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ static int	spawn_proc(int in, int out, t_command *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (in != 0)
 		{
 			dup2(in, 0);
@@ -209,7 +210,8 @@ int    fork_pipes(int n, t_command **arrcmd)
 
 	int pid = fork();
 	if (pid == 0)
-	{	
+	{
+		signal(SIGQUIT, SIG_DFL);
 		if (redin != 0)
 		{
 			dup2(redin, 0);

@@ -1,4 +1,4 @@
-prefix=/goinfre/aben-ham/brew/Cellar/readline/8.1.2
+prefix=/goinfre/yhakkach/brew/Cellar/readline/8.1.2
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

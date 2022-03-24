@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:11:12 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:03:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,40 @@ void	process_str(char *str)
 	add_history(str);
 }
 
-void	change_termios(void)
+void	change_termios(int type)
 {
-	struct termios	new_term;
-	int				rc;
+	static struct termios	new_term;
+	int						rc;
 
-	rc = tcgetattr(0, &new_term);
-	if (rc)
-		ft_error_exit("tcsetattr");
-	new_term.c_lflag &= ~(ECHOCTL);
-	new_term.c_cc[VMIN] = 0;
-	new_term.c_cc[VTIME] = 0;
-	rc = tcsetattr(0, 0, &new_term);
-	if (rc)
-		ft_error_exit("tcsetattr");
+	if (type == 1)
+	{
+		rc = tcsetattr(0, 0, &new_term);
+		if (rc)
+			ft_error_exit("tcsetattr");
+	}
+	else
+	{
+		rc = tcgetattr(0, &new_term);
+		if (rc)
+			ft_error_exit("tcsetattr");
+		new_term.c_lflag &= ~(ECHOCTL);
+		new_term.c_cc[VMIN] = 0;
+		new_term.c_cc[VTIME] = 0;
+		rc = tcsetattr(0, 0, &new_term);
+		if (rc)
+			ft_error_exit("tcsetattr");
+	}
 }
 
-//test
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
+	ac = 0;
+	av = NULL;
 	env_var(get_copy_env(env));
 	init_sigaction();
-	change_termios();
+	change_termios(0);
 	while (1)
 	{
 		str = readline(PROMT_STR);
@@ -62,6 +72,7 @@ int	main(int ac, char **av, char **env)
 			du_working(1);
 			process_str(str);
 			du_working(1);
+			change_termios(1);
 		}
 		else
 		{

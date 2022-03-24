@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:05:03 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:59:47 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		ft_exit(char **cmd);
 int			ft_pwd(void);
 int			ft_export(char **args);
 int			ft_unset(char **args);
+int			ft_env(int type);
 
 //execution->pipe and execute
 char		*get_cmd_path(char *command);
@@ -110,7 +111,7 @@ int			exec_built_in(t_command *command);
 int			execute(t_command	**arrcmd);
 
 //execution->utils
-int			ft_env(void);
+int			du_exit_status(int exit_status, int force);
 void		set_exit_status(int exit_status);
 int			get_exit_status(void);
 
@@ -118,16 +119,5 @@ int			get_exit_status(void);
 void		rl_replace_line(const char *text, int i);
 int			init_sigaction(void);
 int			du_working(int affect);
-
-void		show(t_command	**commands);
-
-int			ft_isalnum(int c);
-int			ft_isalpha(int c);
-char		**ft_split(char const *s, char c);
-char		*ft_substr(char const *s1, unsigned int start, size_t len);
-
-int			is_valid_identifier(char *str);
-char		**ft_split(char const *s, char c);
-void		printarray(char **array, int k);
 
 #endif

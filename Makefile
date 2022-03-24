@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/24 11:12:34 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/24 16:01:02 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,8 @@ FILES = \
 	main.c
 
 #-Wall -Wextra -Werror
-CFLAGS = -g -I includes/
-FLAGS = -lreadline -L readline/lib  -I readline/include  -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -I includes/
+FLAGS = -lreadline -L readline/lib  -I readline/include
 # -fsanitize=address
 #FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)

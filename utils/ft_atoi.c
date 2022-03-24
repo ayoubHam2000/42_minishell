@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 20:15:15 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/22 10:50:10 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:37:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_blank(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int					signe;
 	unsigned long long	res;

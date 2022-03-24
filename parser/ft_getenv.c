@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 01:22:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/23 20:51:04 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:08:37 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**get_copy_env(char **env)
 
 char	**env_var(char **new_env)
 {
-	static char **env;
+	static char	**env;
 
 	if (new_env)
 		env = new_env;
@@ -47,7 +47,7 @@ char	*ft_getenv(char *var)
 	if (!tmp || !var)
 		return (NULL);
 	if (var[0] == '?' && var[1] == 0)
-		return (ft_itoa(get_exit_status(-1)));
+		return (ft_itoa(get_exit_status()));
 	while (*tmp)
 	{
 		if (!ft_strncmp(var, *tmp, ft_strlen(var)))

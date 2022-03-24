@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/23 20:33:21 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:05:03 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,9 @@ typedef struct s_command
 {
 	char	*command;
 	char	**args;
-	t_redt	**redt; // pipe
-	int		fd[2];// pipe
+	t_redt	**redt;
+	int		fd[2];
 }	t_command;
-
-
-typedef struct s_env
-{
-	char	**env;
-}	t_env;
 
 //parser
 t_queue		*get_structure(t_queue *cmds);
@@ -73,7 +67,7 @@ t_command	**parse_command(char *str);
 
 //parser->synatx
 int			msk_pipe(char c);
-int 		msk_tokens(char c);
+int			msk_tokens(char c);
 int			check_pipe_syntax(char **commands);
 int			check_command_syntax(char **tokens);
 
@@ -100,7 +94,7 @@ int			redirection_type(char *token);
 //=======
 //=======
 
-//execution: pipe and built in
+//execution->built in
 char		*get_path(void);
 int			ft_cd(char **cmd);
 int			ft_echo(char **cmd);
@@ -109,28 +103,31 @@ int			ft_pwd(void);
 int			ft_export(char **args);
 int			ft_unset(char **args);
 
-int			execute(t_command	**arrcmd);
-int			exec_built_in(t_command *command);
-int			fork_pipes(int n, t_command **arrcmd);
+//execution->pipe and execute
 char		*get_cmd_path(char *command);
+int			fork_pipes(int n, t_command **arrcmd);
+int			exec_built_in(t_command *command);
+int			execute(t_command	**arrcmd);
+
+//execution->utils
 int			ft_env(void);
-void		set_exit_status(int new_status, int new_sig);
-int			get_exit_status(int new_status);
+void		set_exit_status(int exit_status);
+int			get_exit_status(void);
 
 //other
 void		rl_replace_line(const char *text, int i);
 int			init_sigaction(void);
 int			du_working(int affect);
 
-void	show(t_command	**commands);
+void		show(t_command	**commands);
 
-int	ft_isalnum(int c);
-int	ft_isalpha(int c);
-char	**ft_split(char const *s, char c);
-char	*ft_substr(char const *s1, unsigned int start, size_t len);
+int			ft_isalnum(int c);
+int			ft_isalpha(int c);
+char		**ft_split(char const *s, char c);
+char		*ft_substr(char const *s1, unsigned int start, size_t len);
 
-int is_valid_identifier(char *str);
-char	**ft_split(char const *s, char c);
-void 	printarray(char **array, int k);
+int			is_valid_identifier(char *str);
+char		**ft_split(char const *s, char c);
+void		printarray(char **array, int k);
 
 #endif

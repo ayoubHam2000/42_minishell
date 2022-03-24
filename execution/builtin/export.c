@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/23 21:30:14 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:57:38 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int ft_strcherche(char *str, char c)
 char	*verfy(char *str)
 {
 	int index_equal;
-	int index_equal = ft_strcherche(str,'=');
+	index_equal = ft_strcherche(str,'=');
 	if (index_equal == -1)
 	{
 		is_valid_identifier(str);

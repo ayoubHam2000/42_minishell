@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 21:12:59 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/23 21:28:59 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:50:29 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_exit_status(int new_status)
+static int	du_exit_status(int exit_status)
 {
 	static int	status;
 
-	if (new_status >= 0)
-		status = new_status;
+	if (exit_status == -1)
+		return (status);
+	else if (WIFSIGNALED(exit_status))
+		status = 128 + WTERMSIG(exit_status);
+	else if (WIFEXITED(exit_status))
+		status = WEXITSTATUS(exit_status);
 	return (status);
 }
 
-void	set_exit_status(int new_status, int new_sig)
+void	set_exit_status(int exit_status)
 {
-	static int	signal;
-	char		**status;
+	du_exit_status(exit_status);
+}
 
-	if (new_sig)
-	{
-		signal = new_sig;
-		return ;
-	}
-	if (signal)
-		get_exit_status(128 + signal);
-	else
-		get_exit_status(new_status);
-	signal = 0;
+int	get_exit_status(void)
+{
+	return (du_exit_status(-1));
 }

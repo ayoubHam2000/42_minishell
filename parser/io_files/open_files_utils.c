@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:27:12 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/15 21:47:08 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:05:14 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_doc_file(char *delimiter)
 	char					*path;
 	char					*str;
 
-	path = ft_strjoin("/tmp/t/Minishell_DOC_", ft_itoa((int)index));
+	path = ft_strjoin("/tmp/Minishell_DOC_", ft_itoa((int)index));
 	fd = open(path, io_flag(RD_DOC), 0666);
 	while (fd > 0)
 	{

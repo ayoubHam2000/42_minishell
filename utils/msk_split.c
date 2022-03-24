@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:29:10 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 15:55:26 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:10:31 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ size_t	nb_place(char *mask)
 void	fill_table(char **tab, size_t count, char const *s, char *mask)
 {
 	size_t	len;
-	size_t i;
+	size_t	i;
 
 	while (count > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:07:02 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:02:55 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int	exec_built_in(t_command *command)
 	else if (ft_strcmp(command->command, "unset"))
 		i = ft_unset(command->args);
 	else if (ft_strcmp(command->command, "env"))
- 		i = ft_env();
-	return (0);
+ 		i = ft_env(0);
+	return (i);
  }
 
 void	exec_cmd(t_command *cmd)
@@ -170,9 +170,6 @@ static int	spawn_proc(int in, int out, t_command *cmd)
 int    fork_pipes(int n, t_command **arrcmd)
 {
     int        i;
-    int        in;
-    int        *fd;
-
 	int			redin;
 	int			redout;
 
@@ -229,7 +226,6 @@ int    fork_pipes(int n, t_command **arrcmd)
 
 int	execute(t_command	**arrcmd)
 {
-	int	i;
 	int status;
 	int	last_pid;
 	int	ret;
@@ -237,7 +233,7 @@ int	execute(t_command	**arrcmd)
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
 		ret = exec_built_in(arrcmd[0]);
-		set_exit_status(ret);
+		du_exit_status(ret, 1);
 		return (ret);
 	}
 	else

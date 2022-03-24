@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/18 03:08:06 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:40:04 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_valid_identifier1(char *str)
+int	is_valid_identifier1(char *str)
 {
 	int	i;
 
 	i = 1;
 	if (!ft_isalpha(str[0]) && str[0] != '_')
 	{
-		printf("export: `%s': not a valid identifier \n", str);
+		printf("unset: `%s': not a valid identifier \n", str);
 		return (0);
 	}
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 		{
-			printf("export: `%s': not a valid identifier \n", str);
+			printf("unset: `%s': not a valid identifier \n", str);
 			return (0);
 		}
 		i++;
@@ -45,18 +45,17 @@ int	ft_unset(char **args)
 	ii = 0;
 	i = 0;
 	j = 0; 
-
 	while (args[i])
 	{
-		is_valid_identifier1(args[i]);
+		if (!is_valid_identifier1(args[i]))
+			return (2);
 		i++;
 	}
-	
 	i = 0;
 	envp = env_var(NULL);
 	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
 	if (!unse)
-		ft_error_exit(ERR_MALLOC);	
+		ft_error_exit(ERR_MALLOC);
 	while (envp[i])
 	{
 		j = 0;

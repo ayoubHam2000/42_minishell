@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:35:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:09:45 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:24:45 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	init_sigaction(void)
 {
 	if (signal(SIGINT, sig_handller) != 0)
 		return (0);
-	if (signal(SIGQUIT, sig_handller) != 0)
+	if (signal(SIGQUIT, SIG_IGN) != 0)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:05:16 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:55:26 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int		ft_arrlen(void **arr);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -49,5 +49,6 @@ void	*ft_malloc(size_t size);
 void	free_all(void);
 char	*ft_itoa(int n);
 int		file_error(char *file_name);
+int		ft_isalnum(int c);
 
 #endif

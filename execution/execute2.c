@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 20:27:15 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 20:30:27 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:12:24 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**add_arg_0(char **args, char *arg0)
 	i = 0;
 	while (args[i])
 		i++;
-	res = ft_malloc(sizeof(char *) * (i + 2));
+	res = malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	res[i] = arg0;
 	while (args[i])
@@ -32,7 +32,7 @@ static char	**add_arg_0(char **args, char *arg0)
 	return (res);
 }
 
-static int	is_builtin(char *str)
+int	is_builtin(char *str)
 {
 	const char	*built_in[] = {"cd", "pwd", "echo", "exit", \
 	"export", "unset", "env", NULL};

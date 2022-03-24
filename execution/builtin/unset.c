@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:48:48 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 15:40:04 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:11:41 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,14 @@ int	is_valid_identifier1(char *str)
 	return (1);
 }
 
-int	ft_unset(char **args)
+static int	unset_vars(char **args, char **unse, char **envp)
 {
-	int		i;
-	int		j;
-	char	**unse;
-	int 	ii;
-	char	**envp;
+	int	i;
+	int	j;
+	int	z;
 
-	ii = 0;
 	i = 0;
-	j = 0; 
-	while (args[i])
-	{
-		if (!is_valid_identifier1(args[i]))
-			return (2);
-		i++;
-	}
-	i = 0;
-	envp = env_var(NULL);
-	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
-	if (!unse)
-		ft_error_exit(ERR_MALLOC);
+	z = 0;
 	while (envp[i])
 	{
 		j = 0;
@@ -67,12 +53,36 @@ int	ft_unset(char **args)
 		}
 		if (j == ft_arrlen((void **)args))
 		{
-			unse[ii] = envp[i];
-			ii++;
+			unse[z] = envp[i];
+			z++;
 		}
+		else
+			free(envp[i]);
 		i++;
 	}
-	unse[ii] = NULL;
+	return (z);
+}
+
+int	ft_unset(char **args)
+{
+	char	**unse;
+	char	**envp;
+	int		i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (!is_valid_identifier1(args[i]))
+			return (2);
+		i++;
+	}
+	envp = env_var(NULL);
+	unse = malloc(sizeof(char *) * (ft_arrlen((void **)envp)));
+	if (!unse)
+		ft_error_exit(ERR_MALLOC);
+	i = unset_vars(args, unse, envp);
+	unse[i] = NULL;
+	free(envp);
 	env_var(unse);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 23:11:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 20:48:46 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:56:38 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	spawn_proc(int in, int out, t_command *cmd)
 	return (pid);
 }
 
-static int	fork_last(char *cmd, int redin, int fileout)
+static int	fork_last(t_command *cmd, int redin, int fileout)
 {
 	int	pid;
 
@@ -74,7 +74,7 @@ static void	fork_meddle(int *redin, int *redout, t_command *cmd)
 		*redin = filein;
 	spawn_proc(*redin, fd[1], cmd);
 	close(fd[1]);
-	redin = fd[0];
+	*redin = fd[0];
 }
 
 int	fork_pipes(int n, t_command **arrcmd)

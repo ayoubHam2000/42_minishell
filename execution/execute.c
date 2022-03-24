@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhakkach <yhakkach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 20:48:23 by yhakkach         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:03:16 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
 
-void	env_cmd_path2(char **pathsplit, char *cmd, char *str, int i)
+char *env_cmd_path2(char **pathsplit, char *cmd, int i)
 {	
+	char	*str;
+
 	i = 0;
 	while (pathsplit[i])
 	{
@@ -27,13 +29,13 @@ void	env_cmd_path2(char **pathsplit, char *cmd, char *str, int i)
 	exit(127);
 }
 
-static char	*env_cmd_path(char *cmd)
+char	*env_cmd_path(char *cmd)
 {
 	char	*path;
 	char	**pathsplit;
 	int		i;
-	char	*str;
 	char	**envp;
+	char	*str;
 
 	i = 0;
 	envp = env_var(NULL);
@@ -47,8 +49,8 @@ static char	*env_cmd_path(char *cmd)
 		return (NULL);
 	path = envp[i] + 5;
 	pathsplit = ft_split(path, ':');
-	env_cmd_path2(pathsplit, cmd, str, i);
-	return (NULL);
+	str = env_cmd_path2(pathsplit, cmd, i);
+	return (str);
 }
 
 int	execute(t_command	**arrcmd)

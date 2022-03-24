@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/24 16:01:02 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/24 22:13:05 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,14 @@ EXECUTION_FILES = \
 	execution/builtin/cd.c \
 	execution/builtin/echo.c \
 	execution/builtin/exit.c \
+	execution/builtin/export2.c \
 	execution/builtin/export.c \
 	execution/builtin/pwd.c \
 	execution/builtin/unset.c \
 	execution/builtin/ft_env.c \
 	execution/pipe/pipe.c \
 	execution/set_exit_status.c \
+	execution/execute2.c \
 	execution/execute.c
 
 PARSING_FILES = \
@@ -74,14 +76,12 @@ FILES = \
 	$(UTIL_FILES) \
 	$(EXECUTION_FILES) \
 	$(PARSING_FILES) \
-	other.c \
 	main.c
 
 #-Wall -Wextra -Werror
 CFLAGS = -Wall -Wextra -Werror -g -I includes/
-FLAGS = -lreadline -L readline/lib  -I readline/include
+FLAGS = -lreadline -L ~/brew/opt/readline/lib -I ~/brew/opt/readline/include
 # -fsanitize=address
-#FLAGS = -lreadline 
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = minishell

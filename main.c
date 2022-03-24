@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 16:03:36 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:03:41 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	process_str(char *str)
 	if (cmds)
 	{
 		open_files(cmds);
-		//show(cmds);
 		execute(cmds);
 		close_files(cmds);
 		free_all();
+		system("leaks minishell");
 	}
 	add_history(str);
 }
@@ -67,12 +67,14 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		str = readline(PROMT_STR);
+		//str = "export h='ddfgdfg'";
 		if (str)
 		{
 			du_working(1);
 			process_str(str);
 			du_working(1);
 			change_termios(1);
+			free(str);
 		}
 		else
 		{

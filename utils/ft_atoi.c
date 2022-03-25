@@ -6,12 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 20:15:15 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 16:06:31 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:10:29 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
+
+#define M 9223372036854775808U
 
 static int	is_blank(char c)
 {
@@ -39,8 +40,7 @@ int	ft_atoi(const char *str)
 		res = res * 10;
 		res = res + (*str - '0');
 		str++;
-		if ((res > 9223372036854775808U && signe == -1)
-			|| (res > 9223372036854775807U && signe == 1))
+		if ((res > M && signe == -1) || (res > M && signe == 1))
 		{
 			if (signe < 0)
 				return (0);

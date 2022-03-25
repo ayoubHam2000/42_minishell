@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 09:41:32 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:47:49 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ int	execute(t_command	**arrcmd)
 
 	if (is_builtin(arrcmd[0]->command) && ft_arrlen((void **)arrcmd) == 1)
 	{
+		get_fd_out(arrcmd[0]->fd[1]);
 		ret = exec_built_in(arrcmd[0]);
 		du_exit_status(ret, 1);
+		get_fd_out(0);
 		return (ret);
 	}
 	else

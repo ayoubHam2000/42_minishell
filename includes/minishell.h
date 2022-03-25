@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 09:53:58 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:45:06 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int			get_exit_status(void);
 void		exec_cmd(t_command *cmd);
 int			exec_built_in(t_command *command);
 int			is_builtin(char *str);
+int			get_fd_out(int new);
+void		ft_print_out(const char *str);
 
 //other
 void		rl_replace_line(const char *text, int i);

@@ -6,11 +6,26 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 01:22:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 22:11:52 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:32:57 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*copy_var(char *str)
+{
+	char	*new;
+	int		i;
+
+	new = malloc(ft_strlen(str) + 1);
+	if (!new)
+		ft_error_exit(ERR_MALLOC);
+	i = -1;
+	while (str[++i])
+		new[i] = str[i];
+	new[i] = 0;
+	return (new);
+}
 
 char	**get_copy_env(char **env)
 {
@@ -23,7 +38,7 @@ char	**get_copy_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		copy_env[i] = env[i];
+		copy_env[i] = copy_var(env[i]);
 		i++;
 	}
 	copy_env[i] = NULL;
@@ -39,6 +54,22 @@ char	**env_var(char **new_env)
 	return (env);
 }
 
+static int	msk_env_split(char c)
+{
+	static int	i;
+
+	if (!c)
+	{
+		i = 0;
+	}
+	else if (c == '=' && !i)
+	{
+		i = 1;
+		return (1);
+	}
+	return (0);
+}
+
 char	*ft_getenv(char *var)
 {
 	char	**tmp;
@@ -51,7 +82,7 @@ char	*ft_getenv(char *var)
 	while (*tmp)
 	{
 		if (!ft_strncmp(var, *tmp, ft_strlen(var)))
-			return (ft_split(*tmp, '=')[1]);
+			return (msk_split(*tmp, msk_env_split)[1]);
 		tmp++;
 	}
 	return (NULL);

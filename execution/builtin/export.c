@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 13:31:11 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:32:42 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,15 @@ static char	*concat_var(char **var)
 	i = ft_strlen(var[0]);
 	if (var[1])
 		i += ft_strlen(var[1]);
-	str = malloc(i + 4);
+	str = malloc(i + 1);
 	i = 0;
 	j = 0;
 	while (var[0][j])
 		str[i++] = var[0][j++];
 	j = 0;
 	str[i++] = '=';
-	str[i++] = '"';
 	while (var[1] && var[1][j])
 		str[i++] = var[1][j++];
-	str[i++] = '"';
 	str[i] = 0;
 	return (str);
 }
@@ -87,6 +85,23 @@ static char	**export_arg(char **env, char **var)
 	return (new_env);
 }
 
+static int	msk_env_split(char c)
+{
+	static int	i;
+
+	if (!c)
+	{
+		i = 0;
+		return (0);
+	}
+	if (c == '=' && !i)
+	{
+		i = 1;
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_export(char **args)
 {
 	char	**env;
@@ -99,7 +114,7 @@ int	ft_export(char **args)
 		env = env_var(NULL);
 		while (*args)
 		{
-			var = ft_split(*args, '=');
+			var = msk_split(*args, msk_env_split);
 			if (!is_valid_identifier(var[0]))
 				return (1);
 			env = export_arg(env, var);

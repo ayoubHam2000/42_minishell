@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 22:03:41 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 13:30:45 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		str = readline(PROMT_STR);
-		//str = "export h='ddfgdfg'";
 		if (str)
 		{
 			du_working(1);

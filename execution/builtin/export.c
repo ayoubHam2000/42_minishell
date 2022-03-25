@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 13:28:57 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 13:31:11 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	is_valid_identifier(char *str)
 }
 
 //4 for ""=0
-static char *concat_var(char **var)
+static char	*concat_var(char **var)
 {
 	char	*str;
 	int		i;

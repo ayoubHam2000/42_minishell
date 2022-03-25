@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/24 22:13:05 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/03/25 09:53:45 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,13 @@ EXECUTION_FILES = \
 	execution/builtin/cd.c \
 	execution/builtin/echo.c \
 	execution/builtin/exit.c \
-	execution/builtin/export2.c \
 	execution/builtin/export.c \
 	execution/builtin/pwd.c \
 	execution/builtin/unset.c \
 	execution/builtin/ft_env.c \
 	execution/pipe/pipe.c \
 	execution/set_exit_status.c \
-	execution/execute2.c \
+	execution/exec_cmd.c \
 	execution/execute.c
 
 PARSING_FILES = \

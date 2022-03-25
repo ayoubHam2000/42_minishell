@@ -6,51 +6,48 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 21:03:16 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:41:32 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
-char *env_cmd_path2(char **pathsplit, char *cmd, int i)
-{	
-	char	*str;
-
-	i = 0;
-	while (pathsplit[i])
-	{
-		str = ft_strjoin(pathsplit[i++], "/");
-		str = ft_strjoin(str, cmd);
-		if (access(str, X_OK | F_OK) == 0)
-			return (str);
-	}
-	printf(" %s: command not found \n", cmd);
-	exit(127);
-}
-
-char	*env_cmd_path(char *cmd)
+int	is_builtin(char *str)
 {
-	char	*path;
-	char	**pathsplit;
-	int		i;
-	char	**envp;
-	char	*str;
+	const char	*built_in[] = {"cd", "pwd", "echo", "exit", \
+	"export", "unset", "env", NULL};
+	int			i;
 
 	i = 0;
-	envp = env_var(NULL);
-	while (envp[i])
+	while (built_in[i])
 	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
-			break ;
+		if (str && ft_strcmp(str, (char *)built_in[i]))
+			return (1);
 		i++;
 	}
-	if (!envp[i])
-		return (NULL);
-	path = envp[i] + 5;
-	pathsplit = ft_split(path, ':');
-	str = env_cmd_path2(pathsplit, cmd, i);
-	return (str);
+	return (0);
+}
+
+int	exec_built_in(t_command *command)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strcmp(command->command, "cd"))
+		i = ft_cd(command->args);
+	else if (ft_strcmp(command->command, "pwd"))
+		i = ft_pwd();
+	else if (ft_strcmp(command->command, "echo"))
+		i = ft_echo(command->args);
+	else if (ft_strcmp(command->command, "exit"))
+		ft_exit(command->args);
+	else if (ft_strcmp(command->command, "export"))
+		i = ft_export(command->args);
+	else if (ft_strcmp(command->command, "unset"))
+		i = ft_unset(command->args);
+	else if (ft_strcmp(command->command, "env"))
+	i = ft_env(0);
+	return (i);
 }
 
 int	execute(t_command	**arrcmd)

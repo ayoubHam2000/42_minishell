@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute2.c                                         :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 20:27:15 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 22:12:24 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:42:40 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,42 +32,37 @@ static char	**add_arg_0(char **args, char *arg0)
 	return (res);
 }
 
-int	is_builtin(char *str)
+static char	*env_cmd_path(char *cmd)
 {
-	const char	*built_in[] = {"cd", "pwd", "echo", "exit", \
-	"export", "unset", "env", NULL};
-	int			i;
+	char	**pathsplit;
+	int		i;
+	char	*str;
 
+	pathsplit = ft_split(ft_getenv("PATH"), ':');
 	i = 0;
-	while (built_in[i])
+	while (pathsplit && pathsplit[i])
 	{
-		if (str && ft_strcmp(str, (char *)built_in[i]))
-			return (1);
+		str = ft_strjoin(pathsplit[i], "/");
+		str = ft_strjoin(str, cmd);
+		if (access(str, X_OK | F_OK) == 0)
+			return (str);
 		i++;
 	}
-	return (0);
+	printf(" %s: command not found \n", cmd);
+	exit(127);
 }
 
-int	exec_built_in(t_command *command)
+static char	*get_cmd_path(char *command)
 {
-	int	i;
-
-	i = 0;
-	if (ft_strcmp(command->command, "cd"))
-		i = ft_cd(command->args);
-	else if (ft_strcmp(command->command, "pwd"))
-		i = ft_pwd();
-	else if (ft_strcmp(command->command, "echo"))
-		i = ft_echo(command->args);
-	else if (ft_strcmp(command->command, "exit"))
-		ft_exit(command->args);
-	else if (ft_strcmp(command->command, "export"))
-		i = ft_export(command->args);
-	else if (ft_strcmp(command->command, "unset"))
-		i = ft_unset(command->args);
-	else if (ft_strcmp(command->command, "env"))
-	i = ft_env(0);
-	return (i);
+	if (*command == '/')
+		return (command);
+	else if (ft_strchr(command, '/'))
+	{
+		command = ft_strjoin("/", command);
+		return (ft_strjoin(get_path(), command));
+	}
+	else
+		return (env_cmd_path(command));
 }
 
 void	exec_cmd(t_command *cmd)
@@ -79,8 +74,7 @@ void	exec_cmd(t_command *cmd)
 		return ;
 	else if (is_builtin(cmd->command))
 	{
-		exec_built_in(cmd);
-		exit(13);
+		exit(exec_built_in(cmd));
 	}
 	else
 	{
@@ -90,17 +84,4 @@ void	exec_cmd(t_command *cmd)
 		args = add_arg_0(cmd->args, path);
 		execve(args[0], args, env_var(NULL));
 	}
-}
-
-char	*get_cmd_path(char *command)
-{
-	if (*command == '/')
-		return (command);
-	else if (ft_strchr(command, '/'))
-	{
-		command = ft_strjoin("/", command);
-		return (ft_strjoin(get_path(), command));
-	}
-	else
-		return (env_cmd_path(command));
 }

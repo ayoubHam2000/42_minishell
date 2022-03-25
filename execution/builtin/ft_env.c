@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:38:52 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 21:10:17 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:54:23 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@ static void	print_env(int k)
 	if (k == 0)
 	{
 		while (array[i])
-			printf("%s\n", array[i++]);
+		{
+			ft_print_out(array[i++]);
+			ft_print_out("\n");
+		}
 	}
 	else
 	{
 		while (array[i])
-			printf("declare -x %s\n", array[i++]);
+		{
+			ft_print_out("declare -x ");
+			ft_print_out(array[i++]);
+			ft_print_out("\n");
+		}
 	}
 }
 

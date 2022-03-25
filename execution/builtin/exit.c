@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:20:53 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/24 15:38:19 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:55:26 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	ft_digits(char *arg)
 	i = 0;
 	if (!arg)
 		return (1);
+	if (*arg == '-' || *arg == '+')
+		arg++;
 	while (arg[i] && arg)
 	{
 		if (!ft_isdigit(arg[i]))
@@ -26,6 +28,13 @@ static int	ft_digits(char *arg)
 		i++;
 	}
 	return (1);
+}
+
+static void	fttt_exit_error(char *arg)
+{
+	ft_error("exit: ");
+	ft_error(arg);
+	ft_error(": numeric argument required\n");
 }
 
 void	ft_exit(char **args)
@@ -37,17 +46,12 @@ void	ft_exit(char **args)
 	}
 	if (!ft_digits(args[0]))
 	{
-		printf("exit: %s: numeric argument required", args[0]);
+		fttt_exit_error(args[0]);
 		exit(1);
 	}
-	if ((long long)ft_atoi(args[0]) > 9223372036854775807)
+	if (!ft_atoi(args[0]))
 	{
-		printf("exit: %s: numeric argument required", args[0]);
-		exit(1);
-	}
-	if ((long long)ft_atoi(args[0]) < (-9223372036854775807 - 1))
-	{
-		printf("exit: %s: numeric argument required", args[0]);
+		fttt_exit_error(args[0]);
 		exit(1);
 	}
 	if (!args[0])

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:27:12 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 22:09:32 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:01:19 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	io_flag(int type)
 	if (type == RD_OUT || type == RD_DOC)
 		return (O_CREAT | O_WRONLY | O_TRUNC);
 	else if (type == RD_AP)
-		return (O_CREAT | O_WRONLY | O_APPEND | O_TRUNC);
+		return (O_WRONLY | O_APPEND | O_CREAT);
 	else if (type == RD_IN || type == RD_DOC_READ)
 		return (O_RDONLY);
 	return (0);

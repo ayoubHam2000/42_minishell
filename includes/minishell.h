@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 21:04:04 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:53:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int			ft_unset(char **args);
 int			ft_env(int type);
 
 //execution->pipe and execute
-char		*get_cmd_path(char *command);
 int			fork_pipes(int n, t_command **arrcmd);
 int			exec_built_in(t_command *command);
 int			execute(t_command	**arrcmd);
@@ -114,14 +113,9 @@ int			execute(t_command	**arrcmd);
 int			du_exit_status(int exit_status, int force);
 void		set_exit_status(int exit_status);
 int			get_exit_status(void);
-int			ft_strcherche(char *str, char c);
-char		*copy_arg(char *s1);
-char		**envexport(char **cmd, char *str);
-int			is_valid_identifier(char *str);
-int			exec_built_in(t_command *command);
+
 void		exec_cmd(t_command *cmd);
-char		*get_cmd_path(char *command);
-char		*env_cmd_path(char *cmd);
+int			exec_built_in(t_command *command);
 int			is_builtin(char *str);
 
 //other

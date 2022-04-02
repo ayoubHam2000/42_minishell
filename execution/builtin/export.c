@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 15:32:42 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:14:55 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static char	*concat_var(char **var)
 	while (var[0][j])
 		str[i++] = var[0][j++];
 	j = 0;
-	str[i++] = '=';
+	if (var[1])
+		str[i++] = '=';
 	while (var[1] && var[1][j])
 		str[i++] = var[1][j++];
 	str[i] = 0;
@@ -65,6 +66,8 @@ static char	**export_arg(char **env, char **var)
 	i = 0;
 	while (env[i])
 	{
+		if (!ft_strchr(env[i], '='))
+			return (env);
 		if (!ft_strncmp(env[i], var[0], ft_strlen(var[0])))
 		{
 			free(env[i]);

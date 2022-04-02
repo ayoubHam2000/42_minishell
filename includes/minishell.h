@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 16:45:06 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:09:59 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_redt
 {
 	char	r_type;
 	char	*file;
+	int		with_quote;
 }	t_redt;
 
 typedef struct s_cmd
@@ -74,9 +75,9 @@ int			check_command_syntax(char **tokens);
 //parser->open files
 int			get_last_doc_index(t_redt **redt);
 int			io_flag(int type);
-int			get_doc_file(char *delimiter);
+int			get_doc_file(char *delimiter, int with_quote);
 void		close_files(t_command **cmds);
-void		open_files(t_command **cmds);
+int			open_files(t_command **cmds);
 
 //parser->expansion
 char		*expansion(char *str);
@@ -98,7 +99,7 @@ int			redirection_type(char *token);
 char		*get_path(void);
 int			ft_cd(char **cmd);
 int			ft_echo(char **cmd);
-void		ft_exit(char **cmd);
+int			ft_exit(char **cmd);
 int			ft_pwd(void);
 int			ft_export(char **args);
 int			ft_unset(char **args);

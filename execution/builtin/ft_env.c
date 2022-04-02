@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:38:52 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 16:54:23 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:17:55 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_env(int k)
 	array = env_var(NULL);
 	if (k == 0)
 	{
-		while (array[i])
+		while (array[i] && ft_strchr(array[i], '='))
 		{
 			ft_print_out(array[i++]);
 			ft_print_out("\n");

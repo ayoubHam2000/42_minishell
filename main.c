@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:41:44 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 15:36:26 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:08:49 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	process_str(char *str)
 	cmds = parse_command(str);
 	if (cmds)
 	{
-		open_files(cmds);
-		execute(cmds);
+		if(open_files(cmds))
+			execute(cmds);
 		close_files(cmds);
 		free_all();
 	}

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 15:17:40 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/13 18:33:45 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:41:19 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ static t_cmd	*new_cmd(void)
 	return (cmd);
 }
 
+static t_redt	*get_redt(char *r, char *file)
+{
+	t_redt	*redt;
+
+	redt = ft_malloc(sizeof(t_redt));
+	redt->r_type = redirection_type(r);
+	redt->file = file;
+	redt->with_quote = 0;
+	if (ft_strchr(file, '\'') || ft_strchr(file, '"'))
+		redt->with_quote = 1;
+	return (redt);
+}
+
 static t_cmd	*get_command(char **tokens)
 {
 	t_cmd	*cmd;
@@ -33,9 +46,7 @@ static t_cmd	*get_command(char **tokens)
 	{
 		if (redirection_type(*tokens))
 		{
-			redt = ft_malloc(sizeof(t_redt));
-			redt->r_type = redirection_type(*tokens);
-			redt->file = *(tokens + 1);
+			redt = get_redt(*tokens, *(tokens + 1));
 			if (!expand_redt(redt))
 				return (NULL);
 			q_enqueue(cmd->q_redt, redt);

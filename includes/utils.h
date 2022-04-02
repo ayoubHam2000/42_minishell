@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:24:07 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 15:48:57 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 15:59:06 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	free_all(void);
 char	*ft_itoa(int n);
 int		file_error(char *file_name);
 int		ft_isalnum(int c);
+int		is_int(const char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:27:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/15 21:28:23 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:24:58 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,22 @@ static int	open_doc_file_for_cmd(t_command *cmd, t_redt **redt)
 		if (redt[r]->r_type == RD_DOC)
 		{
 			if (cmd->fd[0] != -1)
-			{
-				close(cmd->fd[1]);
-				cmd->fd[0] = -1;
-			}
-			cmd->fd[0] = get_doc_file(redt[r]->file);
+				close(cmd->fd[0]);
+			cmd->fd[0] = get_doc_file(redt[r]->file, redt[r]->with_quote);
 			if (cmd->fd[0] == -1)
 				return (file_error("Heredoc"));
+			else if (cmd->fd[0] == -2)
+			{
+				cmd->fd[0] = -1;
+				return (0);
+			}
 		}
 		r++;
 	}
 	return (1);
 }
 
-void	open_files(t_command **cmds)
+int	open_files(t_command **cmds)
 {
 	int	r;
 
@@ -104,7 +106,7 @@ void	open_files(t_command **cmds)
 	while (cmds[r])
 	{
 		if (!open_doc_file_for_cmd(cmds[r], cmds[r]->redt))
-			return ;
+			return (0);
 		r++;
 	}
 	r = 0;
@@ -118,4 +120,5 @@ void	open_files(t_command **cmds)
 			cmds[r]->fd[1] = 1;
 		r++;
 	}
+	return (1);
 }

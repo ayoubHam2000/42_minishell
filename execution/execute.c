@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:48:32 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 16:47:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 15:54:51 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	exec_built_in(t_command *command)
 	else if (ft_strcmp(command->command, "echo"))
 		i = ft_echo(command->args);
 	else if (ft_strcmp(command->command, "exit"))
-		ft_exit(command->args);
+		i = ft_exit(command->args);
 	else if (ft_strcmp(command->command, "export"))
 		i = ft_export(command->args);
 	else if (ft_strcmp(command->command, "unset"))

@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:22:09 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 16:47:07 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:57:30 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	print_cmd(int i, char **cmd)
 		if (!cmd[i + 1])
 			ft_print_out(cmd[i++]);
 		else
+		{
 			ft_print_out(cmd[i++]);
+			ft_print_out(" ");
+		}
 	}
 }
 

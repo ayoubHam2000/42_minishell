@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 20:27:15 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 15:34:10 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:23:56 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char	*env_cmd_path(char *cmd)
 			return (str);
 		i++;
 	}
+	if (!pathsplit && access(cmd, X_OK | F_OK) == 0)
+		return (cmd);
 	printf(" %s: command not found \n", cmd);
 	exit(127);
 }

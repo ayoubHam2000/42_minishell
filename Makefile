@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/03/25 16:48:16 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/04/02 15:59:25 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ UTIL_FILES = \
 	utils/ft_isalpha.c \
 	utils/ft_substr.c \
 	utils/ft_atoi.c \
+	utils/is_int.c \
 	utils/ft_memchr.c \
 	utils/ft_memcmp.c \
 	utils/ft_memcpy.c \

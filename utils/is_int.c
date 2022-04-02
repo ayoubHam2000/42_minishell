@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   is_int.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 20:15:15 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/02 15:58:33 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/04/02 15:57:47 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/04/02 16:05:35 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+#define M 9223372036854775808U
 
 static int	is_blank(char c)
 {
@@ -20,7 +22,7 @@ static int	is_blank(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int	is_int(const char *str)
 {
 	int					signe;
 	unsigned long long	res;
@@ -38,6 +40,13 @@ int	ft_atoi(const char *str)
 		res = res * 10;
 		res = res + (*str - '0');
 		str++;
+		if ((res > M && signe == -1) || (res > M - 1 && signe == 1))
+		{
+			if (signe < 0)
+				return (0);
+			if (signe > 0)
+				return (0);
+		}
 	}
-	return (res * signe);
+	return (1);
 }

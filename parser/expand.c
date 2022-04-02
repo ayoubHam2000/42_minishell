@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:45:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:08:25 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:47:06 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	expand_redt(t_redt *redt)
 		p = remove_quotes(p);
 		redt->file = p;
 	}
+	else
+		redt->file = remove_quotes(redt->file);
 	return (1);
 }
 

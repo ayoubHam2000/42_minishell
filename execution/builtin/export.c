@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 06:04:27 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/04/02 18:14:55 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:21:38 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static char	**export_arg(char **env, char **var)
 	int		i;
 	char	**new_env;
 
-	i = 0;
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
 		if (!ft_strchr(env[i], '='))
 			return (env);
@@ -74,7 +74,6 @@ static char	**export_arg(char **env, char **var)
 			env[i] = concat_var(var);
 			return (env);
 		}
-		i++;
 	}
 	new_env = malloc(sizeof(char *) * (ft_arrlen((void **)env) + 2));
 	if (!new_env)

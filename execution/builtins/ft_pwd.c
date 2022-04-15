@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_error.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 21:29:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/14 18:00:59 by hbourkan         ###   ########.fr       */
+/*   Created: 2022/04/15 01:08:40 by hbourkan          #+#    #+#             */
+/*   Updated: 2022/04/15 18:34:21 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	file_error(char *file_name)
+int	ft_pwd(int fd)
 {
-	if (!file_name)
-		perror("minishell");
-	else
-		perror(ft_strjoin("minishell: ", file_name));
+	char	*current_dir;
+
+	current_dir = getcwd(NULL, 0);
+	if (!current_dir)
+	{
+		ft_putstr_fd(2, "Current path not found\n");
+		return (1);
+	}
+	ft_putstr_fd(fd, current_dir);
+	write(fd, "\n", 1);
 	return (0);
 }

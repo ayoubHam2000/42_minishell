@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/02 20:09:59 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:08:04 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define RD_AP 3
 # define RD_DOC 4
 # define RD_DOC_READ 5
+# define STDIN 0
+# define STDOUT 1
 
 typedef struct s_redt
 {
@@ -61,6 +63,13 @@ typedef struct s_command
 	t_redt	**redt;
 	int		fd[2];
 }	t_command;
+
+typedef struct s_status
+{
+	int	status;
+	int	last_status;
+	int	res;
+}	t_status;
 
 //parser
 t_queue		*get_structure(t_queue *cmds);
@@ -97,29 +106,45 @@ int			redirection_type(char *token);
 
 //execution->built in
 char		*get_path(void);
-int			ft_cd(char **cmd);
-int			ft_echo(char **cmd);
-int			ft_exit(char **cmd);
-int			ft_pwd(void);
-int			ft_export(char **args);
-int			ft_unset(char **args);
-int			ft_env(int type);
+int			ft_cd(char **args);
+int			ft_echo(char **args, int fd);
+int			ft_exit(char **args, int fd);
+int			ft_pwd(int fd);
+int			ft_export(char **args, int fd);
+int			ft_unset(char **args, int fd);
+int			ft_env(char **args, int type, int fd);
 
 //execution->pipe and execute
-int			fork_pipes(int n, t_command **arrcmd);
-int			exec_built_in(t_command *command);
-int			execute(t_command	**arrcmd);
+// int			fork_pipes(int n, t_command **arrcmd);
+// int			exec_built_in(t_command *command);
+// int			execute(t_command	**arrcmd);
 
 //execution->utils
+void		execute(t_command **cmds);
+void		in_out_red(int input, int output);
+void		in_out_red(int input, int output);
+void		redirec(t_command **cmds, int **pipefd, int i, int j);
+void		open_pipes(int nb_pipes, int **pipefd);
+void		close_pipes(int nb_pipes, int **pipefd);
+int			execute_builtin(t_command **cmds, int i);
+int			counter(char **arr);
+int			equal_position(char *str);
+int			compare_env(char *s1, char *s2);
+char		*ft_strjoin_path(char const *s1, char const *s2);
+char		*getpath(char *cmd);
+char		**join_args(t_command **cmds, int index);
+int			get_cmds_nb(char **args);
+int			is_builtin(char *cmd);
+int			ft_validvarname(int c, int c2);
+int			check_vn(char *arg);
+void		get_overcmd(t_command **cmds, int *childpid);
+void		cmd_type(t_command **cmds, int j, int nb_pipes, int **pipefd);
+void		executer(t_command **cmds, int j, int nb_pipes, int **pipefd);
+void		executer2(t_command **cmds, int j);
+
 int			du_exit_status(int exit_status, int force);
 void		set_exit_status(int exit_status);
 int			get_exit_status(void);
-
-void		exec_cmd(t_command *cmd);
-int			exec_built_in(t_command *command);
-int			is_builtin(char *str);
-int			get_fd_out(int new);
-void		ft_print_out(const char *str);
 
 //other
 void		rl_replace_line(const char *text, int i);

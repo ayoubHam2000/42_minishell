@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_error.c                                       :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 21:29:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/14 18:00:59 by hbourkan         ###   ########.fr       */
+/*   Created: 2022/04/15 01:08:47 by hbourkan          #+#    #+#             */
+/*   Updated: 2022/04/15 01:19:20 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	file_error(char *file_name)
+int	ft_cd(char **args)
 {
-	if (!file_name)
-		perror("minishell");
+	char	*path;
+
+	if (!args[0])
+		path = ft_getenv("HOME");
+	else if (ft_strcmp(args[0], "~"))
+		path = ft_getenv("HOME");
+	else if (ft_strcmp(args[0], "-"))
+	{
+		path = ft_getenv("OLDPWD");
+		printf("%s\n", path);
+	}
 	else
-		perror(ft_strjoin("minishell: ", file_name));
+		path = ft_strdup(args[0]);
+	if (chdir(path) == -1)
+	{
+		perror("Directory not found");
+		return (1);
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
+#    By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 09:30:37 by aben-ham          #+#    #+#              #
-#    Updated: 2022/04/02 15:59:25 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/04/15 22:07:57 by hbourkan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,18 +47,20 @@ UTIL_FILES = \
 	utils/file_error.c
 
 EXECUTION_FILES = \
-	execution/builtin/cd.c \
-	execution/builtin/echo.c \
-	execution/builtin/exit.c \
-	execution/builtin/export.c \
-	execution/builtin/pwd.c \
-	execution/builtin/unset.c \
-	execution/builtin/ft_env.c \
-	execution/pipe/pipe.c \
 	execution/set_exit_status.c \
 	execution/exec_cmd.c \
-	execution/get_fd_out.c \
-	execution/execute.c
+	execution/exec_utils.c \
+	execution/builtins_utils.c \
+	execution/other_utils.c \
+	execution/io_operations.c \
+	execution/builtins/ft_cd.c \
+	execution/builtins/ft_echo.c \
+	execution/builtins/ft_exit.c \
+	execution/builtins/ft_export.c \
+	execution/builtins/ft_pwd.c \
+	execution/builtins/ft_unset.c \
+	execution/builtins/ft_env.c \
+	
 
 PARSING_FILES = \
 	parser/parser.c \
@@ -80,8 +82,8 @@ FILES = \
 	main.c
 
 #-Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror -g -I includes/
-FLAGS = -lreadline -L ~/brew/opt/readline/lib -I ~/brew/opt/readline/include
+CFLAGS =  -g -I includes/
+FLAGS = -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 # -fsanitize=address
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 

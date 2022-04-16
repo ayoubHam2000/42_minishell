@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_fd_out.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 16:41:54 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 16:45:00 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/04/15 01:08:40 by hbourkan          #+#    #+#             */
+/*   Updated: 2022/04/15 18:34:21 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_fd_out(int new)
+int	ft_pwd(int fd)
 {
-	static int	out = 1;
+	char	*current_dir;
 
-	if (new > 1)
-		out = new;
-	else if (new == 0)
-		out = 1;
-	return (out);
-}
-
-void	ft_print_out(const char *str)
-{
-	ft_putstr_fd(get_fd_out(-1), str);
+	current_dir = getcwd(NULL, 0);
+	if (!current_dir)
+	{
+		ft_putstr_fd(2, "Current path not found\n");
+		return (1);
+	}
+	ft_putstr_fd(fd, current_dir);
+	write(fd, "\n", 1);
+	return (0);
 }

@@ -3,87 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 20:27:15 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/04/02 18:23:56 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/04/15 01:08:59 by hbourkan          #+#    #+#             */
+/*   Updated: 2022/04/16 00:24:49 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**add_arg_0(char **args, char *arg0)
+void	child_proc(t_command **cmds, int **pipefd,
+	int nb_pipes, pid_t *childpid)
 {
-	char	**res;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (args[i])
-		i++;
-	res = malloc(sizeof(char *) * (i + 2));
-	i = 0;
-	res[i] = arg0;
-	while (args[i])
+	j = 0;
+	while (cmds[j])
 	{
-		res[i + 1] = args[i];
-		i++;
+		if (!cmds[j]->command)
+		{
+			get_overcmd(cmds, childpid);
+			j++;
+			continue ;
+		}
+		*childpid = fork();
+		if (*childpid == -1)
+			exit(1);
+		else if (*childpid == 0)
+		{
+			redirec(cmds, pipefd, i, j);
+			cmd_type(cmds, j, nb_pipes, pipefd);
+		}
+		i += 2;
+		j++;
 	}
-	res[i + 1] = NULL;
-	return (res);
 }
 
-static char	*env_cmd_path(char *cmd)
+int	single_process(t_command **cmds)
 {
-	char	**pathsplit;
-	int		i;
-	char	*str;
+	int		status;
+	pid_t	childpid;
 
-	pathsplit = ft_split(ft_getenv("PATH"), ':');
-	i = 0;
-	while (pathsplit && pathsplit[i])
-	{
-		str = ft_strjoin(pathsplit[i], "/");
-		str = ft_strjoin(str, cmd);
-		if (access(str, X_OK | F_OK) == 0)
-			return (str);
-		i++;
-	}
-	if (!pathsplit && access(cmd, X_OK | F_OK) == 0)
-		return (cmd);
-	printf(" %s: command not found \n", cmd);
-	exit(127);
-}
-
-static char	*get_cmd_path(char *command)
-{
-	if (*command == '/')
-		return (command);
-	else if (ft_strchr(command, '/'))
-	{
-		command = ft_strjoin("/", command);
-		return (ft_strjoin(get_path(), command));
-	}
-	else
-		return (env_cmd_path(command));
-}
-
-void	exec_cmd(t_command *cmd)
-{
-	char	*path;
-	char	**args;
-
-	if (cmd->command == NULL)
-		return ;
-	else if (is_builtin(cmd->command))
-	{
-		exit(exec_built_in(cmd));
-	}
+	if (is_builtin(cmds[0]->command))
+		status = execute_builtin(cmds, 0);
 	else
 	{
-		path = get_cmd_path(cmd->command);
-		if (!path)
+		childpid = fork();
+		if (childpid == -1)
+			exit(1);
+		else if (childpid == 0)
+			exec_single(cmds, 0);
+		waitpid(childpid, &status, 0);
+	}
+	return (status);
+}
+
+int	multiple_process(t_command **cmds, int nb_pipes)
+{
+	t_status	s;
+	pid_t		childpid;
+	int			*pipefd;
+	int			i;
+
+	i = 0;
+	pipefd = malloc(sizeof(int) * (nb_pipes * 2));
+	if (!pipefd)
+		return (1);
+	open_pipes(nb_pipes, &pipefd);
+	child_proc(cmds, &pipefd, nb_pipes, &childpid);
+	close_pipes(nb_pipes, &pipefd);
+	while (i <= nb_pipes)
+	{
+		s.res = waitpid(-1, &s.status, 0);
+		if (s.res == childpid || childpid == -1)
+				s.last_status = s.status;
+		i++;
+	}
+	free(pipefd);
+	return (s.last_status);
+}
+
+void	execute(t_command **cmds)
+{
+	int	nb_pipes;
+	int	exit_status;
+
+	nb_pipes = ft_arrlen((void **)cmds) - 1;
+	if (nb_pipes <= 0)
+	{
+		if (!cmds[0]->command)
+		{
+			du_exit_status(1, 1);
 			return ;
-		args = add_arg_0(cmd->args, path);
-		execve(args[0], args, env_var(NULL));
+		}
+		else
+		{
+			exit_status = single_process(cmds);
+			if (is_builtin(cmds[0]->command))
+			{
+				du_exit_status(exit_status, 1);
+				return ;
+			}
+		}
 	}
+	else
+		exit_status = multiple_process(cmds, nb_pipes);
+	set_exit_status(exit_status);
 }

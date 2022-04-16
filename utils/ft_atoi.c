@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 20:15:15 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/02 15:58:33 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:07:40 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	is_blank(char c)
 
 int	ft_atoi(const char *str)
 {
-	int					signe;
-	unsigned long long	res;
+	int	signe;
+	int	res;
 
 	while (is_blank(*str))
 		str++;

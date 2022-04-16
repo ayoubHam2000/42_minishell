@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 01:22:58 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/25 15:32:57 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/15 22:20:36 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ char	**env_var(char **new_env)
 	static char	**env;
 
 	if (new_env)
+	{
 		env = new_env;
+	}
 	return (env);
 }
 
@@ -81,7 +83,8 @@ char	*ft_getenv(char *var)
 		return (ft_itoa(get_exit_status()));
 	while (*tmp)
 	{
-		if (!ft_strncmp(var, *tmp, ft_strlen(var)))
+		if (!ft_strncmp(var, *tmp,
+				ft_strlen(ft_substr(*tmp, 0, equal_position(*tmp)))))
 			return (msk_split(*tmp, msk_env_split)[1]);
 		tmp++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sysntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:24:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/03/24 11:08:15 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:12:37 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,24 @@ int	check_pipe_syntax(char **commands)
 	return (1);
 }
 
+static int	check_quotes(char *line)
+{
+	while (*line)
+	{
+		while (*line && *line != '\'' && *line != '"')
+			line++;
+		if (*line)
+		{
+			line++;
+			line = ft_strchr(line, *(line - 1));
+			if (!line)
+				return (0);
+			line++;
+		}
+	}
+	return (1);
+}
+
 int	check_command_syntax(char **tokens)
 {
 	size_t	i;
@@ -86,6 +104,8 @@ int	check_command_syntax(char **tokens)
 	flag = 0;
 	while (tokens[i])
 	{
+		if (check_quotes(tokens[i]) == 0)
+			return (0);
 		is_red = redirection_type(tokens[i]);
 		if (is_red == RD_ERR)
 			return (0);

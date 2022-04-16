@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 23:14:58 by yhakkach          #+#    #+#             */
-/*   Updated: 2022/03/25 16:39:24 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/04/15 01:08:47 by hbourkan          #+#    #+#             */
+/*   Updated: 2022/04/15 01:19:20 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@ int	ft_cd(char **args)
 	char	*path;
 
 	if (!args[0])
-		path = getenv("HOME");
-	else
-		path = args[0];
-	if (path && path[0] == '~')
-		path = getenv("HOME");
-	if (path && path[0] == '-' && !path[1])
+		path = ft_getenv("HOME");
+	else if (ft_strcmp(args[0], "~"))
+		path = ft_getenv("HOME");
+	else if (ft_strcmp(args[0], "-"))
 	{
-		path = getenv("OLDPWD");
+		path = ft_getenv("OLDPWD");
+		printf("%s\n", path);
 	}
-	else if (chdir(path) < 0)
+	else
+		path = ft_strdup(args[0]);
+	if (chdir(path) == -1)
 	{
-		ft_error("cd: chdir error: ");
-		ft_error(path);
-		ft_error("\n");
+		perror("Directory not found");
 		return (1);
 	}
 	return (0);

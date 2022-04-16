@@ -1,0 +1,11 @@
+Makefile
+_OUT
+execution
+h
+hh
+includes
+main.c
+minishell
+parser
+utils
+       0

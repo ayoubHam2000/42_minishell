@@ -6,7 +6,7 @@
 /*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 01:30:07 by hbourkan          #+#    #+#             */
-/*   Updated: 2022/04/15 23:06:53 by hbourkan         ###   ########.fr       */
+/*   Updated: 2022/04/16 00:23:36 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	cmd_type(t_command **cmds, int j, int nb_pipes, int **pipefd)
 		exit(status);
 	}
 	else
-		executer(cmds, j, nb_pipes, pipefd);
+		exec_multiple(cmds, j, nb_pipes, pipefd);
 }
 
-void	executer2(t_command **cmds, int j)
+void	exec_single(t_command **cmds, int j)
 {
 	char	*path;
 	char	**args;
@@ -68,7 +68,7 @@ void	executer2(t_command **cmds, int j)
 	}
 }
 
-void	executer(t_command **cmds, int j, int nb_pipes, int **pipefd)
+void	exec_multiple(t_command **cmds, int j, int nb_pipes, int **pipefd)
 {
 	char	*path;
 	char	**args;
@@ -76,7 +76,7 @@ void	executer(t_command **cmds, int j, int nb_pipes, int **pipefd)
 	path = getpath(cmds[j]->command);
 	if (!path)
 	{
-		perror("EEE");
+		ft_putstr_fd(2, "Command not found\n");
 		exit(127);
 	}
 	args = join_args(cmds, j);

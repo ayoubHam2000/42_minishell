@@ -6,7 +6,7 @@
 /*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:34:52 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/04/15 23:08:04 by hbourkan         ###   ########.fr       */
+/*   Updated: 2022/04/16 00:22:36 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ int			ft_validvarname(int c, int c2);
 int			check_vn(char *arg);
 void		get_overcmd(t_command **cmds, int *childpid);
 void		cmd_type(t_command **cmds, int j, int nb_pipes, int **pipefd);
-void		executer(t_command **cmds, int j, int nb_pipes, int **pipefd);
-void		executer2(t_command **cmds, int j);
+void		exec_multiple(t_command **cmds, int j, int nb_pipes, int **pipefd);
+void		exec_single(t_command **cmds, int j);
 
 int			du_exit_status(int exit_status, int force);
 void		set_exit_status(int exit_status);

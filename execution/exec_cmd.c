@@ -6,7 +6,7 @@
 /*   By: hbourkan <hbourkan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 01:08:59 by hbourkan          #+#    #+#             */
-/*   Updated: 2022/04/15 21:02:26 by hbourkan         ###   ########.fr       */
+/*   Updated: 2022/04/16 00:24:49 by hbourkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	child_proc(t_command **cmds, int **pipefd,
 		else if (*childpid == 0)
 		{
 			redirec(cmds, pipefd, i, j);
-			close_pipes(nb_pipes, pipefd);
 			cmd_type(cmds, j, nb_pipes, pipefd);
 		}
 		i += 2;
@@ -55,7 +54,7 @@ int	single_process(t_command **cmds)
 		if (childpid == -1)
 			exit(1);
 		else if (childpid == 0)
-			executer2(cmds, 0);
+			exec_single(cmds, 0);
 		waitpid(childpid, &status, 0);
 	}
 	return (status);

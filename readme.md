@@ -50,6 +50,6 @@ make
 ```
 
 ## Resources
-- [Subject](./static/minitalk.pdf)
+- [Subject](./static/minishell.pdf)
 - [man7](https://man7.org/linux/man-pages/index.html)
 - [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
